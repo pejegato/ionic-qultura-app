@@ -1,3 +1,4 @@
+import { InicioSesionPage } from './../pages/inicio-sesion/inicio-sesion';
 import { PerfilPage } from './../pages/perfil/perfil';
 import { DashboardPage } from './../pages/dashboard/dashboard';
 import { LoginPage } from './../pages/login/login';
@@ -26,7 +27,8 @@ import { RegistroPage } from '../pages/registro/registro';
     LoginPage,
     RegistroPage,
     DashboardPage,
-    PerfilPage
+    PerfilPage,
+    InicioSesionPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { RegistroPage } from '../pages/registro/registro';
     LoginPage,
     RegistroPage,
     DashboardPage,
-    PerfilPage
+    PerfilPage,
+    InicioSesionPage
   ],
   providers: [
     StatusBar,

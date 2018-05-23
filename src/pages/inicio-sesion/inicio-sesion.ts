@@ -1,11 +1,9 @@
-import { InicioSesionPage } from './../inicio-sesion/inicio-sesion';
 import { DashboardPage } from './../dashboard/dashboard';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RegistroPage } from '../registro/registro';
 
 /**
- * Generated class for the LoginPage page.
+ * Generated class for the InicioSesionPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,22 +11,17 @@ import { RegistroPage } from '../registro/registro';
 
 @IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
+  selector: 'page-inicio-sesion',
+  templateUrl: 'inicio-sesion.html',
 })
-export class LoginPage {
+export class InicioSesionPage {
 
-  registroPage: any = RegistroPage;
-  dashboardPage: any = DashboardPage;
-  inicioSesionPage: any = InicioSesionPage;
-
+  dashboardPage: any  = DashboardPage;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    console.log('ionViewDidLoad InicioSesionPage');
   }
-
-    
 
 }

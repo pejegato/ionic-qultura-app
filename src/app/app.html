@@ -7,7 +7,7 @@
     <ion-content>
         <ion-list>
             
-            <button ion-item detail-none (click)="openPage(loginPage)">
+            <button ion-item detail-none (click)="openPage(dashboardPage)">
                 <ion-icon name="home" item-start></ion-icon>
                 Inicio           
             </button>
@@ -22,7 +22,7 @@
                 Contactos
             </button>
                     
-            <button ion-item detail-none>
+            <button ion-item detail-none  (click)="openPage(loginPage)">
                 <ion-icon name="log-out" item-start></ion-icon>
                 Cerrar sesión
             </button>
