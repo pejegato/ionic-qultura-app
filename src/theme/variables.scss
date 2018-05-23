@@ -124,6 +124,17 @@ $colors: (
     
 }
 
+.avatar-registro {
+    width:90px;
+    height:90px; 
+    margin: none;           
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 $text-input-md-highlight-color-invalid: transparent;
 $text-input-md-highlight-color-valid: transparent;
 $text-input-md-show-invalid-highlight: transparent;

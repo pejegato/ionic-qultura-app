@@ -1,5 +1,5 @@
 <!--
-  Generated template for the RegistroPage page.
+  Generated template for the LoginPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>registro</ion-title>
+    <ion-title>Registro</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,25 +16,55 @@
 <ion-content padding text-center>
 
   <ion-grid style="height: 100%">
-
-    <ion-row justify-content-center align-items-center style="height: 50%">
-      <img src="../../assets/avatars/rey.jpg" class="avatar">
-    </ion-row>
-
-    <ion-row>
-      <ion-col></ion-col>
-      <ion-col>
-        <ion-buttons>
-          <button ion-button block style="margin-bottom: 30px">
-            Registrarse
-          </button>
-          <button ion-button block>
-            Iniciar Sesión
-          </button>
-        </ion-buttons>
+    <ion-row  align-items-center>
+      <ion-col col-4>
+        <img src="../../assets/avatars/rey.jpg" class="avatar-registro">
       </ion-col>
+      <ion-col col-8>      
+        <ion-buttons>
+          <button ion-button medium icon-end [navPush]="registroPage">
+            Cambiar Avatar
+            <ion-icon name="star"></ion-icon>
+          </button>
+        </ion-buttons>      
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
 
-      <ion-col></ion-col>
+          <ion-item>
+            <ion-label floating>Nombre</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>User</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Correo</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Contraseña</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Confirmar contraseña</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+
+          <ion-buttons>
+            <button style="margin-top: 30px" ion-button block large [navPush]="dashboardPage">
+              Registrarse
+            </button>
+          </ion-buttons>
+
+
+      </ion-col>
     </ion-row>
 
   </ion-grid>

@@ -1,3 +1,4 @@
+import { HomePage } from './../home/home';
 import { MyApp } from './../../app/app.component';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
@@ -21,7 +22,7 @@ import { DASHCARDS } from '../../data/dashcards.data';
 
 
 export class DashboardPage {
-  
+  homePage:any = HomePage;
   listaContactos:Dashcard[] = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuController: MenuController) {
 
