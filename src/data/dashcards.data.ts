@@ -40,8 +40,8 @@ export const DASHCARDS = [
 
 export const MIS_DATOS= 
   {
-    img: 'assets/avatars/han-solo.jpg',
-    nombre: 'Han Solo'
+    img: 'assets/avatars/rey.jpg',
+    nombre: 'Rey'
   };
 
 export const MIS_LUGARES=[
