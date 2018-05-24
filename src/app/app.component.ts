@@ -1,3 +1,4 @@
+import { PerfilPage } from './../pages/perfil/perfil';
 import { EdicionPerfilPage } from './../pages/edicion-perfil/edicion-perfil';
 import { DashboardPage } from './../pages/dashboard/dashboard';
 import { RegistroPage } from './../pages/registro/registro';
@@ -8,6 +9,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage, TabsPage, MapaPage } from '../pages/index-paginas';
 import { LoginPage } from '../pages/login/login';
+import { ListaContactosPage } from '../pages/lista-contactos/lista-contactos';
+import { PerfilContactoPage } from '../pages/perfil-contacto/perfil-contacto';
 
 @Component({
   templateUrl: 'app.html'
@@ -20,6 +23,9 @@ export class MyApp {
   registroPage: any = RegistroPage;
   dashboardPage: any = DashboardPage;
   edicionPerfilPage: any = EdicionPerfilPage;
+  perfilPage: any = PerfilPage;
+  contactosPage:any = ListaContactosPage;
+  perfilContactosPage:any = PerfilContactoPage;
   
   //contactosPage: any = ContactosPage;
 

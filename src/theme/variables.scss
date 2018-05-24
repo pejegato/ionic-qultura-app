@@ -34,7 +34,7 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:    #fc8455,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
@@ -98,6 +98,15 @@ $colors: (
     margin-top: 10px;
 }
 
+.logo {
+    width:300px;
+    height:240px; 
+    margin:auto;   
+    
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 .avatar-dashboard {
     width:70px;
     height:70px; 
@@ -127,9 +136,7 @@ $colors: (
 .avatar-registro {
     width:90px;
     height:90px; 
-    margin: none;           
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
+    
     margin-left: 10px;
     margin-bottom: 10px;
     margin-top: 10px;

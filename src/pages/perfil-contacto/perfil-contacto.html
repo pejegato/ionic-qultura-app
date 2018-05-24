@@ -1,18 +1,18 @@
 <ion-header>
 
-<ion-navbar hideBackButton>
-  <ion-title>Mi Perfil</ion-title>
-  <ion-buttons>
-    <button ion-button icon-only (click)="abrirMenu()">
-      <ion-icon name="menu"></ion-icon>
-    </button>
-  </ion-buttons>
-  <ion-buttons end>
-    <button ion-button icon-only [navPush]="homePage">
-      <ion-icon name="camera"></ion-icon>
-    </button>
-  </ion-buttons>
-</ion-navbar>
+  <ion-navbar hideBackButton>
+    <ion-title>Perfil</ion-title>
+    <ion-buttons>
+      <button ion-button icon-only (click)="abrirMenu()">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only [navPush]="homePage">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 
 </ion-header>
 
@@ -20,26 +20,16 @@
 
   <ion-grid>
     <ion-row justify-content-center align-items-center>
-      <img src="{{miPerfil.img}}" class="avatar">
+      <img src="{{contactoPerfil.img}}" class="avatar">
     </ion-row>
 
     <ion-row justify-content-center align-items-center>
       <ion-col>
-        <h1>{{miPerfil.nombre}}</h1>
-      </ion-col>      
-    </ion-row>
-
-    <ion-row justify-content-center align-items-center>
-      <ion-col>
-        <button ion-button small style="margin-bottom: 30px" [navPush]="edicionPerfilPage" icon-end>
-          Editar Perfil
-          <ion-icon name="create"></ion-icon>
-        </button>
+        <h1>{{contactoPerfil.nombre}}</h1>
       </ion-col>
-      
     </ion-row>
 
-    <ion-row>
+    <ion-row  justify-content-center align-items-center>
       <ion-col col-12>
         <ion-list>
           <ion-list-header>
@@ -62,21 +52,21 @@
           <ion-list-header>
             Ultimos Logros
           </ion-list-header>
-          <ion-card *ngFor="let contacto of misLogros; let i = index">
-          
+          <ion-card *ngFor="let contacto of contactoLogros; let i = index">
+
             <ion-item>
               <p>Has visto
                 <b>'{{contacto.titulo}}'</b>
               </p>
               <p>{{contacto.fecha | date : 'medium'}}</p>
             </ion-item>
-          
+
             <img src="{{contacto.lugarImg}}">
-          
+
             <ion-card-content>
               <p>{{contacto.texto}}</p>
             </ion-card-content>
-          
+
             <ion-row>
               <ion-col>
                 <button ion-button icon-left clear small>

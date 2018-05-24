@@ -1,6 +1,8 @@
+import { HomePage } from './../home/home';
+import { EdicionPerfilPage } from './../edicion-perfil/edicion-perfil';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { MIS_DATOS, MIS_LUGARES } from '../../data/dashcards.data';
 /**
  * Generated class for the PerfilPage page.
  *
@@ -14,12 +16,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'perfil.html',
 })
 export class PerfilPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  miPerfil:any;
+  misLogros:any;
+  edicionPerfilPage:any = EdicionPerfilPage;
+  homePage: any = HomePage;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menuController: MenuController) {
+    this.miPerfil  = MIS_DATOS;
+    this.misLogros = MIS_LUGARES.slice(0);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PerfilPage');
+  }
+
+  abrirMenu() {
+    this.menuController.toggle();
   }
 
 }

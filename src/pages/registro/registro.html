@@ -17,21 +17,22 @@
 
   <ion-grid style="height: 100%">
     <ion-row  align-items-center>
-      <ion-col col-4>
+      
+      <ion-col col-5>
         <img src="../../assets/avatars/rey.jpg" class="avatar-registro">
       </ion-col>
-      <ion-col col-8>      
+      <ion-col col-7>      
         <ion-buttons>
-          <button ion-button medium icon-end [navPush]="registroPage">
-            Cambiar Avatar
-            <ion-icon name="star"></ion-icon>
+          <button ion-button block medium icon-end [navPush]="registroPage">
+            Subir foto             
           </button>
         </ion-buttons>      
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-
+        
+      
           <ion-item>
             <ion-label floating>Nombre</ion-label>
             <ion-input type="text"></ion-input>
@@ -58,11 +59,10 @@
           </ion-item>
 
           <ion-buttons>
-            <button style="margin-top: 30px" ion-button block large [navPush]="dashboardPage">
+            <button style="margin-top: 40px" ion-button block large [navPush]="dashboardPage">
               Registrarse
             </button>
           </ion-buttons>
-
 
       </ion-col>
     </ion-row>

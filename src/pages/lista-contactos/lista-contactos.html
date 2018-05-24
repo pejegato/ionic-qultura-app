@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+    <ion-title>Mi Perfil</ion-title>
+    <ion-buttons>
+      <button ion-button icon-only (click)="abrirMenu()">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only [navPush]="homePage">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding text-center>
+  <ion-list>
+  <ion-list-header>
+    Tus contactos  
+  </ion-list-header>
+    <ion-item-sliding *ngFor="let contacto of listaContactos; let i = index">
+
+      <button ion-item detail-none>
+        <ion-avatar item-left>
+          <img [src]=contacto.img>
+        </ion-avatar>
+        <h2>{{contacto.nombre}}</h2>
+      </button>
+
+      <ion-item-options side="right">
+        <button ion-button color="danger">
+          <ion-icon name="trash"></ion-icon>
+          Borrar
+        </button>
+        <button ion-button color="primary">
+          <ion-icon name="person"></ion-icon>
+          Perfil
+        </button>
+      </ion-item-options>
+</ion-item-sliding>
+
+  </ion-list>
+</ion-content>

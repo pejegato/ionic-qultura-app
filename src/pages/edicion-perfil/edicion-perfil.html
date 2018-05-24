@@ -1,81 +1,94 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
+
   <ion-navbar hideBackButton>
+    <ion-title>Editar Perfil</ion-title>
     <ion-buttons>
       <button ion-button icon-only (click)="abrirMenu()">
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-
     <ion-buttons end>
       <button ion-button icon-only [navPush]="homePage">
         <ion-icon name="camera"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content>
-  <ion-grid height="100%">
+
+<ion-content padding text-center>
+
+  <ion-grid style="height: 100%">
     <ion-row align-items-center>
 
-      <ion-col row-2 col-12>
-        <ion-item no-lines>
-          <ion-label color="primary" stacked>¿Donde estás?</ion-label>
-          <ion-textarea type="text" class="comentarios"></ion-textarea>
-
-
-        </ion-item>
-        <ion-item no-lines>
-          <ion-buttons>
-            <button ion-button block>Enviar</button>
-          </ion-buttons>
-        </ion-item>
-
+      <ion-col col-5>
+        <img src="../../assets/avatars/rey.jpg" class="avatar-registro">
+      </ion-col>
+      <ion-col col-7>
+        <ion-buttons>
+          <button ion-button block medium icon-end [navPush]="registroPage">
+            Subir foto
+          </button>
+        </ion-buttons>
       </ion-col>
     </ion-row>
-    <ion-list>
+    <ion-row>
+      <ion-col col-12>
 
-      <ion-card *ngFor="let contacto of listaContactos; let i = index">
+        <ion-list>
+          <ion-list-header>
+            Cambiar Correo
+          </ion-list-header>
+            
+          <ion-item>
+            <ion-label floating>Correo</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
 
+          <ion-item>
+            <ion-label floating>Ingrese contraseña</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+                
+        </ion-list>
+  
+        <ion-list-header>
+          Cambiar Contraseña
+        </ion-list-header>
         <ion-item>
-          <ion-avatar item-start>
-            <img src="{{contacto.img}}">
-          </ion-avatar>
-          <h2>{{contacto.nombre}}</h2>
-          <p>Ha escaneado
-            <b>'{{contacto.titulo}}'</b>
-          </p>
-          <p>{{contacto.fecha | date : 'medium'}}</p>
+          <ion-label floating>Contraseña actual</ion-label>
+          <ion-input type="text"></ion-input>
         </ion-item>
 
-        <img src="{{contacto.lugarImg}}">
+        <ion-item>
+          <ion-label floating>Nueva contraseña</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
 
-        <ion-card-content>
-          <p>{{contacto.texto}}</p>
-        </ion-card-content>
+        <ion-item>
+          <ion-label floating>Confirmar contraseña</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
 
-        <ion-row>
-          <ion-col>
-            <button ion-button icon-left clear small>
-              <ion-icon name="thumbs-up"></ion-icon>
-              <div>12 Likes</div>
-            </button>
-          </ion-col>
-          <ion-col>
-            <button ion-button icon-left clear small>
-              <ion-icon name="text"></ion-icon>
-              <div>4 Comments</div>
-            </button>
-          </ion-col>
-          <ion-col center text-center>
-            <ion-note>
-              11h ago
-            </ion-note>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </ion-list>
+        <ion-buttons>
+          <button style="margin-top: 40px" small ion-button icon-end>
+            Eliminar cuenta
+            <ion-icon name="trash"></ion-icon>
+          </button>
+
+          <button style="margin-top: 40px" ion-button block large [navPush]="dashboardPage">
+            Aplicar
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
   </ion-grid>
-
 
 </ion-content>

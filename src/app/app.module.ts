@@ -1,3 +1,4 @@
+import { EdicionPerfilPage } from './../pages/edicion-perfil/edicion-perfil';
 import { InicioSesionPage } from './../pages/inicio-sesion/inicio-sesion';
 import { PerfilPage } from './../pages/perfil/perfil';
 import { DashboardPage } from './../pages/dashboard/dashboard';
@@ -15,6 +16,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { HistorialProvider } from '../providers/historial/historial';
 import { AgmCoreModule } from '@agm/core';
 import { RegistroPage } from '../pages/registro/registro';
+import { ListaContactosPage } from '../pages/lista-contactos/lista-contactos';
+import { PerfilContactoPage } from '../pages/perfil-contacto/perfil-contacto';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { RegistroPage } from '../pages/registro/registro';
     RegistroPage,
     DashboardPage,
     PerfilPage,
-    InicioSesionPage
+    InicioSesionPage,
+    EdicionPerfilPage,
+    ListaContactosPage,
+    PerfilContactoPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,10 @@ import { RegistroPage } from '../pages/registro/registro';
     RegistroPage,
     DashboardPage,
     PerfilPage,
-    InicioSesionPage
+    InicioSesionPage,
+    EdicionPerfilPage,
+    ListaContactosPage,
+    PerfilContactoPage
   ],
   providers: [
     StatusBar,

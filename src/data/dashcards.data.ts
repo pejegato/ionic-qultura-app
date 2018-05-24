@@ -35,5 +35,98 @@ export const DASHCARDS = [
     titulo: 'Princesa',
     fecha: new Date,
     lugarImg: 'assets/museum/esc1.jpg'
+  }
+];
+
+export const MIS_DATOS= 
+  {
+    img: 'assets/avatars/han-solo.jpg',
+    nombre: 'Han Solo'
+  };
+
+export const MIS_LUGARES=[
+  {
+    texto: "Hola esto es una prueba de texto",
+    lugar: "MAC",
+    titulo: 'Cazarrecompensas',
+    fecha: new Date,
+    lugarImg: 'assets/museum/esc1.jpg'
   },
+  {
+    texto: "Hola esto es una prueba de texto",
+    lugar: "MIM",
+    titulo: 'Cazarrecompensas',
+    fecha: new Date,
+    lugarImg: 'assets/museum/esc1.jpg'
+  },
+  {
+    texto: "Hola esto es una prueba de texto",
+    lugar: "Zoologico",
+    titulo: 'Jirafa Ecuatoriana',
+    fecha: new Date,
+    lugarImg: 'assets/museum/esc1.jpg'
+  },
+  {
+    texto: "Hola esto es una prueba de texto",
+    lugar: "MAC",
+    titulo: 'Cazarrecompensas',
+    fecha: new Date,
+    lugarImg: 'assets/museum/esc1.jpg'
+  }];
+
+  export const CONTACTO_DATOS =
+  {
+    img: 'assets/avatars/finn.jpg',
+    nombre: 'Finn'
+  };
+
+export const CONTACTO_LUGARES = [
+  {
+    texto: "Hola esto es una prueba de texto",
+    lugar: "MAC",
+    titulo: 'Cazarrecompensas',
+    fecha: new Date,
+    lugarImg: 'assets/museum/esc1.jpg'
+  },
+  {
+    texto: "Hola esto es una prueba de texto",
+    lugar: "MIM",
+    titulo: 'Cazarrecompensas',
+    fecha: new Date,
+    lugarImg: 'assets/museum/esc1.jpg'
+  },
+  {
+    texto: "Hola esto es una prueba de texto",
+    lugar: "Zoologico",
+    titulo: 'Jirafa Ecuatoriana',
+    fecha: new Date,
+    lugarImg: 'assets/museum/esc1.jpg'
+  },
+  {
+    texto: "Hola esto es una prueba de texto",
+    lugar: "MAC",
+    titulo: 'Cazarrecompensas',
+    fecha: new Date,
+    lugarImg: 'assets/museum/esc1.jpg'
+  }
+];
+
+export const CONTACTOS = [
+  {
+    img: 'assets/avatars/han-solo.jpg',
+    nombre: 'Han Solo'    
+  },
+  {
+    img: 'assets/avatars/rey.jpg',
+    nombre: 'Rey',
+  },
+
+  {
+    img: 'assets/avatars/finn.jpg',
+    nombre: 'Finn',    
+  },
+  {
+    img: 'assets/avatars/leia.jpg',
+    nombre: 'Leia Organa'    
+  }
 ];
