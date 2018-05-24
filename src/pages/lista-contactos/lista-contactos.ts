@@ -2,6 +2,7 @@ import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { CONTACTOS } from '../../data/dashcards.data';
+import { PerfilContactoPage } from '../perfil-contacto/perfil-contacto';
 
 /**
  * Generated class for the ListaContactosPage page.
@@ -19,6 +20,7 @@ import { CONTACTOS } from '../../data/dashcards.data';
 export class ListaContactosPage {
   homePage: any = HomePage;
   listaContactos: any[] = [];
+  perfilContactoPage = PerfilContactoPage;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuController: MenuController) {
     this.listaContactos = CONTACTOS.slice(0);
   }

@@ -1,18 +1,20 @@
 <ion-header>
 
-  <ion-navbar hideBackButton>
-    <ion-title>Perfil</ion-title>
-    <ion-buttons>
-      <button ion-button icon-only (click)="abrirMenu()">
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-buttons end>
-      <button ion-button icon-only [navPush]="homePage">
-        <ion-icon name="camera"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+    <ion-navbar hideBackButton color="primary">    
+        <ion-buttons left>
+          <button ion-button icon-only (click)="abrirMenu()">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>    
+        
+          <ion-title text-center>Perfil Contacto</ion-title>
+        
+        <ion-buttons end>
+          <button ion-button icon-only [navPush]="homePage">
+            <ion-icon name="camera"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-navbar>
 
 </ion-header>
 

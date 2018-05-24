@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the RegistroPage page.
@@ -14,7 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'registro.html',
 })
 export class RegistroPage {
-
+  loginPage:any = LoginPage
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
