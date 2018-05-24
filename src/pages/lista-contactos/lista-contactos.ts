@@ -1,3 +1,4 @@
+import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { CONTACTOS } from '../../data/dashcards.data';
@@ -14,8 +15,9 @@ import { CONTACTOS } from '../../data/dashcards.data';
   selector: 'page-lista-contactos',
   templateUrl: 'lista-contactos.html',
 })
-export class ListaContactosPage {
 
+export class ListaContactosPage {
+  homePage: any = HomePage;
   listaContactos: any[] = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuController: MenuController) {
     this.listaContactos = CONTACTOS.slice(0);
