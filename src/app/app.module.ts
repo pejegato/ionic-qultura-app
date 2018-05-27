@@ -18,7 +18,21 @@ import { AgmCoreModule } from '@agm/core';
 import { RegistroPage } from '../pages/registro/registro';
 import { ListaContactosPage } from '../pages/lista-contactos/lista-contactos';
 import { PerfilContactoPage } from '../pages/perfil-contacto/perfil-contacto';
+import { HttpProvider } from '../providers/http/http';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthProvider } from '../providers/auth/auth';
 
+export const firebaseConfig = {
+  apiKey: "AIzaSyDcB8jqFCAA5L1ieeI7E_K7toTJZXUEJ_4",
+  authDomain: "qultura-63b5d.firebaseapp.com",
+  databaseURL: "https://qultura-63b5d.firebaseio.com",
+  projectId: "qultura-63b5d",
+  storageBucket: "qultura-63b5d.appspot.com",
+  messagingSenderId: "996842443204"  
+};
 
 @NgModule({
   declarations: [
@@ -41,7 +55,12 @@ import { PerfilContactoPage } from '../pages/perfil-contacto/perfil-contacto';
     IonicModule.forRoot(MyApp),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBYi00yrWm7s1YVl0mOHEh9GfNqVCZpTU4'
-    })
+    }),
+    HttpClientModule,
+     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -65,7 +84,9 @@ import { PerfilContactoPage } from '../pages/perfil-contacto/perfil-contacto';
     BarcodeScanner,
     InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HistorialProvider
+    HistorialProvider,
+    HttpProvider,
+    AuthProvider
   ]
 })
 export class AppModule {}

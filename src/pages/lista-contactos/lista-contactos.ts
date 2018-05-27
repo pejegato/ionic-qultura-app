@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { CONTACTOS } from '../../data/dashcards.data';
 
+
 /**
  * Generated class for the ListaContactosPage page.
  *

@@ -6,9 +6,13 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Registro</ion-title>
-  </ion-navbar>
+    <ion-navbar color="primary">    
+        
+        
+          <ion-title text-center>Registro</ion-title>
+        
+
+      </ion-navbar>
 
 </ion-header>
 
@@ -44,13 +48,13 @@
           </ion-item>
 
           <ion-item>
-            <ion-label floating>Correo</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" [(ngModel)]="user.email" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label floating>Contraseña</ion-label>
-            <ion-input type="password"></ion-input>
+            <ion-input type="password"[(ngModel)]="user.password" required></ion-input>
           </ion-item>
 
           <ion-item>
@@ -59,7 +63,7 @@
           </ion-item>
 
           <ion-buttons>
-            <button style="margin-top: 40px" ion-button block large [navPush]="dashboardPage">
+            <button style="margin-top: 40px" ion-button block large (click)="signin()">
               Registrarse
             </button>
           </ion-buttons>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { LoginPage } from '../login/login';
+import { AuthProvider } from '../../providers/auth/auth';
 
 /**
  * Generated class for the RegistroPage page.
@@ -14,12 +16,34 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'registro.html',
 })
 export class RegistroPage {
+  loginPage:any = LoginPage
+  user = { email: '', password: '' };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public auth: AuthProvider,
+    public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegistroPage');
+  }
+
+  signin() {
+    this.auth.registerUser(this.user.email, this.user.password)
+      .then((user) => {
+        // El usuario se ha creado correctamente
+      })
+      .catch(err => {
+        let alert = this.alertCtrl.create({
+          title: 'Error',
+          subTitle: err.message,
+          buttons: ['Aceptar']
+        });
+        alert.present();
+      })
+
   }
 
 }

@@ -15,7 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'inicio-sesion.html',
 })
 export class InicioSesionPage {
-
+  user = { email: '', password: '' };
   dashboardPage: any  = DashboardPage;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
