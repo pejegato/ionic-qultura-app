@@ -21,7 +21,7 @@ import { CONTACTOS } from '../../data/dashcards.data';
 export class ListaContactosPage {
   homePage: any = HomePage;
   listaContactos: any[] = [];
-  PerfilContactoPage:any = PerfilContactoPage;
+  perfilContactoPage:any = PerfilContactoPage;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuController: MenuController) {
     this.listaContactos = CONTACTOS.slice(0);
   }

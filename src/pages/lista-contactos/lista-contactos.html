@@ -27,7 +27,7 @@
       </ion-item> 
     <ion-item-sliding *ngFor="let contacto of listaContactos; let i = index">
 
-      <button ion-item detail-none>
+      <button ion-item detail-none [navPush]="perfilContactoPage">
         <ion-avatar item-left>
           <img [src]=contacto.img>
         </ion-avatar>
@@ -43,13 +43,7 @@
           <ion-icon name="trash"></ion-icon>
           Borrar
         </button>
-<<<<<<< HEAD
-=======
-        <button ion-button color="primary"  [navPush]="perfilContacoPage">
-          <ion-icon name="person"></ion-icon>
-          Perfil
-        </button>
->>>>>>> 589fa822a4c81580b56c0c6ce57319e30d1ce080
+
       </ion-item-options>
 </ion-item-sliding>
 
