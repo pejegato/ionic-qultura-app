@@ -24,4 +24,18 @@ export class InicioSesionPage {
     console.log('ionViewDidLoad InicioSesionPage');
   }
 
+  login() {
+    this.auth.loginUser(this.user.email, this.user.password).then((user) => {
+    }
+    )
+      .catch(err => {
+        let alert = this.alertCtrl.create({
+          title: 'Error',
+          subTitle: err.message,
+          buttons: ['Aceptar']
+        });
+        alert.present();
+      })
+  }
+
 }
