@@ -35,6 +35,19 @@ export class AuthProvider {
   // Devuelve la session
   get Session() {
     return this.afAuth.authState;
+    
   }
+
+  // Logout de usuario
+  logout() {
+    this.afAuth.auth.signOut().then(() => {
+      // hemos salido
+    })
+  }
+
+  getUser() {
+    return this.afAuth.auth.currentUser.uid;
+  }
+
 
 }

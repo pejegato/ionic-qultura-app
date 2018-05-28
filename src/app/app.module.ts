@@ -24,6 +24,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthProvider } from '../providers/auth/auth';
+import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDcB8jqFCAA5L1ieeI7E_K7toTJZXUEJ_4",
@@ -86,7 +87,8 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HistorialProvider,
     HttpProvider,
-    AuthProvider
+    AuthProvider,
+    FirebaseDbProvider
   ]
 })
 export class AppModule {}
