@@ -1,7 +1,7 @@
 import { DashboardPage } from './../dashboard/dashboard';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { AuthProvider } from '../../providers/auth/auth';
 /**
  * Generated class for the InicioSesionPage page.
  *
@@ -17,7 +17,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class InicioSesionPage {
   user = { email: '', password: '' };
   dashboardPage: any  = DashboardPage;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public auth: AuthProvider,
+    public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
