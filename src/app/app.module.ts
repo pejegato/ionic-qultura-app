@@ -4,7 +4,7 @@ import { PerfilPage } from './../pages/perfil/perfil';
 import { DashboardPage } from './../pages/dashboard/dashboard';
 import { LoginPage } from './../pages/login/login';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { HomePage, TabsPage, GuardadosPage, MapaPage } from './../pages/index-paginas';
+import { HomePage, GuardadosPage, MapaPage } from './../pages/index-paginas';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -18,7 +18,6 @@ import { AgmCoreModule } from '@agm/core';
 import { RegistroPage } from '../pages/registro/registro';
 import { ListaContactosPage } from '../pages/lista-contactos/lista-contactos';
 import { PerfilContactoPage } from '../pages/perfil-contacto/perfil-contacto';
-import { HttpProvider } from '../providers/http/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -38,8 +37,7 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    TabsPage,
+    HomePage,    
     GuardadosPage,
     MapaPage,
     LoginPage,
@@ -67,7 +65,6 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     HomePage,
-    TabsPage,
     GuardadosPage,
     MapaPage,
     LoginPage,
@@ -86,7 +83,6 @@ export const firebaseConfig = {
     InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HistorialProvider,
-    HttpProvider,
     AuthProvider,
     FirebaseDbProvider
   ]

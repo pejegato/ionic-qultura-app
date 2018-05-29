@@ -5,12 +5,28 @@ import { AuthProvider } from '../auth/auth';
 
 @Injectable()
 export class FirebaseDbProvider {
+  /***********************************
+   * Variables globales del servicio
+  ************************************/
+  datosUsuario:any = {}  
+
 
   constructor(
     public afDB: AngularFireDatabase, 
     public auth: AuthProvider
-  ) {
-    console.log('Hello FirebaseDbProvider Provider');
+  ) {}
+
+  guardaUsuario(usuario) {    
+    return this.afDB.database.ref('usuarios/' + this.auth.getUser()).set(usuario);
   }
+
+  //observable
+  obtieneDatosUsuario() {
+    this.afDB.object('usuarios/' + this.auth.getUser()).valueChanges().subscribe(usuario => {
+      this.datosUsuario = usuario;
+    });
+  }
+
+  
 
 }

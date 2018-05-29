@@ -1,3 +1,4 @@
+import { FirebaseDbProvider } from './../providers/firebase-db/firebase-db';
 import { PerfilPage } from './../pages/perfil/perfil';
 import { EdicionPerfilPage } from './../pages/edicion-perfil/edicion-perfil';
 import { DashboardPage } from './../pages/dashboard/dashboard';
@@ -7,7 +8,7 @@ import { Platform, MenuController, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage, TabsPage, MapaPage } from '../pages/index-paginas';
+import { HomePage, MapaPage } from '../pages/index-paginas';
 import { LoginPage } from '../pages/login/login';
 import { ListaContactosPage } from '../pages/lista-contactos/lista-contactos';
 import { PerfilContactoPage } from '../pages/perfil-contacto/perfil-contacto';
@@ -29,19 +30,20 @@ export class MyApp {
   perfilContactosPage:any = PerfilContactoPage;
   
   //contactosPage: any = ContactosPage;
-
+  datosUsuario:any = {};
   constructor(
     platform: Platform, 
     statusBar: StatusBar, 
     splashScreen: SplashScreen, 
     private menuController: MenuController,
-    private auth: AuthProvider
+    private auth: AuthProvider,
+    private fb : FirebaseDbProvider
+    
   ) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+    platform.ready().then(() => {      
       this.auth.Session.subscribe(session => {
-        if (session) {
+        if (session) {          
+          fb.obtieneDatosUsuario();
           this.rootPage = this.dashboardPage;
         }
         else {
@@ -60,7 +62,7 @@ export class MyApp {
   }
 
   cerrarSesion() {
-    this.auth.getUser();
+    this.auth.logout();
     this.menuController.close();
   }
 

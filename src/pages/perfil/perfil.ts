@@ -1,3 +1,4 @@
+import { FirebaseDbProvider } from './../../providers/firebase-db/firebase-db';
 import { HomePage } from './../home/home';
 import { EdicionPerfilPage } from './../edicion-perfil/edicion-perfil';
 import { Component } from '@angular/core';
@@ -21,8 +22,13 @@ export class PerfilPage {
   edicionPerfilPage:any = EdicionPerfilPage;
   homePage: any = HomePage;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menuController: MenuController) {
-    this.miPerfil  = MIS_DATOS;
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private menuController: MenuController,
+    private fb: FirebaseDbProvider) {
+
+    this.miPerfil  = fb.datosUsuario;
     this.misLogros = MIS_LUGARES.slice(0);
   }
 
