@@ -2,6 +2,7 @@ import { DashboardPage } from './../dashboard/dashboard';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
+import { LoadingController } from 'ionic-angular';
 /**
  * Generated class for the InicioSesionPage page.
  *
@@ -21,24 +22,32 @@ export class InicioSesionPage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public auth: AuthProvider,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public loadingController: LoadingController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InicioSesionPage');
+  loading = this.loadingController.create({ content: "Conectando, por favor espera..." });
+
+  login() {    
+    this.loading.present();
+    this.auth.loginUser(this.user.email, this.user.password)
+    
+    .then((user) => { 
+      this.loading.dismissAll();  
+    })
+    .catch(err => {      
+      this.crearAlerta(err).present();
+      this.loading.dismissAll();
+    })
   }
 
-  login() {
-    this.auth.loginUser(this.user.email, this.user.password).then((user) => {
-    }
-    )
-      .catch(err => {
-        let alert = this.alertCtrl.create({
-          title: 'Error',
-          subTitle: err.message,
-          buttons: ['Aceptar']
-        });
-        alert.present();
-      })
+  crearAlerta(err){
+    return this.alertCtrl.create({
+      title: 'Error',
+      subTitle: err.message,
+      buttons: ['Aceptar']
+    });
   }
+
+
 }
