@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { AuthProvider } from '../../providers/auth/auth';
+import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
 
 /**
  * Generated class for the RegistroPage page.
@@ -16,14 +17,21 @@ import { AuthProvider } from '../../providers/auth/auth';
   templateUrl: 'registro.html',
 })
 export class RegistroPage {
-  loginPage:any = LoginPage
-  user = { email: '', password: '' };
+  
+  user = { 
+    email: '', 
+    password: '', 
+    passwordConfirm:'',
+    username: '',
+    nombre: ''
+  };
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public auth: AuthProvider,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    private dbFirebase: FirebaseDbProvider) {
   }
 
   ionViewDidLoad() {
@@ -31,9 +39,29 @@ export class RegistroPage {
   }
 
   signin() {
-    this.auth.registerUser(this.user.email, this.user.password)
+    if (this.user.passwordConfirm === this.user.password){
+      this.registrarUsuario(this.user)
+    }else{
+      let alert = this.alertCtrl.create({
+        title: 'Error',
+        subTitle: "Passwords no coinciden",
+        buttons: ['Aceptar']
+      });
+      alert.present();
+    }
+  }
+
+  registrarUsuario(usuario){
+    this.auth.registerUser(usuario.email, usuario.password)
       .then((user) => {
-        // El usuario se ha creado correctamente
+        this.dbFirebase.guardaUsuario(usuario).then(res => {
+          let alert = this.alertCtrl.create({
+            title: 'Exito',
+            subTitle: "Usuario Creado!",
+            buttons: ['Aceptar']
+          });
+          alert.present();
+        })
       })
       .catch(err => {
         let alert = this.alertCtrl.create({
@@ -43,7 +71,6 @@ export class RegistroPage {
         });
         alert.present();
       })
-
   }
 
 }

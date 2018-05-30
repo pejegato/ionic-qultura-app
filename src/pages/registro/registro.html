@@ -35,16 +35,14 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        
-      
           <ion-item>
             <ion-label floating>Nombre</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" [(ngModel)]="user.nombre" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label floating>User</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="user.username" required></ion-input>
           </ion-item>
 
           <ion-item>
@@ -59,7 +57,7 @@
 
           <ion-item>
             <ion-label floating>Confirmar contraseña</ion-label>
-            <ion-input type="password"></ion-input>
+            <ion-input type="password"[(ngModel)]="user.passwordConfirm" required></ion-input>
           </ion-item>
 
           <ion-buttons>

@@ -1,11 +1,10 @@
+import { FirebaseDbProvider } from './../../providers/firebase-db/firebase-db';
 import { HomePage } from './../home/home';
 import { MyApp } from './../../app/app.component';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Dashcard } from '../../interfaces/dashcard-interface';
 import { DASHCARDS } from '../../data/dashcards.data';
-
-
 
 /**
  * Generated class for the DashboardPage page.
@@ -24,19 +23,27 @@ import { DASHCARDS } from '../../data/dashcards.data';
 export class DashboardPage {
   homePage:any = HomePage;
   listaContactos:Dashcard[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menuController: MenuController) {
+  datosUsuario:any = {}
+  
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private menuController: MenuController,
+    public fb: FirebaseDbProvider
+  ) {
 
     this.listaContactos = DASHCARDS.slice(0);
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DashboardPage');
-    
-    
   }
 
   abrirMenu(){
     this.menuController.toggle();
   }
+
+  ionViewDidLoad(){
+   this.fb.obtieneDatosUsuario();
+  }
+
+  
+
 
 }
