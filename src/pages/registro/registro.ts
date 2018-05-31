@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
 import { LoginPage } from '../login/login';
 import { AuthProvider } from '../../providers/auth/auth';
 import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
+import { AvisosProvider } from '../../providers/avisos/avisos';
 
 @IonicPage()
 @Component({
@@ -14,17 +15,16 @@ export class RegistroPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public auth: AuthProvider,
-    public alertCtrl: AlertController,
+    public auth: AuthProvider,    
     private dbFirebase: FirebaseDbProvider,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private avisosProvider: AvisosProvider
   ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegistroPage');
   }
-
 
   user = {
     email: '',
@@ -34,47 +34,35 @@ export class RegistroPage {
     nombre: ''
   };
 
+  
+  
+  signin() {   
 
-  loading = this.loadingController.create({ content: "Registrando, por favor espera..." });
-  
-  
-  signin() {
     if (this.user.passwordConfirm === this.user.password){      
       this.registrarUsuario(this.user)
-    }else{
-
-      let alert = this.alertCtrl.create({
-        title: 'Error',
-        subTitle: "Passwords no coinciden",
-        buttons: ['Aceptar']
-      });
-      alert.present();
+      
+    }else{            
+      this.avisosProvider.crearAlertaSimple('Error!','Passwords no coinciden!');
     }
   }
 
   registrarUsuario(usuario){
-    this.loading.present();
+    let loading = this.avisosProvider.crearLoading();
+    loading.present();
 
     this.auth.registerUser(usuario.email, usuario.password)
       .then((user) => {
-        this.dbFirebase.guardaUsuario(usuario).then(res => {
-          this.loading.dismissAll();
-          this.crearAlerta('Exito',res);
+        this.dbFirebase.guardaUsuario(usuario).then(res => {        
+          loading.dismiss();
+          this.avisosProvider.crearAlertaSimple('Exito',"Usuario creado con exito");
         })
       })
       .catch(err => {
-        this.crearAlerta('Error', err);
-        this.loading.dismissAll();
+        this.avisosProvider.crearAlertaSimple('Error', err);
+        loading.dismiss();
       })
   }
 
-  crearAlerta(titulo, mensaje){
-    let alert = this.alertCtrl.create({
-      title: titulo,
-      subTitle: mensaje,
-      buttons: ['Aceptar']
-    });
-    alert.present();
-  }
+  
 
 }
