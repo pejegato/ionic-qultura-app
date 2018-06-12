@@ -4,6 +4,9 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { AuthProvider } from '../../providers/auth/auth';
 import { LoadingController } from 'ionic-angular';
 import { AvisosProvider } from '../../providers/avisos/avisos';
+import { diccionarioErrores } from '../../providers/constants/errores';
+
+
 /**
  * Generated class for the InicioSesionPage page.
  *
@@ -19,19 +22,20 @@ import { AvisosProvider } from '../../providers/avisos/avisos';
 export class InicioSesionPage {
   user = { email: '', password: '' };
   dashboardPage: any  = DashboardPage;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public auth: AuthProvider,
     public alertCtrl: AlertController,
     public loadingController: LoadingController,
-    private avisosProvider : AvisosProvider 
+    private avisosProvider : AvisosProvider,
+    private errores : diccionarioErrores
   ) {
   }
 
   login() {    
     let loading = this.avisosProvider.crearLoading();
-    
     loading.present();
 
     this.auth.loginUser(this.user.email, this.user.password)    
@@ -39,8 +43,8 @@ export class InicioSesionPage {
       loading.dismiss();  
     })
     .catch(err => {      
-      loading.dismiss();
-      this.avisosProvider.crearAlertaSimple("Error",err);      
+      loading.dismiss();         
+      this.avisosProvider.crearAlertaSimple("Error", this.errores.traducirError('LOGIN',err.code));      
     })
   }
 

@@ -19,7 +19,6 @@ import { DASHCARDS } from '../../data/dashcards.data';
   templateUrl: 'dashboard.html',
 })
 
-
 export class DashboardPage {
   homePage:any = HomePage;
   listaContactos:Dashcard[] = [];
@@ -42,8 +41,4 @@ export class DashboardPage {
   ionViewDidLoad(){
    this.fb.obtieneDatosUsuario();
   }
-
-  
-
-
 }

@@ -25,6 +25,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthProvider } from '../providers/auth/auth';
 import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
 import { AvisosProvider } from '../providers/avisos/avisos';
+import { diccionarioErrores } from '../providers/constants/errores';
+
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDcB8jqFCAA5L1ieeI7E_K7toTJZXUEJ_4",
@@ -86,7 +89,8 @@ export const firebaseConfig = {
     HistorialProvider,
     AuthProvider,
     FirebaseDbProvider,
-    AvisosProvider
+    AvisosProvider,
+    diccionarioErrores
   ]
 })
 export class AppModule {}
