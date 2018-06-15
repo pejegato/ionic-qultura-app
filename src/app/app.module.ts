@@ -26,6 +26,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
 import { AvisosProvider } from '../providers/avisos/avisos';
 import { diccionarioErrores } from '../providers/constants/errores';
+import { ScannerProvider } from '../providers/scanner/scanner';
 
 
 
@@ -90,7 +91,8 @@ export const firebaseConfig = {
     AuthProvider,
     FirebaseDbProvider,
     AvisosProvider,
-    diccionarioErrores
+    diccionarioErrores,
+    ScannerProvider
   ]
 })
 export class AppModule {}

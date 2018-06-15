@@ -9,7 +9,7 @@
       <ion-title text-center>Historias de {{fb.datosUsuario.username}}</ion-title>
     
     <ion-buttons end>
-      <button ion-button icon-only [navPush]="homePage">
+      <button ion-button icon-only (click)='sc.scanCode()'>
         <ion-icon name="camera"></ion-icon>
       </button>
     </ion-buttons>

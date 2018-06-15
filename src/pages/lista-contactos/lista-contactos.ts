@@ -1,3 +1,4 @@
+import { ScannerProvider } from './../../providers/scanner/scanner';
 import { PerfilContactoPage } from './../perfil-contacto/perfil-contacto';
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
@@ -22,7 +23,7 @@ export class ListaContactosPage {
   homePage: any = HomePage;
   listaContactos: any[] = [];
   perfilContactoPage:any = PerfilContactoPage;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menuController: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menuController: MenuController, public sc: ScannerProvider) {
     this.listaContactos = CONTACTOS.slice(0);
   }
 

@@ -1,3 +1,4 @@
+import { ScannerProvider } from './../../providers/scanner/scanner';
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
@@ -17,7 +18,7 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
 })
 export class EdicionPerfilPage {
   homePage: any = HomePage;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menuController: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menuController: MenuController, public sc: ScannerProvider) {
   }
 
   ionViewDidLoad() {

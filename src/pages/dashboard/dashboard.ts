@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Dashcard } from '../../interfaces/dashcard-interface';
 import { DASHCARDS } from '../../data/dashcards.data';
+import { ScannerProvider } from '../../providers/scanner/scanner';
 
 /**
  * Generated class for the DashboardPage page.
@@ -28,7 +29,9 @@ export class DashboardPage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     private menuController: MenuController,
-    public fb: FirebaseDbProvider
+    public fb: FirebaseDbProvider,
+    public sc: ScannerProvider
+
   ) {
 
     this.listaContactos = DASHCARDS.slice(0);

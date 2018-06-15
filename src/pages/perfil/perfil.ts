@@ -1,3 +1,4 @@
+import { ScannerProvider } from './../../providers/scanner/scanner';
 import { FirebaseDbProvider } from './../../providers/firebase-db/firebase-db';
 import { HomePage } from './../home/home';
 import { EdicionPerfilPage } from './../edicion-perfil/edicion-perfil';
@@ -26,7 +27,8 @@ export class PerfilPage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     private menuController: MenuController,
-    private fb: FirebaseDbProvider) {
+    private fb: FirebaseDbProvider,
+    public sc: ScannerProvider) {
 
     this.miPerfil  = fb.datosUsuario;
     this.misLogros = MIS_LUGARES.slice(0);
