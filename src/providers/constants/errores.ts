@@ -3,25 +3,23 @@
 export class diccionarioErrores {
 
   private ERRORES_LOGIN = new  Map<string, string>([        
-      ["AUTH/AUTHENTICATION_PROVIDER_DISABLED","Autenticación Deshabilitada"],           
-      ["AUTH/INVALID_CREDENTIALS", 'Credenciales invalidas'],
+      ["AUTH/AUTHENTICATION-PROVIDER-DISABLED","Autenticación Deshabilitada"],           
+      ["AUTH/INVALID-CREDENTIALS", 'Credenciales invalidas'],
       ['AUTH/INVALID-EMAIL', 'Email invalido'],
-      ["AUTH/INVALID_ORIGIN", 'Origen invalido'],
-      ["AUTH/INVALID_PASSWORD", 'Password invalido'],    
-      ["AUTH/EMAIL_TAKEN", 'Email ya existe'],
-      ["AUTH/INVALID_PROVIDER", 'Proveedor invalido'],
-      ["AUTH/INVALID_AUTH_ARGUMENTS", 'Argumentos de autenticación invalidos'],
-      ["AUTH/INVALID_CONFIGURATION", 'Configuración invalida'],      
-      ["AUTH/INVALID_TOKEN", 'Token invalido'],
-      ["AUTH/NETWORK_ERROR", 'Error de red'],
-      ["AUTH/UNKNOWN_ERROR", 'Se ha producido un error'],
-      ["AUTH/USER_DENIED_AUTH", 'Usuario no autorizado'],
-      ["AUTH/USER_DOES_NOT_EXIST", 'Usuario no existe']      
+      ["AUTH/INVALID-ORIGIN", 'Origen invalido'],
+      ["AUTH/INVALID-PASSWORD", 'Password invalido'],    
+      ["AUTH/WRONG-PASSWORD", 'Password invalido'],    
+      ["AUTH/EMAIL-TAKEN", 'Email ya existe'],
+      ["AUTH/INVALID-PROVIDER", 'Proveedor invalido'],
+      ["AUTH/INVALID-AUTH-ARGUMENTS", 'Argumentos de autenticación invalidos'],
+      ["AUTH/INVALID-CONFIGURATION", 'Configuración invalida'],      
+      ["AUTH/INVALID-TOKEN", 'Token invalido'],
+      ["AUTH/NETWORK-ERROR", 'Error de red'],
+      ["AUTH/UNKNOWN-ERROR", 'Se ha producido un error'],
+      ["AUTH/USER-DENIED-AUTH", 'Usuario no autorizado'],
+      ["AUTH/USER-DOES-NOT-EXIST", 'Usuario no existe']      
   ]);
-
-  /**
-   * name
-   */
+  
   public traducirError(tipo:string, key:string) {  
     console.log("tipo de error ",typeof key); 
     let erroresMap = new  Map<string, string>();

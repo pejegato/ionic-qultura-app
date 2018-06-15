@@ -46,4 +46,8 @@ export class HomePage {
     toast.present();
   }
 
+  ionViewDidLoad() {
+    this.scanCode();
+  }
+
 }
