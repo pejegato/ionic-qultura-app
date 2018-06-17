@@ -1,3 +1,5 @@
+import { Crop } from '@ionic-native/crop';
+import { ImagePicker } from '@ionic-native/image-picker';
 import { EdicionPerfilPage } from './../pages/edicion-perfil/edicion-perfil';
 import { InicioSesionPage } from './../pages/inicio-sesion/inicio-sesion';
 import { PerfilPage } from './../pages/perfil/perfil';
@@ -92,7 +94,9 @@ export const firebaseConfig = {
     FirebaseDbProvider,
     AvisosProvider,
     diccionarioErrores,
-    ScannerProvider
+    ScannerProvider,
+    ImagePicker,
+    Crop
   ]
 })
 export class AppModule {}
