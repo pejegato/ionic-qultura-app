@@ -30,21 +30,17 @@ export class RegistroPage {
     password: '',
     passwordConfirm: '',
     username: '',
-    nombre: ''
+    nombre: '',
+    captureDataUrl: ''
   };
-  captureDataUrl: string;
+  
   alertCtrl: AlertController;
 
   @Input('useURI') useURI: Boolean = true;
-   
-
-  
-  
-  signin() {   
-
+     
+  signin() {
     if (this.user.passwordConfirm === this.user.password){      
-      this.registrarUsuario(this.user)
-      
+      this.registrarUsuario(this.user);
     }else{            
       this.avisosProvider.crearAlertaSimple('Error!','Passwords no coinciden!');
     }
@@ -56,9 +52,11 @@ export class RegistroPage {
 
     this.auth.registerUser(usuario.email, usuario.password)
       .then((user) => {
-        this.dbFirebase.guardaUsuario(usuario).then(res => {        
-          loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Exito',"Usuario creado con exito");
+        this.dbFirebase.guardaUsuario(usuario).then(res => {  
+          this.dbFirebase.upload(this.user.captureDataUrl).then(res =>{
+            loading.dismiss();
+            this.avisosProvider.crearAlertaSimple('Exito',"Usuario creado con exito");
+          })
         })
       })
       .catch(err => {
@@ -75,41 +73,11 @@ export class RegistroPage {
       mediaType:  this.camera.MediaType.PICTURE,
       sourceType: sourceType
     };
-
     this.camera.getPicture(cameraOptions)
      .then((captureDataUrl) => {
-       this.captureDataUrl = 'data:image/jpeg;base64,' + captureDataUrl;
-    }, (err) => {
-        console.log(err);
+       this.user.captureDataUrl = 'data:image/jpeg;base64,' + captureDataUrl;
+    }).catch(err => {
+      this.avisosProvider.crearAlertaSimple('Error',"No se pudo obtener la foto");
     });
-  }  
-
-upload() {
-    let storageRef = firebase.storage().ref();
-    // Create a timestamp as filename
-    const filename = Math.floor(Date.now() / 1000);
-
-    // Create a reference to 'images/todays-date.jpg'
-    const imageRef = storageRef.child(`images/${filename}.jpg`);
-
-    imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL)
-      .then((snapshot)=> {
-        // Do something here when the data is succesfully uploaded!
-        this.showSuccesfulUploadAlert();
-    }), function(err){
-      alert(err);
-    };
   }
-
-  showSuccesfulUploadAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'Uploaded!',
-      subTitle: 'Picture is uploaded to Firebase',
-      buttons: ['OK']
-    });
-    alert.present();
-    // clear the previous photo data in the variable
-    this.captureDataUrl = "";
-  }
-
 }

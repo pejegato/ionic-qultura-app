@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase} from 'angularfire2/database';
 import { AuthProvider } from '../auth/auth';
+import firebase from 'firebase';
 
 
 @Injectable()
@@ -27,6 +28,14 @@ export class FirebaseDbProvider {
     });
   }
 
-  
+  upload(captureDataUrl) {
+    let storageRef = firebase.storage().ref();
+    // Create a timestamp as filename
+    const filename = Math.floor(Date.now() / 1000);
+    // Create a reference to 'images/todays-date.jpg'
+    const imageRef = storageRef.child('images/${filename}.jpg');
+    return imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL);
+      
+  };
 
 }

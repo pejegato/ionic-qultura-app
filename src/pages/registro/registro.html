@@ -28,7 +28,7 @@
       </ion-col>
       <ion-col col-7>      
         <ion-buttons>
-            <button ion-button (click)="getPicture(0)">Subir Foto</button>
+            <button ion-button (click)="getPicture(0, cameraOptions)">Subir Foto</button>
             <button ion-button (click)="upload()" *ngIf="captureDataUrl">Upload to Firebase!</button>
         </ion-buttons>      
       </ion-col>
