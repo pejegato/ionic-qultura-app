@@ -23,6 +23,7 @@
     "@angular/platform-browser": "5.2.9",
     "@angular/platform-browser-dynamic": "5.2.9",
     "@ionic-native/barcode-scanner": "^4.6.0",
+    "@ionic-native/camera": "^4.7.0",
     "@ionic-native/core": "4.6.0",
     "@ionic-native/in-app-browser": "^4.7.0",
     "@ionic-native/splash-screen": "4.6.0",
@@ -69,7 +70,8 @@
         "WARN_DEBUG": "true",
         "UPDATE_API": "https://api.ionicjs.com",
         "MAX_STORE": "2"
-      }
+      },
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "android"

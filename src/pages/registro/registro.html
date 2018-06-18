@@ -27,9 +27,10 @@
       </ion-col>
       <ion-col col-7>      
         <ion-buttons>
-          <button ion-button block medium icon-end [navPush]="registroPage">
-            Subir foto             
-          </button>
+            <button ion-button (click)="getPicture(0)">Show Album</button>  
+
+            <img [src]="captureDataUrl" *ngIf="captureDataUrl"/>
+            <button ion-button (click)="upload()" *ngIf="captureDataUrl">Upload to Firebase!</button>
         </ion-buttons>      
       </ion-col>
     </ion-row>

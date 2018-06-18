@@ -27,6 +27,7 @@ import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
 import { AvisosProvider } from '../providers/avisos/avisos';
 import { diccionarioErrores } from '../providers/constants/errores';
 import { ScannerProvider } from '../providers/scanner/scanner';
+import { Camera } from '@ionic-native/camera';
 
 
 
@@ -92,7 +93,9 @@ export const firebaseConfig = {
     FirebaseDbProvider,
     AvisosProvider,
     diccionarioErrores,
-    ScannerProvider
+    ScannerProvider,
+    Camera
+    
   ]
 })
 export class AppModule {}
