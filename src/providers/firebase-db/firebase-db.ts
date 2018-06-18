@@ -33,7 +33,7 @@ export class FirebaseDbProvider {
     // Create a timestamp as filename
     const filename = Math.floor(Date.now() / 1000);
     // Create a reference to 'images/todays-date.jpg'
-    const imageRef = storageRef.child('images/${filename}.jpg');
+    const imageRef = storageRef.child(`images/${filename}.jpg`);
     return imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL);
       
   };

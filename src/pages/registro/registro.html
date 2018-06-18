@@ -24,7 +24,7 @@
       
       <ion-col col-5>
         <img src="../../assets/avatars/rey.jpg" *ngIf="!captureDataUrl" class="avatar-registro">
-        <img [src]="captureDataUrl" *ngIf="captureDataUrl" class="avatar-registro"/>
+        <img [src]="captureDataUrl" *ngIf="dataUrl" class="avatar-registro"/>
       </ion-col>
       <ion-col col-7>      
         <ion-buttons>

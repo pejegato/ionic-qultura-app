@@ -53,7 +53,7 @@ export class RegistroPage {
     this.auth.registerUser(usuario.email, usuario.password)
       .then((user) => {
         this.dbFirebase.guardaUsuario(usuario).then(res => {  
-          this.dbFirebase.upload(this.user.captureDataUrl).then(res =>{
+          this.dbFirebase.upload(this.user.dataUrl.split(',')[1]).then(res =>{
             loading.dismiss();
             this.avisosProvider.crearAlertaSimple('Exito',"Usuario creado con exito");
           })
@@ -75,7 +75,7 @@ export class RegistroPage {
     };
     this.camera.getPicture(cameraOptions)
      .then((captureDataUrl) => {
-       this.user.captureDataUrl = 'data:image/jpeg;base64,' + captureDataUrl;
+       this.user.dataUrl = 'data:image/jpeg;base64,' + captureDataUrl;
     }).catch(err => {
       this.avisosProvider.crearAlertaSimple('Error',"No se pudo obtener la foto");
     });
