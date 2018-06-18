@@ -96,7 +96,9 @@ upload() {
       .then((snapshot)=> {
         // Do something here when the data is succesfully uploaded!
         this.showSuccesfulUploadAlert();
-    });
+    }), function(err){
+      alert(err);
+    };
   }
 
   showSuccesfulUploadAlert() {
