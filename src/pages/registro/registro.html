@@ -23,13 +23,12 @@
     <ion-row  align-items-center>
       
       <ion-col col-5>
-        <img src="../../assets/avatars/rey.jpg" class="avatar-registro">
+        <img src="../../assets/avatars/rey.jpg" *ngIf="!captureDataUrl" class="avatar-registro">
+        <img [src]="captureDataUrl" *ngIf="captureDataUrl" class="avatar-registro"/>
       </ion-col>
       <ion-col col-7>      
         <ion-buttons>
-            <button ion-button (click)="getPicture(0)">Show Album</button>  
-
-            <img [src]="captureDataUrl" *ngIf="captureDataUrl"/>
+            <button ion-button (click)="getPicture(0)">Subir Foto</button>
             <button ion-button (click)="upload()" *ngIf="captureDataUrl">Upload to Firebase!</button>
         </ion-buttons>      
       </ion-col>
