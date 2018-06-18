@@ -31,7 +31,7 @@ export class RegistroPage {
     passwordConfirm: '',
     username: '',
     nombre: '',
-    captureDataUrl: ''
+    dataUrl: ''
   };
   
   alertCtrl: AlertController;
