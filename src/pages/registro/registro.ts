@@ -24,11 +24,7 @@ export class RegistroPage {
     private camera : Camera
   ) {
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegistroPage');
-  }
-
+  
   user = {
     email: '',
     password: '',
@@ -113,7 +109,5 @@ upload() {
     // clear the previous photo data in the variable
     this.captureDataUrl = "";
   }
-
-  
 
 }
