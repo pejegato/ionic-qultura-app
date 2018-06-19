@@ -24,12 +24,11 @@
       
       <ion-col col-5>
         <img src="../../assets/avatars/rey.jpg" *ngIf="!captureDataUrl" class="avatar-registro">
-        <img [src]="captureDataUrl" *ngIf="dataUrl" class="avatar-registro"/>
+        <img [src]="user.dataUrl" *ngIf="user.dataUrl" class="avatar-registro"/>
       </ion-col>
       <ion-col col-7>      
         <ion-buttons>
             <button ion-button (click)="getPicture(0)">Subir Foto</button>
-            <button ion-button (click)="upload()" *ngIf="user.dataUrl">Upload to Firebase!</button>
         </ion-buttons>      
       </ion-col>
     </ion-row>
