@@ -49,12 +49,13 @@ export class RegistroPage {
   registrarUsuario(usuario){
     let loading = this.avisosProvider.crearLoading();
     loading.present();
-
+    usuario.fileName = Math.floor(Date.now() / 1000);
+    
     this.auth.registerUser(usuario.email, usuario.password)
       .then((user) => {
         this.dbFirebase.guardaUsuario(usuario).then(res => {  
-          console.log(this.user.dataUrl);
-          this.dbFirebase.upload(this.user.dataUrl).then(res =>{
+          
+          this.dbFirebase.uploadImage(this.user.dataUrl, usuario.fileName).then(res =>{
             loading.dismiss();
             this.avisosProvider.crearAlertaSimple('Exito',"Usuario creado con exito");
           }).catch(err => {

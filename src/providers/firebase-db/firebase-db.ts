@@ -28,14 +28,12 @@ export class FirebaseDbProvider {
     });
   }
 
-  upload(captureDataUrl) {
-    let storageRef = firebase.storage().ref();
-    // Create a timestamp as filename
-    const filename = Math.floor(Date.now() / 1000);
+  uploadImage(captureDataUrl, filename) {
+    let storageRef = firebase.storage().ref();   
+    
     // Create a reference to 'images/todays-date.jpg'
     const imageRef = storageRef.child(`images/${filename}.jpg`);
-    return imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL);
-      
+    return imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL);      
   };
 
 }
