@@ -25,10 +25,9 @@ export class FirebaseDbProvider {
   obtieneDatosUsuario() {    
     this.afDB.object('usuarios/' + this.auth.getUser()).valueChanges().subscribe(usuario => {
       this.datosUsuario = usuario;
-      console.log("usuarios ", this.auth.getUser());
-      this.datosUsuario.avatar = this.getImage(this.auth.getUser());
-      console.log("url avatar ",this.datosUsuario.avatar);
-      
+      //console.log("usuarios ", this.auth.getUser());
+      //this.datosUsuario.avatar = this.getImage(this.auth.getUser());
+      //console.log("url avatar ",this.datosUsuario.avatar);
     });
   }
 

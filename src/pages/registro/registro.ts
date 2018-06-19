@@ -54,7 +54,7 @@ export class RegistroPage {
     this.auth.registerUser(usuario.email, usuario.password)
       .then((user) => {
         this.dbFirebase.guardaUsuario(usuario).then(res => {       
-          console.log("usuario reg", user)   
+          
           this.dbFirebase.uploadImage(this.user.dataUrl, user.uid)
           .then(res =>{
             loading.dismiss();
