@@ -48,28 +48,16 @@ export class RegistroPage {
 
   registrarUsuario(usuario){
     let loading = this.avisosProvider.crearLoading();
-    loading.present();
-    usuario.fileName = Math.floor(Date.now() / 1000);
-    
     this.auth.registerUser(usuario.email, usuario.password)
-      .then((user) => {
-        this.dbFirebase.guardaUsuario(usuario).then(res => {       
-          
-          this.dbFirebase.uploadImage(this.user.dataUrl, user.uid)
-          .then(res =>{
-            loading.dismiss();
-            this.avisosProvider.crearAlertaSimple('Exito',"Usuario creado con exito");
-          })
-          .catch(err => {
-            this.avisosProvider.crearAlertaSimple('Error', err);
-            loading.dismiss();
-          })
-        })
+    .then(
+      sesion => {
+        this.dbFirebase.guardaUsuario(this.user, sesion.uid);
+      }
+    )
+    .catch(err => {
+        this.avisosProvider.crearAlertaSimple('Error', err);        
       })
-      .catch(err => {
-        this.avisosProvider.crearAlertaSimple('Error', err);
-        loading.dismiss();
-      })
+      loading.dismiss();
   }
 
   getPicture(sourceType){
@@ -87,4 +75,16 @@ export class RegistroPage {
       this.avisosProvider.crearAlertaSimple('Error',"No se pudo obtener la foto");
     });
   }
+
+  guardarPerfil(){
+      let loading = this.avisosProvider.crearLoading();
+      this.auth.session.subscribe(session => {
+      console.log("guardando usuario")
+      this.dbFirebase.guardaUsuario(this.user, session.uid)
+      .then(res => {
+        loading.dismiss();
+        this.avisosProvider.crearAlertaSimple('Exito',"Usuario creado con exito");})
+      })
+  }
+
 }

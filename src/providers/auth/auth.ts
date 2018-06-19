@@ -10,7 +10,7 @@ export class AuthProvider {
   // Registro de usuario
   registerUser(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then(res => Promise.resolve(res))
+      .then(response => Promise.resolve(response))
       .catch(err => Promise.reject(err))
   }
 
@@ -27,14 +27,11 @@ export class AuthProvider {
     .catch(err => Promise.reject(err))
   }
   
-  get Session() {
+  get session() {
     return this.afAuth.authState;
   }
 
-  getUser() {
-    return this.afAuth.auth.currentUser.uid;
-  }
-
+ 
   
 
   

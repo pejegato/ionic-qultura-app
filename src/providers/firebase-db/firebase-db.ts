@@ -17,13 +17,13 @@ export class FirebaseDbProvider {
     public auth: AuthProvider
   ) {}
 
-  guardaUsuario(usuario) {    
-    return this.afDB.database.ref('usuarios/' + this.auth.getUser()).set(usuario);
+  guardaUsuario(usuario: any, userId: string) {    
+    return this.afDB.database.ref(`usuarios/'${userId}`).set(usuario);
   }
 
   //observable
-  obtieneDatosUsuario() {    
-    this.afDB.object('usuarios/' + this.auth.getUser()).valueChanges().subscribe(usuario => {
+  obtieneDatosUsuario(userId: string) {    
+    this.afDB.object(`usuarios/'${userId}`).valueChanges().subscribe(usuario => {
       this.datosUsuario = usuario;
       //console.log("usuarios ", this.auth.getUser());
       //this.datosUsuario.avatar = this.getImage(this.auth.getUser());

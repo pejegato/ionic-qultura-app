@@ -40,8 +40,9 @@ export class MyApp {
     private fb : FirebaseDbProvider
     
   ) {
-    platform.ready().then(() => {      
-      this.auth.Session.subscribe(session => {
+    platform.ready().then(() => {
+      /*      
+      this.auth.session.subscribe(session => {
         if (session) {          
           fb.obtieneDatosUsuario();
           this.rootPage = this.dashboardPage;
@@ -50,7 +51,7 @@ export class MyApp {
           this.rootPage = this.loginPage;
         }
       });
-      
+      */
       statusBar.styleDefault();
       splashScreen.hide();
     });

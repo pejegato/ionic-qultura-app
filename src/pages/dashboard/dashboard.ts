@@ -7,6 +7,8 @@ import { Dashcard } from '../../interfaces/dashcard-interface';
 import { DASHCARDS } from '../../data/dashcards.data';
 import { ScannerProvider } from '../../providers/scanner/scanner';
 
+import { AuthProvider } from '../../providers/auth/auth';
+
 /**
  * Generated class for the DashboardPage page.
  *
@@ -30,7 +32,8 @@ export class DashboardPage {
     public navParams: NavParams, 
     private menuController: MenuController,
     public fb: FirebaseDbProvider,
-    public sc: ScannerProvider
+    public sc: ScannerProvider,
+    public auth: AuthProvider,  
 
   ) {
 
@@ -42,6 +45,7 @@ export class DashboardPage {
   }
 
   ionViewDidLoad(){
-   this.fb.obtieneDatosUsuario();
+    //currentUser()
+   //this.fb.obtieneDatosUsuario();
   }
 }
