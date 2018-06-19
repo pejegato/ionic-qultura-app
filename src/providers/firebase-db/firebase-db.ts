@@ -22,9 +22,11 @@ export class FirebaseDbProvider {
   }
 
   //observable
-  obtieneDatosUsuario() {
+  obtieneDatosUsuario() {    
     this.afDB.object('usuarios/' + this.auth.getUser()).valueChanges().subscribe(usuario => {
       this.datosUsuario = usuario;
+      this.datosUsuario.avatar = this.getImage(this.datosUsuario.uid);
+      console.log("url avatar ",this.datosUsuario.avatar);
     });
   }
 
@@ -35,5 +37,11 @@ export class FirebaseDbProvider {
     const imageRef = storageRef.child(`images/${filename}.jpg`);
     return imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL);      
   };
+
+  getImage(userId: string): any {
+    let storageRef = firebase.storage().ref();
+    let imageRef = storageRef.child(`image/${userId}`);
+    return imageRef.getDownloadURL();
+  }
 
 }

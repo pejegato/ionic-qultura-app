@@ -53,12 +53,13 @@ export class RegistroPage {
     
     this.auth.registerUser(usuario.email, usuario.password)
       .then((user) => {
-        this.dbFirebase.guardaUsuario(usuario).then(res => {  
-          
-          this.dbFirebase.uploadImage(this.user.dataUrl, usuario.fileName).then(res =>{
+        this.dbFirebase.guardaUsuario(usuario).then(res => {          
+          this.dbFirebase.uploadImage(this.user.dataUrl, usuario.fileName)
+          .then(res =>{
             loading.dismiss();
             this.avisosProvider.crearAlertaSimple('Exito',"Usuario creado con exito");
-          }).catch(err => {
+          })
+          .catch(err => {
             this.avisosProvider.crearAlertaSimple('Error', err);
             loading.dismiss();
           })
