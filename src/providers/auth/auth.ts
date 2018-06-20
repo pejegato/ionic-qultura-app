@@ -15,6 +15,14 @@ export class AuthProvider {
         
   }
 
+  updatePerfilUsuario(username: string, photoURL:string){    
+    return firebase.auth().currentUser.updateProfile({
+      displayName: username,
+      photoURL: photoURL
+    }).then(response => Promise.resolve(response))
+      .catch(err => Promise.reject(err))
+  }
+
   // Login de usuario
   loginUser(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
@@ -35,4 +43,7 @@ export class AuthProvider {
   get currentUser(){
     return firebase.auth().currentUser;
   }
+
+  
+ 
 }

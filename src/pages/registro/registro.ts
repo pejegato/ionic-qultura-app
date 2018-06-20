@@ -6,6 +6,7 @@ import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
 import { AvisosProvider } from '../../providers/avisos/avisos';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import firebase from 'firebase';
+import {Observable} from 'rxjs/Rx'
 
 @IonicPage()
 @Component({
@@ -36,7 +37,7 @@ export class RegistroPage {
   
   alertCtrl: AlertController;
 
-  @Input('useURI') useURI: Boolean = true;
+
      
   signin() {
     if (this.user.passwordConfirm === this.user.password){      
@@ -46,25 +47,31 @@ export class RegistroPage {
     }
   }
 
-  registrarUsuario(usuario){
+  registrarUsuario(usuario){      
     let loading = this.avisosProvider.crearLoading();
     loading.present();
     this.auth.registerUser(usuario)
     .then(
       user => {
-        var currentUser = this.auth.currentUser;
-        currentUser.updateProfile({
-          displayName: usuario.username,
-          photoURL: usuario.photoURL
-        });
-        loading.dismiss();
-        this.avisosProvider.crearAlertaSimple('Exito', "Ok");
-        console.log(user);
-    })
+        this.guardarDatosUsuario(usuario,user.uid)
+        
+        }) 
+    
     .catch(err => {
       loading.dismiss();
       this.avisosProvider.crearAlertaSimple('Error', err);
     });
+  }
+
+  guardarDatosUsuario(usuario, id){    
+    Observable.forkJoin([       
+      //Observable.fromPromise(this.dbFirebase.uploadImage(this.user.dataUrl,id)),
+      Observable.fromPromise(this.dbFirebase.guardaInfoAdicionalUsuario(usuario)),
+      Observable.fromPromise(this.auth.updatePerfilUsuario(usuario.username, "images/"+id))
+    ])
+   .subscribe(data => {
+      this.avisosProvider.crearAlertaSimple('Exito',"Exito");
+   });
   }
 
   getPicture(sourceType){

@@ -16,14 +16,10 @@ export class FirebaseDbProvider {
     public afDB: AngularFireDatabase, 
     public auth: AuthProvider
   ) {}
-/*
-  guardaUsuario(usuario: any, userId: string) {    
-    return this.afDB.database.ref(`usuarios/'${userId}`).set(usuario);
-  }
-*/
 
-  guardaUsuario(usuario: any, userId: string) {    
-  var user = firebase.auth().currentUser;
+  guardaInfoAdicionalUsuario(usuario:any) {    
+    console.log('Funcion de guardar usuario con parametros')
+    return this.afDB.database.ref(`usuarios/'${usuario.uid}`).set(usuario);
   }
 
   //observable
@@ -48,10 +44,7 @@ export class FirebaseDbProvider {
     let storageRef = firebase.storage().ref();
     let imageRef = storageRef.child(`image/${userId}`);
     return imageRef.getDownloadURL();
-  }
-
-  get currentUser(){
-    return firebase.auth().currentUser
-  }
+  } 
 
 }
+
