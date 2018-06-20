@@ -48,16 +48,26 @@ export class RegistroPage {
 
   registrarUsuario(usuario){
     let loading = this.avisosProvider.crearLoading();
+    loading.present();
     this.auth.registerUser(usuario)
-    .then(function()
-      {
-      this.avisosProvider.crearAlertaSimple('Error',"Todo bien");
-      }
-    )
+    .then(
+      user => {
+        var x = this.dbFirebase.currentUser;
+        x.updateProfile({
+          displayName: usuario.username,
+          photoURL: usuario.photoURL
+        });
+        loading.dismiss();
+        this.avisosProvider.crearAlertaSimple('Exito', "Ok");
+        console.log(user);
+    })
     .catch(err => {
-        this.avisosProvider.crearAlertaSimple('Error', err);        
-      })
       loading.dismiss();
+      this.avisosProvider.crearAlertaSimple('Error', err);
+    });
+      
+      
+    
   }
 
   getPicture(sourceType){

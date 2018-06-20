@@ -9,15 +9,10 @@ export class AuthProvider {
 
   // Registro de usuario
   registerUser(newUser) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password)
-      .then(user => function(){        
-          user.updateProfile({
-            displayName: newUser.username,
-            photoURL: newUser.photoURL,
-            name: newUser.nombre
-          })
-      })
-      .catch(err => Promise.reject(err))
+    return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password)      
+        .then(response => Promise.resolve(response))
+        .catch(err => Promise.reject(err))
+        
   }
 
   // Login de usuario

@@ -50,4 +50,8 @@ export class FirebaseDbProvider {
     return imageRef.getDownloadURL();
   }
 
+  get currentUser(){
+    return firebase.auth().currentUser
+  }
+
 }
