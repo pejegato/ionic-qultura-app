@@ -52,8 +52,8 @@ export class RegistroPage {
     this.auth.registerUser(usuario)
     .then(
       user => {
-        var x = this.dbFirebase.currentUser;
-        x.updateProfile({
+        var currentUser = this.auth.currentUser;
+        currentUser.updateProfile({
           displayName: usuario.username,
           photoURL: usuario.photoURL
         });
@@ -65,9 +65,6 @@ export class RegistroPage {
       loading.dismiss();
       this.avisosProvider.crearAlertaSimple('Error', err);
     });
-      
-      
-    
   }
 
   getPicture(sourceType){

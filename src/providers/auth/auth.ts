@@ -32,10 +32,7 @@ export class AuthProvider {
     return this.afAuth.authState;
   }
 
- 
-  
-
-  
-
-
+  get currentUser(){
+    return firebase.auth().currentUser;
+  }
 }
