@@ -48,10 +48,10 @@ export class RegistroPage {
 
   registrarUsuario(usuario){
     let loading = this.avisosProvider.crearLoading();
-    this.auth.registerUser(usuario.email, usuario.password)
-    .then(
-      sesion => {
-        this.dbFirebase.guardaUsuario(this.user, sesion.uid);
+    this.auth.registerUser(usuario)
+    .then(function()
+      {
+      this.avisosProvider.crearAlertaSimple('Error',"Todo bien");
       }
     )
     .catch(err => {
@@ -74,17 +74,6 @@ export class RegistroPage {
     }).catch(err => {
       this.avisosProvider.crearAlertaSimple('Error',"No se pudo obtener la foto");
     });
-  }
-
-  guardarPerfil(){
-      let loading = this.avisosProvider.crearLoading();
-      this.auth.session.subscribe(session => {
-      console.log("guardando usuario")
-      this.dbFirebase.guardaUsuario(this.user, session.uid)
-      .then(res => {
-        loading.dismiss();
-        this.avisosProvider.crearAlertaSimple('Exito',"Usuario creado con exito");})
-      })
-  }
+  }  
 
 }
