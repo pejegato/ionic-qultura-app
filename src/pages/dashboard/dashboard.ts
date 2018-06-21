@@ -35,7 +35,6 @@ export class DashboardPage {
     public sc: ScannerProvider,
     public auth: AuthProvider
   ) {
-
     this.listaContactos = DASHCARDS.slice(0);
   }
 
@@ -44,6 +43,6 @@ export class DashboardPage {
   }
 
   ionViewDidLoad(){
-    
+    this.fb.obtieneDatosUsuario();    
   }
 }

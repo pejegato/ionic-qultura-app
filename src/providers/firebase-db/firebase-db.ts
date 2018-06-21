@@ -29,6 +29,7 @@ export class FirebaseDbProvider {
       this.datosUsuario = usuario;
       this.datosUsuario.username = usuarioActual.displayName;
       this.datosUsuario.imgUrl = this.downloadImageUrl(usuarioActual.uid);
+      console.log("url ima", this.datosUsuario.imgUrl);
       //console.log("usuarios ", this.auth.getUser());
       //this.datosUsuario.avatar = this.getImage(this.auth.getUser());
       //console.log("url avatar ",this.datosUsuario.avatar);
@@ -45,7 +46,7 @@ export class FirebaseDbProvider {
 
   downloadImageUrl(userId: string): any {
     let storageRef = firebase.storage().ref();
-    let imageRef = storageRef.child(`images/${userId}`);
+    let imageRef = storageRef.child(`images/${userId}.jpg`);
     return imageRef.getDownloadURL();
   } 
 
