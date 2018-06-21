@@ -1,12 +1,13 @@
 <ion-header>
-  <ion-navbar hideBackButton color="primary">    
+  <ion-navbar hideBackButton color="primary"> 
+    
     <ion-buttons left>
       <button ion-button icon-only (click)="abrirMenu()">
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>    
     
-      <ion-title text-center>Historias de {{fb.datosUsuario.username}}</ion-title>
+      <ion-title text-center>Historias de {{fb.infoExtraUsuario.username}}</ion-title>
     
     <ion-buttons end>
       <button ion-button icon-only (click)='sc.scanCode()'>
@@ -19,7 +20,6 @@
 <ion-content>
   <ion-grid height="100%">
     <ion-row align-items-center>
-      
       <ion-col row-2 col-12>
           <ion-item no-lines >            
             <ion-label color="primary" stacked>¿Donde estás?</ion-label>

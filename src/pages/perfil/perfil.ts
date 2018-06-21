@@ -30,7 +30,7 @@ export class PerfilPage {
     private fb: FirebaseDbProvider,
     public sc: ScannerProvider) {
 
-    this.miPerfil  = fb.datosUsuario;
+    this.miPerfil  = fb.infoExtraUsuario;
     this.misLogros = MIS_LUGARES.slice(0);
   }
 

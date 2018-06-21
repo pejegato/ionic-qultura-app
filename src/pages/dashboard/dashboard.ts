@@ -43,6 +43,6 @@ export class DashboardPage {
   }
 
   ionViewDidLoad(){
-    this.fb.obtieneDatosUsuario();    
+    
   }
 }

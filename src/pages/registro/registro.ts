@@ -26,20 +26,20 @@ export class RegistroPage {
   ) {
   }
   
-  user = {
+  private user = {
     uid:'',
     email: '',
     password: '',
     passwordConfirm: '',
     username: '',
     nombre: '',
-    dataUrl: ''
+    img: ''
   };
+
+  private imgData 
   
   alertCtrl: AlertController;
 
-
-     
   signin() {
     if (this.user.passwordConfirm === this.user.password){      
       this.registrarUsuario(this.user);
@@ -51,32 +51,33 @@ export class RegistroPage {
   registrarUsuario(usuario){      
     let loading = this.avisosProvider.crearLoading();
     loading.present();
+
     this.auth.registerUser(usuario)    
-    .then(response => {
-      usuario.uid = response.user.uid;
-      this.guardarDatosUsuario(usuario)
+    .then(response => {      
+      this.guardarDatosUsuario(this.imgData, usuario)
     })    
     .then(() => {
       loading.dismiss();
       this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
-    })     
+    })
     .catch(err => {
       loading.dismiss();
       this.avisosProvider.crearAlertaSimple('Error', err);
     });
   }
 
-  guardarDatosUsuario(usuario) {
-    if (usuario.dataUrl){
+  guardarDatosUsuario(imgData, usuario) {
+    if (this.imgData){
+      const filename = Math.floor(Date.now() / 1000);      
       Promise.all([
-        this.dbFirebase.uploadImage(usuario.dataUrl, usuario.uid),
+        this.dbFirebase.uploadImage(imgData, filename),
         this.dbFirebase.guardaInfoAdicionalUsuario(usuario),
-        this.auth.updatePerfilUsuario(usuario.username, "images/" + usuario.uid)
+        this.auth.updatePerfilUsuario(usuario.username, filename.toString())
       ])
-    }else{
+    }else{      
       Promise.all([
         this.dbFirebase.guardaInfoAdicionalUsuario(usuario),
-        this.auth.updatePerfilUsuario(usuario.username, "images/" + usuario.uid),        
+        this.auth.updatePerfilUsuario(usuario.username, "noneImg"),        
       ])
     }
   }
@@ -89,9 +90,10 @@ export class RegistroPage {
       mediaType:  this.camera.MediaType.PICTURE,
       sourceType: sourceType
     };
+
     this.camera.getPicture(cameraOptions)
-     .then((captureDataUrl) => {
-       this.user.dataUrl = 'data:image/jpeg;base64,' + captureDataUrl;
+     .then((captureDataUrl) => {       
+       this.imgData = 'data:image/jpeg;base64,' + captureDataUrl;
     }).catch(err => {
       this.avisosProvider.crearAlertaSimple('Error',"No se pudo obtener la foto");
     });
