@@ -41,17 +41,17 @@ export class MyApp {
     
   ) {
     platform.ready().then(() => {
-      /*      
+            
       this.auth.session.subscribe(session => {
         if (session) {          
-          fb.obtieneDatosUsuario();
+          fb.obtieneDatosUsuario(session.uid);
           this.rootPage = this.dashboardPage;
         }
         else {
           this.rootPage = this.loginPage;
         }
       });
-      */
+      
       statusBar.styleDefault();
       splashScreen.hide();
     });

@@ -19,7 +19,12 @@ export class AvisosProvider {
     let alert = this.alertCtrl.create({
       title: titulo,
       subTitle: mensaje,
-      buttons: ['Aceptar']
+      buttons: [{
+        text: 'Aceptar',        
+        handler: () => {
+          
+        }
+      }]
     });
     alert.present();
   }

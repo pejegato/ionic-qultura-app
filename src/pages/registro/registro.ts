@@ -56,8 +56,8 @@ export class RegistroPage {
     .then(response => {
       usuario.uid = response.user.uid;
       this.guardarDatosUsuario(usuario)
-    })
-    .then(()=>{
+    })    
+    .then(() => {
       loading.dismiss();
       this.avisosProvider.crearAlertaSimple('Error', "Usuario Guardado con Exito");
     })     
@@ -68,11 +68,18 @@ export class RegistroPage {
   }
 
   guardarDatosUsuario(usuario) {
-    Promise.all([
-      this.dbFirebase.guardaInfoAdicionalUsuario(usuario),
-      this.auth.updatePerfilUsuario(usuario.username, "images/" + usuario.uid),
-      this.dbFirebase.uploadImage(usuario.dataUrl, usuario.uid)
-    ])
+    if (usuario.dataUrl){
+      Promise.all([
+        this.dbFirebase.guardaInfoAdicionalUsuario(usuario),
+        this.auth.updatePerfilUsuario(usuario.username, "images/" + usuario.uid),
+        this.dbFirebase.uploadImage(usuario.dataUrl, usuario.uid)
+      ])
+    }else{
+      Promise.all([
+        this.dbFirebase.guardaInfoAdicionalUsuario(usuario),
+        this.auth.updatePerfilUsuario(usuario.username, "images/" + usuario.uid),        
+      ])
+    }
   }
   
   
