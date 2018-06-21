@@ -17,7 +17,7 @@ export class FirebaseDbProvider {
     public auth: AuthProvider
   ) {}
 
-  guardaInfoAdicionalUsuario(usuario:any) {    
+  guardaInfoAdicionalUsuario(usuario) {    
     console.log('Funcion de guardar usuario con parametros')
     return this.afDB.database.ref(`usuarios/'${usuario.uid}`).set(usuario);
   }

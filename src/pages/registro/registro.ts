@@ -27,6 +27,7 @@ export class RegistroPage {
   }
   
   user = {
+    uid:'',
     email: '',
     password: '',
     passwordConfirm: '',
@@ -50,29 +51,31 @@ export class RegistroPage {
   registrarUsuario(usuario){      
     let loading = this.avisosProvider.crearLoading();
     loading.present();
-    this.auth.registerUser(usuario)
-    .then(
-      user => {
-        this.guardarDatosUsuario(usuario,user.uid)
-        
-        }) 
-    
+
+    this.auth.registerUser(usuario)    
+    .then(response => {
+      usuario.uid = response.user.uid;
+      this.guardarDatosUsuario(usuario)
+    })
+    .then(()=>{
+      loading.dismiss();
+      this.avisosProvider.crearAlertaSimple('Error', "Usuario Guardado con Exito");
+    })     
     .catch(err => {
       loading.dismiss();
       this.avisosProvider.crearAlertaSimple('Error', err);
     });
   }
 
-  guardarDatosUsuario(usuario, id){    
-    Observable.forkJoin([       
-      //Observable.fromPromise(this.dbFirebase.uploadImage(this.user.dataUrl,id)),
-      Observable.fromPromise(this.dbFirebase.guardaInfoAdicionalUsuario(usuario)),
-      Observable.fromPromise(this.auth.updatePerfilUsuario(usuario.username, "images/"+id))
+  guardarDatosUsuario(usuario) {
+    Promise.all([
+      this.dbFirebase.guardaInfoAdicionalUsuario(usuario),
+      this.auth.updatePerfilUsuario(usuario.username, "images/" + usuario.uid),
+      this.dbFirebase.uploadImage(usuario.dataUrl, usuario.uid)
     ])
-   .subscribe(data => {
-      this.avisosProvider.crearAlertaSimple('Exito',"Exito");
-   });
   }
+  
+  
 
   getPicture(sourceType){
     const cameraOptions: CameraOptions = {
