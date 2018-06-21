@@ -59,7 +59,7 @@ export class RegistroPage {
     })    
     .then(() => {
       loading.dismiss();
-      this.avisosProvider.crearAlertaSimple('Error', "Usuario Guardado con Exito");
+      this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
     })     
     .catch(err => {
       loading.dismiss();
@@ -70,9 +70,9 @@ export class RegistroPage {
   guardarDatosUsuario(usuario) {
     if (usuario.dataUrl){
       Promise.all([
+        this.dbFirebase.uploadImage(usuario.dataUrl, usuario.uid),
         this.dbFirebase.guardaInfoAdicionalUsuario(usuario),
-        this.auth.updatePerfilUsuario(usuario.username, "images/" + usuario.uid),
-        this.dbFirebase.uploadImage(usuario.dataUrl, usuario.uid)
+        this.auth.updatePerfilUsuario(usuario.username, "images/" + usuario.uid)
       ])
     }else{
       Promise.all([
@@ -81,8 +81,6 @@ export class RegistroPage {
       ])
     }
   }
-  
-  
 
   getPicture(sourceType){
     const cameraOptions: CameraOptions = {

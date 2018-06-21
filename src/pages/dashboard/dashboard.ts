@@ -45,7 +45,6 @@ export class DashboardPage {
   }
 
   ionViewDidLoad(){
-    //currentUser()
-   //this.fb.obtieneDatosUsuario();
+    
   }
 }

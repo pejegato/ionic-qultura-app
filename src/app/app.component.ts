@@ -40,8 +40,8 @@ export class MyApp {
     private fb : FirebaseDbProvider
     
   ) {
-    platform.ready().then(() => {
-            
+    
+    platform.ready().then(() => {            
       this.auth.session.subscribe(session => {
         if (session) {          
           fb.obtieneDatosUsuario(session.uid);
