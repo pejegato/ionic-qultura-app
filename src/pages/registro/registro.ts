@@ -51,7 +51,6 @@ export class RegistroPage {
   registrarUsuario(usuario){      
     let loading = this.avisosProvider.crearLoading();
     loading.present();
-
     this.auth.registerUser(usuario)    
     .then(response => {
       usuario.uid = response.user.uid;

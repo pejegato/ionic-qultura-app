@@ -33,8 +33,7 @@ export class DashboardPage {
     private menuController: MenuController,
     public fb: FirebaseDbProvider,
     public sc: ScannerProvider,
-    public auth: AuthProvider,  
-
+    public auth: AuthProvider
   ) {
 
     this.listaContactos = DASHCARDS.slice(0);

@@ -23,9 +23,12 @@ export class FirebaseDbProvider {
   }
 
   //observable
-  obtieneDatosUsuario(userId: string) {    
-    this.afDB.object(`usuarios/'${userId}`).valueChanges().subscribe(usuario => {
+  obtieneDatosUsuario() {    
+    let usuarioActual = this.auth.currentUser
+    this.afDB.object(`usuarios/'${usuarioActual.uid}`).valueChanges().subscribe(usuario => {
       this.datosUsuario = usuario;
+      this.datosUsuario.username = usuarioActual.displayName;
+      this.datosUsuario.imgUrl = this.downloadImageUrl(usuarioActual.uid);
       //console.log("usuarios ", this.auth.getUser());
       //this.datosUsuario.avatar = this.getImage(this.auth.getUser());
       //console.log("url avatar ",this.datosUsuario.avatar);
@@ -40,9 +43,9 @@ export class FirebaseDbProvider {
     return imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL);      
   };
 
-  getImage(userId: string): any {
+  downloadImageUrl(userId: string): any {
     let storageRef = firebase.storage().ref();
-    let imageRef = storageRef.child(`image/${userId}`);
+    let imageRef = storageRef.child(`images/${userId}`);
     return imageRef.getDownloadURL();
   } 
 

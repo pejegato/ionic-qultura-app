@@ -44,7 +44,7 @@ export class MyApp {
     platform.ready().then(() => {            
       this.auth.session.subscribe(session => {
         if (session) {          
-          fb.obtieneDatosUsuario(session.uid);
+          fb.obtieneDatosUsuario();
           this.rootPage = this.dashboardPage;
         }
         else {
