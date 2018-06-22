@@ -19,9 +19,10 @@ export class FirebaseDbProvider {
 
   public loader:boolean;
 
-  guardaInfoAdicionalUsuario(usuario) {    
-    console.log('Funcion de guardar usuario con parametros');    
-    return this.afDB.database.ref(`usuarios/'${usuario.uid}`).set(usuario);
+  guardaInfoAdicionalUsuario(usuario): Promise<any> {          
+    return this.afDB.database.ref(`usuarios/'${usuario.uid}`).set(usuario)
+    .then(response => Promise.resolve(response))
+      .catch(err => Promise.reject(err));
   }
 
   //observable
@@ -30,12 +31,11 @@ export class FirebaseDbProvider {
     let usuarioActual = this.auth.currentUser
     this.afDB.object(`usuarios/'${usuarioActual.uid}`).valueChanges().subscribe(usuario => {
       this.infoExtraUsuario = usuario;
-      this.infoExtraUsuario.username = usuarioActual.displayName;
-      this.downloadImageUrl(usuarioActual.photoURL).then((url)=>{
-        this.infoExtraUsuario.imgUrl = url;
-        this.loader = false;
+      this.downloadImageUrl(this.infoExtraUsuario.img).then((url)=>{
+        this.infoExtraUsuario.imgUrl = url;  
+        console.log("imagen "+this.infoExtraUsuario.imgUrl);     
       }).catch((err)=>{
-        this.loader = false;
+       
       });          
     });
   }
@@ -43,13 +43,15 @@ export class FirebaseDbProvider {
   uploadImage(captureDataUrl, filename) {
     let storageRef = firebase.storage().ref();       
     const imageRef = storageRef.child(`images/${filename}`);
-    return imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL);      
+    return imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL)
+    .then(response => Promise.resolve(response))
+    .catch(err => Promise.reject(err));;      
   };
 
   downloadImageUrl(userId: string): any {
     let storageRef = firebase.storage().ref();
     let imageRef = storageRef.child(`images/${userId}.jpg`);
-    return imageRef.getDownloadURL();
+    return imageRef.getDownloadURL()
   } 
 
 }

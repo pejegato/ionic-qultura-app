@@ -43,6 +43,8 @@ export class MyApp {
     
     platform.ready().then(() => {            
       this.auth.session.subscribe(session => {
+        console.log("Cambio objeto sesion", session)
+        
         if (session) {
           this.fb.obtieneDatosUsuario();                    
           this.rootPage = this.dashboardPage;

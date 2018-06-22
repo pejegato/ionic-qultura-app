@@ -29,8 +29,6 @@ export class PerfilPage {
     private menuController: MenuController,
     private fb: FirebaseDbProvider,
     public sc: ScannerProvider) {
-
-    this.miPerfil  = fb.infoExtraUsuario;
     this.misLogros = MIS_LUGARES.slice(0);
   }
 

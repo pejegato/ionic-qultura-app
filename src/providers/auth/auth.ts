@@ -8,19 +8,15 @@ export class AuthProvider {
   constructor(private afAuth: AngularFireAuth) {}
 
   // Registro de usuario
-  registerUser(newUser) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password)      
-        .then(response => Promise.resolve(response))
-        .catch(err => Promise.reject(err))
-        
+  registerUser(newUser):Promise<any> {
+    return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password);
   }
 
-  updatePerfilUsuario(username: string, photoURL:string){    
+  updatePerfilUsuario(username: string, photoURL:string):Promise<any>{    
     return firebase.auth().currentUser.updateProfile({
       displayName: username,
       photoURL: photoURL
-    }).then(response => Promise.resolve(response))
-      .catch(err => Promise.reject(err))
+    })
   }
 
   // Login de usuario

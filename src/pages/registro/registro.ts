@@ -48,38 +48,36 @@ export class RegistroPage {
     }
   }
 
-  registrarUsuario(usuario){      
+  registrarUsuario(user){      
     let loading = this.avisosProvider.crearLoading();
     loading.present();
-
-    this.auth.registerUser(usuario)    
-    .then(response => {      
-      this.guardarDatosUsuario(this.imgData, usuario)
-    })    
-    .then(() => {
-      loading.dismiss();
-      this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
+    this.auth.registerUser(user)    
+    .then(response => {     
+      this.user.uid = response.user.uid
+      if (this.imgData){
+        const filename = Math.floor(Date.now() / 1000);
+        user.img = filename
+        this.dbFirebase.uploadImage(this.imgData, filename)
+        .then(()=>{          
+          this.dbFirebase.guardaInfoAdicionalUsuario(user)
+          .then(()=>{          
+            loading.dismiss();
+            this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
+          })
+        })
+      }else{
+        user.img = "noneImg"
+        this.dbFirebase.guardaInfoAdicionalUsuario(user)
+        .then(()=>{          
+          loading.dismiss();
+          this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
+        })
+      }       
     })
     .catch(err => {
       loading.dismiss();
       this.avisosProvider.crearAlertaSimple('Error', err);
     });
-  }
-
-  guardarDatosUsuario(imgData, usuario) {
-    if (this.imgData){
-      const filename = Math.floor(Date.now() / 1000);      
-      Promise.all([
-        this.dbFirebase.uploadImage(imgData, filename),
-        this.dbFirebase.guardaInfoAdicionalUsuario(usuario),
-        this.auth.updatePerfilUsuario(usuario.username, filename.toString())
-      ])
-    }else{      
-      Promise.all([
-        this.dbFirebase.guardaInfoAdicionalUsuario(usuario),
-        this.auth.updatePerfilUsuario(usuario.username, "noneImg"),        
-      ])
-    }
   }
 
   getPicture(sourceType){
