@@ -19,8 +19,8 @@
     <ion-row  align-items-center>
       
       <ion-col col-5>
-        <img src="../../assets/avatars/none.jpeg" *ngIf="!user.dataUrl" class="avatar-registro">
-        <img [src]="user.dataUrl" *ngIf="user.dataUrl" class="avatar-registro"/>
+        <img src="../../assets/avatars/none.jpeg" *ngIf="!imgData" class="avatar-registro">
+        <img [src]="imgData" *ngIf="imgData" class="avatar-registro"/>
       </ion-col>
       <ion-col col-7>      
         <ion-buttons>
