@@ -47,7 +47,7 @@ export class MyApp {
     if (this.rootPage !== StartPage) {
       this.loading.present();
     }
-    this.loading.present();
+
     platform.ready().then(() => {
 
       this.authProvider.session.subscribe(session => {
@@ -66,13 +66,15 @@ export class MyApp {
                   this.loading.dismiss();
                   console.log("No se pudo obtener la foto");
                   this.avisosProvider.crearAlertaSimple('Error', "No se pudo obtener la foto");
+                  this.rootPage = this.loginPage;
                 });
             },
             error => {
-              console.log()
+              console.log();
               this.loading.dismiss();
               console.log("No se pudo obtener el usuario");
               this.avisosProvider.crearAlertaSimple('Error', "No se pudo obtener el usuario");
+              this.rootPage = this.loginPage;
             })
         } else {
           this.loading.dismiss();
