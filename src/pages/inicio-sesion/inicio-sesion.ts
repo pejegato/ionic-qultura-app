@@ -1,10 +1,9 @@
-import { DashboardPage } from './../dashboard/dashboard';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { AuthProvider } from '../../providers/auth/auth';
-import { LoadingController } from 'ionic-angular';
-import { AvisosProvider } from '../../providers/avisos/avisos';
-import { diccionarioErrores } from '../../providers/constants/errores';
+import {DashboardPage} from "./../dashboard/dashboard";
+import {Component} from "@angular/core";
+import {IonicPage, NavController, NavParams, AlertController, LoadingController} from "ionic-angular";
+import {AuthProvider} from "../../providers/auth/auth";
+import {AvisosProvider} from "../../providers/avisos/avisos";
+import {diccionarioErrores} from "../../providers/constants/errores";
 
 
 /**
@@ -30,16 +29,15 @@ export class InicioSesionPage {
     public alertCtrl: AlertController,
     public loadingController: LoadingController,
     private avisosProvider : AvisosProvider,
-    private errores : diccionarioErrores
-  ) {
+    private errores : diccionarioErrores) {
   }
 
-  login() {    
-    let loading = this.avisosProvider.crearLoading();
+  login() {
+      let loading = this.avisosProvider.crearLoading("Iniciando sesión...");
     loading.present();
 
-    this.auth.loginUser(this.user.email, this.user.password)    
-    .then((user) => { 
+    this.auth.loginUser(this.user.email, this.user.password)
+        .then((user) => {
       loading.dismiss();  
     })
     .catch(err => {      

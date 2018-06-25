@@ -1,5 +1,5 @@
-import { AlertController, LoadingController } from 'ionic-angular';
-import { Injectable } from '@angular/core';
+import {AlertController, LoadingController} from "ionic-angular";
+import {Injectable} from "@angular/core";
 
 /*
   Generated class for the AvisosProvider provider.
@@ -29,9 +29,9 @@ export class AvisosProvider {
     alert.present();
   }
 
-  crearLoading(){
+    crearLoading(mensaje: string) {
     let loading = this.loadingController.create(
-      { content: "Conectando, por favor espera..." }
+        {content: mensaje}
     );
     return loading;
   }

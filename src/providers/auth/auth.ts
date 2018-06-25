@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import {Injectable} from "@angular/core";
+import {AngularFireAuth} from "angularfire2/auth";
+import * as firebase from "firebase/app";
+
 
 @Injectable()
 export class AuthProvider {
@@ -19,17 +20,12 @@ export class AuthProvider {
     })
   }
 
-  // Login de usuario
-  loginUser(email: string, password: string) {
+    loginUser(email: string, password: string): Promise<any> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then(response => Promise.resolve(response))
-      .catch(err => Promise.reject(err))
   }
-  
-  logout() {
-    this.afAuth.auth.signOut()
-    .then(response =>  Promise.resolve(response))
-    .catch(err => Promise.reject(err))
+
+    logout(): Promise<any> {
+        return this.afAuth.auth.signOut();
   }
   
   get session() {

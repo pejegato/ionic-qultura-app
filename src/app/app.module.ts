@@ -1,34 +1,35 @@
-import { EdicionPerfilPage } from './../pages/edicion-perfil/edicion-perfil';
-import { InicioSesionPage } from './../pages/inicio-sesion/inicio-sesion';
-import { PerfilPage } from './../pages/perfil/perfil';
-import { DashboardPage } from './../pages/dashboard/dashboard';
-import { LoginPage } from './../pages/login/login';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { HomePage, GuardadosPage, MapaPage } from './../pages/index-paginas';
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import { MyApp } from './app.component';
-
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { HistorialProvider } from '../providers/historial/historial';
-import { AgmCoreModule } from '@agm/core';
-import { RegistroPage } from '../pages/registro/registro';
-import { ListaContactosPage } from '../pages/lista-contactos/lista-contactos';
-import { PerfilContactoPage } from '../pages/perfil-contacto/perfil-contacto';
-import { HttpClientModule } from '@angular/common/http';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AuthProvider } from '../providers/auth/auth';
-import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
-import { AvisosProvider } from '../providers/avisos/avisos';
-import { diccionarioErrores } from '../providers/constants/errores';
-import { ScannerProvider } from '../providers/scanner/scanner';
-import { Camera } from '@ionic-native/camera';
-
+import {EdicionPerfilPage} from "./../pages/edicion-perfil/edicion-perfil";
+import {InicioSesionPage} from "./../pages/inicio-sesion/inicio-sesion";
+import {PerfilPage} from "./../pages/perfil/perfil";
+import {DashboardPage} from "./../pages/dashboard/dashboard";
+import {LoginPage} from "./../pages/login/login";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {HomePage, GuardadosPage, MapaPage} from "./../pages/index-paginas";
+import {BrowserModule} from "@angular/platform-browser";
+import {ErrorHandler, NgModule} from "@angular/core";
+import {IonicApp, IonicErrorHandler, IonicModule} from "ionic-angular";
+import {SplashScreen} from "@ionic-native/splash-screen";
+import {StatusBar} from "@ionic-native/status-bar";
+import {MyApp} from "./app.component";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import {HistorialProvider} from "../providers/historial/historial";
+import {AgmCoreModule} from "@agm/core";
+import {RegistroPage} from "../pages/registro/registro";
+import {ListaContactosPage} from "../pages/lista-contactos/lista-contactos";
+import {PerfilContactoPage} from "../pages/perfil-contacto/perfil-contacto";
+import {HttpClientModule} from "@angular/common/http";
+import {AngularFireModule} from "angularfire2";
+import {AngularFireDatabaseModule} from "angularfire2/database";
+import {AngularFireAuthModule} from "angularfire2/auth";
+import {AuthProvider} from "../providers/auth/auth";
+import {FirebaseDbProvider} from "../providers/firebase-db/firebase-db";
+import {AvisosProvider} from "../providers/avisos/avisos";
+import {diccionarioErrores} from "../providers/constants/errores";
+import {ScannerProvider} from "../providers/scanner/scanner";
+import {Camera} from "@ionic-native/camera";
+import {PhotoProvider} from "../providers/photo/photo";
+import {UserProvider} from "../providers/user/user";
+import {StartPage} from "../pages/start/start";
 
 
 export const firebaseConfig = {
@@ -53,7 +54,8 @@ export const firebaseConfig = {
     InicioSesionPage,
     EdicionPerfilPage,
     ListaContactosPage,
-    PerfilContactoPage
+    PerfilContactoPage,
+    StartPage
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,8 @@ export const firebaseConfig = {
     InicioSesionPage,
     EdicionPerfilPage,
     ListaContactosPage,
-    PerfilContactoPage
+    PerfilContactoPage,
+    StartPage
   ],
   providers: [
     StatusBar,
@@ -94,7 +97,9 @@ export const firebaseConfig = {
     AvisosProvider,
     diccionarioErrores,
     ScannerProvider,
-    Camera
+    Camera,
+    PhotoProvider,
+    UserProvider
     
   ]
 })

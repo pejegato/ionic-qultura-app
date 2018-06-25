@@ -1,13 +1,9 @@
-import { FirebaseDbProvider } from './../../providers/firebase-db/firebase-db';
-import { HomePage } from './../home/home';
-import { MyApp } from './../../app/app.component';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-import { Dashcard } from '../../interfaces/dashcard-interface';
-import { DASHCARDS } from '../../data/dashcards.data';
-import { ScannerProvider } from '../../providers/scanner/scanner';
-
-import { AuthProvider } from '../../providers/auth/auth';
+import {UserProvider} from "./../../providers/user/user";
+import {Component} from "@angular/core";
+import {IonicPage, MenuController} from "ionic-angular";
+import {Dashcard} from "../../interfaces/dashcard-interface";
+import {DASHCARDS} from "../../data/dashcards.data";
+import {ScannerProvider} from "../../providers/scanner/scanner";
 
 /**
  * Generated class for the DashboardPage page.
@@ -23,17 +19,14 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 
 export class DashboardPage {
-  homePage:any = HomePage;
+
   listaContactos:Dashcard[] = [];
-  datosUsuario:any = {}
   
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
     private menuController: MenuController,
-    public fb: FirebaseDbProvider,
     public sc: ScannerProvider,
-    public auth: AuthProvider
+    public userProvider: UserProvider
+
   ) {
     this.listaContactos = DASHCARDS.slice(0);
   }

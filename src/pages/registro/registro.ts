@@ -1,12 +1,10 @@
-import { Component,  Input } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
-import { AuthProvider } from '../../providers/auth/auth';
-import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
-import { AvisosProvider } from '../../providers/avisos/avisos';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import firebase from 'firebase';
-import {Observable} from 'rxjs/Rx'
+import {PhotoProvider} from "./../../providers/photo/photo";
+import {Component} from "@angular/core";
+import {IonicPage, NavController, NavParams, AlertController, LoadingController} from "ionic-angular";
+import {AuthProvider} from "../../providers/auth/auth";
+import {FirebaseDbProvider} from "../../providers/firebase-db/firebase-db";
+import {AvisosProvider} from "../../providers/avisos/avisos";
+import {Camera, CameraOptions} from "@ionic-native/camera";
 
 @IonicPage()
 @Component({
@@ -16,17 +14,18 @@ import {Observable} from 'rxjs/Rx'
 export class RegistroPage {
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams,
-    public auth: AuthProvider,    
-    private dbFirebase: FirebaseDbProvider,
-    private loadingController: LoadingController,
-    private avisosProvider: AvisosProvider,
-    private camera : Camera
+      public navCtrl: NavController,
+      public navParams: NavParams,
+      public auth: AuthProvider,
+      private dbFirebase: FirebaseDbProvider,
+      private photoProvider: PhotoProvider,
+      private loadingController: LoadingController,
+      private avisosProvider: AvisosProvider,
+      private camera : Camera
   ) {
   }
-  
-  private user = {
+
+    public user = {
     uid:'',
     email: '',
     password: '',
@@ -48,8 +47,8 @@ export class RegistroPage {
     }
   }
 
-  registrarUsuario(user){      
-    let loading = this.avisosProvider.crearLoading();
+  registrarUsuario(user){
+      let loading = this.avisosProvider.crearLoading("Registrando usuario...");
     loading.present();
     this.auth.registerUser(user)    
     .then(response => {     
@@ -57,7 +56,7 @@ export class RegistroPage {
       if (this.imgData){
         const filename = Math.floor(Date.now() / 1000);
         user.img = filename
-        this.dbFirebase.uploadImage(this.imgData, filename)
+          this.photoProvider.uploadImage(this.imgData, filename)
         .then(()=>{          
           this.dbFirebase.guardaInfoAdicionalUsuario(user)
           .then(()=>{          

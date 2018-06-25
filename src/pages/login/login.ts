@@ -1,8 +1,8 @@
-import { InicioSesionPage } from './../inicio-sesion/inicio-sesion';
-import { DashboardPage } from './../dashboard/dashboard';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { RegistroPage } from '../registro/registro';
+import {InicioSesionPage} from "./../inicio-sesion/inicio-sesion";
+import {DashboardPage} from "./../dashboard/dashboard";
+import {Component} from "@angular/core";
+import {IonicPage, NavController, NavParams} from "ionic-angular";
+import {RegistroPage} from "../registro/registro";
 
 
 /**
@@ -22,6 +22,17 @@ export class LoginPage {
   registroPage: any = RegistroPage;
   dashboardPage: any = DashboardPage;
   inicioSesionPage: any = InicioSesionPage;
+
+    loading: boolean;
+
+    ngOnInit() {
+        this.loading = true;
+    };
+
+    ngAfterViewChecked() {
+        this.loading = false;
+    }
+  
 
   constructor(
     public navCtrl: NavController, 

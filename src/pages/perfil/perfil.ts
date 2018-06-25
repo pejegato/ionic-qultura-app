@@ -1,10 +1,11 @@
-import { ScannerProvider } from './../../providers/scanner/scanner';
-import { FirebaseDbProvider } from './../../providers/firebase-db/firebase-db';
-import { HomePage } from './../home/home';
-import { EdicionPerfilPage } from './../edicion-perfil/edicion-perfil';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-import { MIS_DATOS, MIS_LUGARES } from '../../data/dashcards.data';
+import {UserProvider} from "./../../providers/user/user";
+import {ScannerProvider} from "./../../providers/scanner/scanner";
+import {FirebaseDbProvider} from "./../../providers/firebase-db/firebase-db";
+import {HomePage} from "./../home/home";
+import {EdicionPerfilPage} from "./../edicion-perfil/edicion-perfil";
+import {Component} from "@angular/core";
+import {IonicPage, NavController, NavParams, MenuController} from "ionic-angular";
+import {MIS_LUGARES} from "../../data/dashcards.data";
 /**
  * Generated class for the PerfilPage page.
  *
@@ -24,11 +25,12 @@ export class PerfilPage {
   homePage: any = HomePage;
   
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
-    private menuController: MenuController,
-    private fb: FirebaseDbProvider,
-    public sc: ScannerProvider) {
+      public navCtrl: NavController,
+      public navParams: NavParams,
+      private menuController: MenuController,
+      private fb: FirebaseDbProvider,
+      public sc: ScannerProvider,
+      public userProvider: UserProvider) {
     this.misLogros = MIS_LUGARES.slice(0);
   }
 
