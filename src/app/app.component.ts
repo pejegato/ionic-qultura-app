@@ -56,7 +56,7 @@ export class MyApp {
           this.firebaseProvider.obtieneDatosUsuario(session.uid).subscribe(
             response => {
               this.userProvider.datosUsuario = response;
-              this.photoProvider.downloadImageUrl(response.uid)
+                this.photoProvider.downloadImageUrl(response.img)
                 .then(url => {
                   this.userProvider.datosUsuario.imgUrl = url;
                   this.loading.dismiss();
