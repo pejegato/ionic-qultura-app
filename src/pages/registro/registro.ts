@@ -1,10 +1,12 @@
 import {PhotoProvider} from "./../../providers/photo/photo";
 import {Component} from "@angular/core";
-import {IonicPage, NavController, NavParams, AlertController, LoadingController} from "ionic-angular";
+import {IonicPage, AlertController, LoadingController, NavController} from "ionic-angular";
 import {AuthProvider} from "../../providers/auth/auth";
 import {FirebaseDbProvider} from "../../providers/firebase-db/firebase-db";
 import {AvisosProvider} from "../../providers/avisos/avisos";
 import {Camera, CameraOptions} from "@ionic-native/camera";
+import { DashboardPage } from "../dashboard/dashboard";
+import { UserProvider } from "../../providers/user/user";
 
 @IonicPage()
 @Component({
@@ -14,64 +16,74 @@ import {Camera, CameraOptions} from "@ionic-native/camera";
 export class RegistroPage {
 
   constructor(
-      public navCtrl: NavController,
-      public navParams: NavParams,
       public auth: AuthProvider,
       private dbFirebase: FirebaseDbProvider,
       private photoProvider: PhotoProvider,
       private loadingController: LoadingController,
       private avisosProvider: AvisosProvider,
-      private camera : Camera
-  ) {
+      private camera : Camera,
+      private navCtrl: NavController,
+      public userProvider: UserProvider) {
   }
 
     public user = {
-    uid:'',
-    email: '',
-    password: '',
-    passwordConfirm: '',
-    username: '',
-    nombre: '',
-    img: ''
+        uid:'',
+        email: '',
+        password: '',
+        passwordConfirm: '',
+        username: '',
+        nombre: '',
+        img: ''
   };
 
-  private imgData 
-  
+  private imgData
+
   alertCtrl: AlertController;
 
   signin() {
-    if (this.user.passwordConfirm === this.user.password){      
+    if (this.user.passwordConfirm === this.user.password){
       this.registrarUsuario(this.user);
-    }else{            
+    }else{
       this.avisosProvider.crearAlertaSimple('Error!','Passwords no coinciden!');
     }
   }
 
   registrarUsuario(user){
-      let loading = this.avisosProvider.crearLoading("Registrando usuario...");
+
+    let loading = this.avisosProvider.crearLoading("Registrando usuario...");
     loading.present();
-    this.auth.registerUser(user)    
-    .then(response => {     
+    this.auth.registerUser(user)
+    .then(response => {
       this.user.uid = response.user.uid
       if (this.imgData){
+
         const filename = Math.floor(Date.now() / 1000);
         user.img = filename
-          this.photoProvider.uploadImage(this.imgData, filename)
-        .then(()=>{          
-          this.dbFirebase.guardaInfoAdicionalUsuario(user)
-          .then(()=>{          
-            loading.dismiss();
-            this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
-          })
+
+        this.photoProvider.uploadImage(this.imgData, filename)
+        .then(()=>{
+          this.dbFirebase.guardaInfoAdicionalUsuario(user);
         })
-      }else{
-        user.img = "noneImg"
-        this.dbFirebase.guardaInfoAdicionalUsuario(user)
-        .then(()=>{          
+        .then(()=>{
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
+
+        }).catch(err => {
+          loading.dismiss();
+          this.avisosProvider.crearAlertaSimple('Error', err);
+        });
+
+      }else{
+
+        user.img = "noneImg"
+
+        this.dbFirebase.guardaInfoAdicionalUsuario(user)
+        .then(()=>{
+          loading.dismiss();
+          this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
+
         })
-      }       
+      }
     })
     .catch(err => {
       loading.dismiss();
@@ -89,11 +101,10 @@ export class RegistroPage {
     };
 
     this.camera.getPicture(cameraOptions)
-     .then((captureDataUrl) => {       
+     .then((captureDataUrl) => {
        this.imgData = 'data:image/jpeg;base64,' + captureDataUrl;
     }).catch(err => {
       this.avisosProvider.crearAlertaSimple('Error',"No se pudo obtener la foto");
     });
-  }  
-
+  }
 }

@@ -25,17 +25,9 @@ export class LoginPage {
 
     loading: boolean;
 
-    ngOnInit() {
-        this.loading = true;
-    };
-
-    ngAfterViewChecked() {
-        this.loading = false;
-    }
-  
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams
     ) {
   }
@@ -44,9 +36,9 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  
 
-  
-    
+
+
+
 
 }

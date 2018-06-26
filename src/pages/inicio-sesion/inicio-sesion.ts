@@ -4,6 +4,7 @@ import {IonicPage, NavController, NavParams, AlertController, LoadingController}
 import {AuthProvider} from "../../providers/auth/auth";
 import {AvisosProvider} from "../../providers/avisos/avisos";
 import {diccionarioErrores} from "../../providers/constants/errores";
+import { UserProvider } from "../../providers/user/user";
 
 
 /**
@@ -23,29 +24,38 @@ export class InicioSesionPage {
   dashboardPage: any  = DashboardPage;
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    public navCtrl: NavController,
     public auth: AuthProvider,
-    public alertCtrl: AlertController,
-    public loadingController: LoadingController,
     private avisosProvider : AvisosProvider,
-    private errores : diccionarioErrores) {
+    private errores : diccionarioErrores,
+    private userProvider: UserProvider) {
   }
 
   login() {
-      let loading = this.avisosProvider.crearLoading("Iniciando sesión...");
+
+    let loading = this.avisosProvider.crearLoading("Iniciando sesión...");
     loading.present();
 
     this.auth.loginUser(this.user.email, this.user.password)
-        .then((user) => {
-      loading.dismiss();  
+    .then((response) => {
+      this.userProvider.getUserData(response.user)
+      .then(response=> {
+        loading.dismiss();
+        this.userProvider.datosUsuario = response;
+        this.navCtrl.setRoot(DashboardPage);
+      })
+      .catch(err => {
+        loading.dismiss();
+        this.avisosProvider.crearAlertaSimple("Error", this.errores.traducirError('LOGIN',err.code));
+      });
     })
-    .catch(err => {      
-      loading.dismiss();         
-      this.avisosProvider.crearAlertaSimple("Error", this.errores.traducirError('LOGIN',err.code));      
+    .catch(err => {
+      loading.dismiss();
+      this.avisosProvider.crearAlertaSimple("Error", this.errores.traducirError('LOGIN',err.code));
     })
   }
 
 
-  
+
+
 }
