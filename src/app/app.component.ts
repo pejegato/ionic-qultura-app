@@ -61,12 +61,11 @@ export class MyApp {
           this.loading.dismiss();
           this.navCtrl.setRoot(LoginPage);
         }
-      }),
-      function(error){
-
+      }), error => {
+          this.loading.dismiss();
+          this.navCtrl.setRoot(LoginPage);
+          this.avisosProvider.crearAlertaSimple('Error!','Se ha producido un error rescatando datos de usuario: '+ error);
       }
-
-      ;
     });
   }
 

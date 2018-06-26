@@ -1,11 +1,7 @@
 import {Injectable} from "@angular/core";
-import { AngularFireDatabase } from "angularfire2/database";
 import { FirebaseDbProvider } from "../firebase-db/firebase-db";
 import { PhotoProvider } from "../photo/photo";
-import { AvisosProvider } from "../avisos/avisos";
-import { NavController } from "ionic-angular";
-import { DashboardPage } from "../../pages/dashboard/dashboard";
-import { LoginPage } from "../../pages/login/login";
+
 
 /*
  Generated class for the UserProvider provider.
@@ -19,10 +15,7 @@ export class UserProvider {
     public datosUsuario: any
     constructor(
         private firebaseProvider: FirebaseDbProvider,
-        private photoProvider: PhotoProvider,
-        private avisosProvider: AvisosProvider,
-
-
+        private photoProvider: PhotoProvider
     ) {}
 
     public getUserData(user){

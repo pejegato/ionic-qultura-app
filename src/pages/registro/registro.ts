@@ -1,12 +1,11 @@
 import {PhotoProvider} from "./../../providers/photo/photo";
 import {Component} from "@angular/core";
-import {IonicPage, AlertController, LoadingController, NavController} from "ionic-angular";
+import {IonicPage, AlertController} from "ionic-angular";
 import {AuthProvider} from "../../providers/auth/auth";
 import {FirebaseDbProvider} from "../../providers/firebase-db/firebase-db";
 import {AvisosProvider} from "../../providers/avisos/avisos";
 import {Camera, CameraOptions} from "@ionic-native/camera";
-import { DashboardPage } from "../dashboard/dashboard";
-import { UserProvider } from "../../providers/user/user";
+
 
 @IonicPage()
 @Component({
@@ -19,14 +18,11 @@ export class RegistroPage {
       public auth: AuthProvider,
       private dbFirebase: FirebaseDbProvider,
       private photoProvider: PhotoProvider,
-      private loadingController: LoadingController,
       private avisosProvider: AvisosProvider,
-      private camera : Camera,
-      private navCtrl: NavController,
-      public userProvider: UserProvider) {
+      private camera : Camera){
   }
 
-    public user = {
+    user = {
         uid:'',
         email: '',
         password: '',
@@ -36,11 +32,11 @@ export class RegistroPage {
         img: ''
   };
 
-  private imgData
+  private imgData;
 
   alertCtrl: AlertController;
 
-  signin() {
+  signin(){
     if (this.user.passwordConfirm === this.user.password){
       this.registrarUsuario(this.user);
     }else{
@@ -54,38 +50,39 @@ export class RegistroPage {
     loading.present();
     this.auth.registerUser(user)
     .then(response => {
-      this.user.uid = response.user.uid
+
+      user.img = "noneImg";
+
+      this.user.uid = response.user.uid;
       if (this.imgData){
 
-        const filename = Math.floor(Date.now() / 1000);
-        user.img = filename
+        user.img = Math.floor(Date.now() / 1000);
 
-        this.photoProvider.uploadImage(this.imgData, filename)
+        this.photoProvider.uploadImage(this.imgData, user.img)
+
         .then(()=>{
           this.dbFirebase.guardaInfoAdicionalUsuario(user);
         })
         .then(()=>{
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
-
-        }).catch(err => {
+        })
+        .catch(err => {
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Error', err);
         });
 
       }else{
 
-        user.img = "noneImg"
-
         this.dbFirebase.guardaInfoAdicionalUsuario(user)
+
         .then(()=>{
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
-
         })
+
       }
-    })
-    .catch(err => {
+    }).catch(err => {
       loading.dismiss();
       this.avisosProvider.crearAlertaSimple('Error', err);
     });
