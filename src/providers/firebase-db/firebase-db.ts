@@ -17,8 +17,12 @@ export class FirebaseDbProvider {
   }
 
 
-    obtieneDatosUsuario(usuarioId): Observable<any> {
-        return this.afDB.object(`usuarios/'${usuarioId}`).valueChanges();
+  obtieneDatosUsuario(usuarioId): Observable<any> {
+      return this.afDB.object(`usuarios/'${usuarioId}`).valueChanges();
+  }
+
+  obtieneDatosObra(obraId): Observable<any> {
+    return this.afDB.object(`obras/'${obraId}`).valueChanges();
   }
 }
 
