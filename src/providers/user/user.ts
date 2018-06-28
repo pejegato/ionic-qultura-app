@@ -43,7 +43,8 @@ export class UserProvider {
         return new Promise<any>(
             (resolve, reject) => this.firebaseProvider.obtieneDatosObra("1").subscribe(response => {
                 if (response) {
-                    this.photoProvider.downloadImageUrl(response.img)
+                    let res = response.img+".jpg"
+                    this.photoProvider.downloadImageUrl(res)
                         .then(url => {
                             response.imgUrl = url;
                             resolve(response);

@@ -7,28 +7,59 @@
 <ion-header>
 
   <ion-navbar>
-
-
-    <ion-title>FELICITACIONES!</ion-title>
+    <ion-title text-center>Has descubierto una obra!</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+    <!--ion-card>
+
+        <img src= {{obraEscaneada.imgUrl}}>
+        <ion-item>
+          <ion-card-title>
+            {{obraEscaneada.nombre}}
+          </ion-card-title>
+        </ion-item>
+
+        <ion-item>          
+          <p>Autor</p>
+          <p>{{obraEscaneada.autor}}</p>          
+        </ion-item>
+      
+        <ion-item>          
+          <p>Año</p>
+          <p>{{obraEscaneada.anio}}</p>
+          
+        </ion-item>
+      
+        <ion-item>            
+            <p>Año</p>
+            <p>{{obraEscaneada.descripcion}}</p>            
+        </ion-item>
+      
+      </ion-card-->
 <ion-card>
-  <img src="../../assets/museum/laPiedad.jpg">
-  <ion-card-content>
-    <ion-card-title>
-      La piedad
+  
+
+    <ion-card-title text-center>
+      {{obraEscaneada.nombre}}
     </ion-card-title>
-    <p>
-      La Piedad del Vaticano o Pietà es un grupo escultórico en mármol realizado por Miguel Ángel entre 1498 y 1499. Sus dimensiones
-      son 1,74 por 1,95 m. Se encuentra en la basílica de San Pedro de la Ciudad del Vaticano.
-      de la Virgen María es muestra del idealismo renacentista: se trata de representar el ideal de belleza y juventud, una madre
-      eternamente joven y bella.
-    </p>
-  </ion-card-content>
+    <ion-card-content>
+      <img src= {{obraEscaneada.imgUrl}}>
+    </ion-card-content>
+    <ion-card-content>
+      <p>Autor: {{obraEscaneada.autor}}</p>  
+      <br>
+      <p>Año: {{obraEscaneada.anio}}</p>  
+      <br>
+      <p>Puntos: {{obraEscaneada.puntaje}}</p>  
+      <br>
+      <p>Descripción: {{obraEscaneada.descripcion}}</p>
+    </ion-card-content>
+    
+
+  
   <ion-buttons>
     <button block ion-button icon-only (click)="dismiss()">
       Aceptar

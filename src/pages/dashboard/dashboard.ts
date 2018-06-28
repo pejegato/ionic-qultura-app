@@ -1,6 +1,6 @@
 import {UserProvider} from "./../../providers/user/user";
 import {Component} from "@angular/core";
-import {IonicPage, MenuController, ModalController} from "ionic-angular";
+import {IonicPage, MenuController, ModalController, NavParams} from "ionic-angular";
 import {Dashcard} from "../../interfaces/dashcard-interface";
 import {DASHCARDS} from "../../data/dashcards.data";
 import {ScannerProvider} from "../../providers/scanner/scanner";
@@ -29,7 +29,6 @@ export class DashboardPage {
     public sc: ScannerProvider,
     public userProvider: UserProvider,
     public modalCtrl: ModalController
-
   ) {
     this.listaContactos = DASHCARDS.slice(0);
   }
@@ -39,9 +38,10 @@ export class DashboardPage {
   }
 
   abrirScanner(){
-    console.log("xxxx");
-    this.sc.scanCode().then(()=>{
-       const modal = this.modalCtrl.create(ModalObraPage);
+    console.log("Entrando a scanner");
+    this.sc.scanCode().then(response =>{
+        let obraEscaneada = response;
+        const modal = this.modalCtrl.create(ModalObraPage, {obra: obraEscaneada});
         modal.present();    
     }).catch(err =>{
 

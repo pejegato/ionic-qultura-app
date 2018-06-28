@@ -14,9 +14,12 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
   templateUrl: 'modal-obra.html',
 })
 export class ModalObraPage {
-
+  obraEscaneada = {}
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+    this.obraEscaneada = navParams.get("obra");
   }
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalObraPage');
