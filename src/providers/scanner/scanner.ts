@@ -1,3 +1,4 @@
+import { UserProvider } from './../user/user';
 import { FirebaseDbProvider } from './../firebase-db/firebase-db';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Platform, ToastController } from 'ionic-angular';
@@ -21,14 +22,16 @@ export class ScannerProvider {
     private toastCtrl: ToastController, 
     private platform: Platform, 
     private historialProvider: HistorialProvider,
-    private firebaseProvider: FirebaseDbProvider) { 
+    private firebaseProvider: FirebaseDbProvider, 
+    private userProvider: UserProvider) { 
     console.log('Hello ScannerProvider Provider');
   }
 
   scanCode() {
     console.log("Escaneando...");
     if (!this.platform.is('cordova')) {
-      this.historialProvider.agregarHistorial("http://google.com");
+      let obraEscaneada = this.userProvider.getPiecesData("1");
+      console.log(obraEscaneada);
 
 
       return;
@@ -42,11 +45,8 @@ export class ScannerProvider {
 
       if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
         //this.historialProvider.agregarHistorial(barcodeData.text);
-        
-        this.firebaseProvider.obtieneDatosObra("1111");
-
-
-        
+        let obraEscaneada = this.userProvider.getPiecesData("1");
+        console.log(obraEscaneada)        ;
       }
 
     }).catch(err => {

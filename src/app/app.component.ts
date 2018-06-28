@@ -54,20 +54,19 @@ export class MyApp {
         if (user) {
           this.userProvider.getUserData(user)
           .then(response => {
-            if (response){
-              this.loading.dismiss();
+            
+            if (response){              
               this.userProvider.datosUsuario = response;
               this.navCtrl.setRoot(DashboardPage);
             }else{
-              this.loading.dismiss();
-              this.navCtrl.setRoot(LoginPage);
               this.avisosProvider.crearAlertaSimple('Error!', 'Se ha producido un error rescatando datos de usuario: ');
+              this.navCtrl.setRoot(LoginPage);
             }
           });
-        } else {
-          this.loading.dismiss();
+        } else {          
           this.navCtrl.setRoot(LoginPage);
         }
+        this.loading.dismiss();
       }), error => {
           this.loading.dismiss();
           this.navCtrl.setRoot(LoginPage);

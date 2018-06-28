@@ -39,4 +39,25 @@ export class UserProvider {
         );
     }
 
+    public getPiecesData(user) {
+        return new Promise<any>(
+            (resolve, reject) => this.firebaseProvider.obtieneDatosObra("1").subscribe(response => {
+                if (response) {
+                    this.photoProvider.downloadImageUrl(response.img)
+                        .then(url => {
+                            response.imgUrl = url;
+                            resolve(response);
+                        })
+                        .catch((error) => {
+                            reject(error);
+                        })
+                } else {
+                    resolve(response);
+                }
+            }, error => {
+                reject(error);
+            })
+        );
+    }
+
 }

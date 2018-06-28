@@ -13,16 +13,19 @@ export class FirebaseDbProvider {
   }
 
   guardaInfoAdicionalUsuario(usuario): Promise<any> {
-      return this.afDB.database.ref(`usuarios/'${usuario.uid}`).set(usuario);
+      return this.afDB.database.ref(`usuarios/${usuario.uid}`).set(usuario);
   }
 
+  guardaObraEscaneada(usuario, obra): Promise<any> {
+    return this.afDB.database.ref(`usuarios/${usuario.uid}/obras/${obra.uid}`).set(obra);
+  }
 
   obtieneDatosUsuario(usuarioId): Observable<any> {
-      return this.afDB.object(`usuarios/'${usuarioId}`).valueChanges();
+      return this.afDB.object(`usuarios/${usuarioId}`).valueChanges();
   }
 
   obtieneDatosObra(obraId): Observable<any> {
-    return this.afDB.object(`obras/'${obraId}`).valueChanges();
+    return this.afDB.object(`obras/${obraId}`).valueChanges();
   }
 }
 
