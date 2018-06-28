@@ -24,36 +24,21 @@ export class ScannerProvider {
     private historialProvider: HistorialProvider,
     private firebaseProvider: FirebaseDbProvider, 
     private userProvider: UserProvider) { 
-    console.log('Hello ScannerProvider Provider');
+    
   }
 
   scanCode() {
-    console.log("Escaneando...");
-    if (!this.platform.is('cordova')) {
-      let obraEscaneada = this.userProvider.getPiecesData("1");
-      console.log(obraEscaneada);
-
-
-      return;
-    }
-    this.barcodeScanner.scan().then(barcodeData => {
+    return new Promise<any>((resolve, reject) => {
       
-      console.log("Escaneando...");
-      console.log('Barcode text: ' + barcodeData.text);
-      console.log('Barcode format: ' + barcodeData.format);
-      console.log('Barcode cancelled: ' + barcodeData.cancelled);
-
-      if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
-        //this.historialProvider.agregarHistorial(barcodeData.text);
-        let obraEscaneada = this.userProvider.getPiecesData("1");
-        console.log(obraEscaneada)        ;
+      if (!this.platform.is('cordova')) {
+        this.userProvider.getPiecesData("1").then(response => {
+          resolve(response);
+        }).catch(err => {
+          reject(err);
+        });
       }
-
-    }).catch(err => {
-
-      console.log('Error', err);
-      this.mostrarError("Error: " + err);
     });
+    
   }
 
   mostrarError(mensaje: string) {
