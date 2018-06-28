@@ -36,6 +36,26 @@ export class ScannerProvider {
         }).catch(err => {
           reject(err);
         });
+      }else{
+        this.barcodeScanner.scan().then(barcodeData => {
+          console.log("Escaneando...");
+          console.log('Barcode text: ' + barcodeData.text);
+          console.log('Barcode format: ' + barcodeData.format);
+          console.log('Barcode cancelled: ' + barcodeData.cancelled);
+
+          if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
+            this.userProvider.getPiecesData("1").then(response => {
+              resolve(response);
+            }).catch(err => {
+              reject(err);
+            });
+          }
+
+        }).catch(err => {
+
+          console.log('Error', err);
+          this.mostrarError("Error: " + err);
+        });
       }
     });
     
