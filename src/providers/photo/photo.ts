@@ -19,7 +19,7 @@ export class PhotoProvider {
 
     downloadImageUrl(imgId: string): any {
         let storageRef = firebase.storage().ref();
-        let imageRef = storageRef.child(`images/${imgId}.jpg`);
+        let imageRef = storageRef.child(`images/${imgId}`);
         return imageRef.getDownloadURL();
     }
 
