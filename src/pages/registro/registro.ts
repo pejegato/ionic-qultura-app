@@ -29,7 +29,9 @@ export class RegistroPage {
         passwordConfirm: '',
         username: '',
         nombre: '',
-        img: ''
+        img: '',
+        puntaje: '',
+        obrasEscaneadas:[]
   };
 
   private imgData;

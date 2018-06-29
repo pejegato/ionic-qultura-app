@@ -57,6 +57,7 @@ export class MyApp {
             
             if (response){              
               this.userProvider.datosUsuario = response;
+              this.userProvider.datosUsuario.uid = this.authProvider.currentUser.uid;
               this.navCtrl.setRoot(DashboardPage);
             }else{
               this.avisosProvider.crearAlertaSimple('Error!', 'Se ha producido un error rescatando datos de usuario: ');

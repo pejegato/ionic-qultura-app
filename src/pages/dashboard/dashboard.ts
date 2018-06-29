@@ -37,9 +37,11 @@ export class DashboardPage {
     this.menuController.toggle();
   }
 
+  
   abrirScanner(){
     console.log("Entrando a scanner");
-    this.sc.scanCode().then(response =>{
+    
+    this.sc.scanCode(this.userProvider.datosUsuario.uid).then(response =>{
         let obraEscaneada = response;
         const modal = this.modalCtrl.create(ModalObraPage, {obra: obraEscaneada});
         modal.present();    

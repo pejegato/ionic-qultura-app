@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {Injectable} from "@angular/core";
 import {AngularFireDatabase} from "angularfire2/database";
+import * as firebase from "firebase/app";
 
 
 @Injectable()
@@ -16,16 +17,18 @@ export class FirebaseDbProvider {
       return this.afDB.database.ref(`usuarios/${usuario.uid}`).set(usuario);
   }
 
-  guardaObraEscaneada(usuario, obra): Promise<any> {
-    return this.afDB.database.ref(`usuarios/${usuario.uid}/obras/${obra.uid}`).set(obra);
-  }
-
   obtieneDatosUsuario(usuarioId): Observable<any> {
       return this.afDB.object(`usuarios/${usuarioId}`).valueChanges();
   }
 
+  //Obras
+
   obtieneDatosObra(obraId): Observable<any> {
     return this.afDB.object(`obras/${obraId}`).valueChanges();
+  }
+
+  updateDatosUsuarioObra(usuarioId, obra): Promise<any> {
+    return this.afDB.database.ref(`usuarios/${usuarioId}/obras/${obra.uid}`).update(obra);
   }
 }
 

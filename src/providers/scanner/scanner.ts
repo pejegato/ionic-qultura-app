@@ -27,47 +27,45 @@ export class ScannerProvider {
     
   }
 
-  scanCode() {
-    return new Promise<any>((resolve, reject) => {
-      
+  scanCode(idUsuario) {
+    return new Promise<any>((resolve, reject) => {      
       if (!this.platform.is('cordova')) {
-        this.userProvider.getPiecesData("1").then(response => {
-          resolve(response);
-        }).catch(err => {
+        let idObra= "1";
+        this.userProvider.getPiecesData(idObra)
+        .then(response1 => {
+          response1.uid = idObra;
+          this.firebaseProvider.updateDatosUsuarioObra(idUsuario, response1)
+          .then(response => {
+            resolve(response1);
+          })
+          .catch(err => {
+            reject(err);
+          });
+        })
+        .catch(err => {
           reject(err);
         });
-      }else{
+      } else {
         this.barcodeScanner.scan().then(barcodeData => {
-          console.log("Escaneando...");
-          console.log('Barcode text: ' + barcodeData.text);
-          console.log('Barcode format: ' + barcodeData.format);
-          console.log('Barcode cancelled: ' + barcodeData.cancelled);
-
           if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
-            this.userProvider.getPiecesData("1").then(response => {
-              resolve(response);
-            }).catch(err => {
+            let idObra = barcodeData.text;
+            this.userProvider.getPiecesData(idObra)
+            .then(response1 => {
+              response1.uid = idObra;
+              this.firebaseProvider.updateDatosUsuarioObra(idUsuario, response1)
+                .then(response => {
+                  resolve(response1);
+                })
+                .catch(err => {
+                  reject(err);
+                });
+            })
+            .catch(err => {
               reject(err);
             });
           }
-
-        }).catch(err => {
-
-          console.log('Error', err);
-          this.mostrarError("Error: " + err);
-        });
+        })
       }
-    });
-    
+    })
   }
-
-  mostrarError(mensaje: string) {
-    let toast = this.toastCtrl.create({
-      message: mensaje,
-      duration: 3000
-    });
-
-    toast.present();
-  }
-
 }
