@@ -63,19 +63,19 @@
           <ion-list-header>
             Ultimos Logros
           </ion-list-header>
-          <ion-card *ngFor="let contacto of misLogros; let i = index">
+          <ion-card *ngFor="let contacto of userProvider.datosUsuario.obras; let i = index">
           
             <ion-item>
               <p>Has visto
-                <b>'{{contacto.titulo}}'</b>
+                <b>'{{contacto.nombre}}'</b>
               </p>
-              <p>{{contacto.fecha | date : 'medium'}}</p>
+              
             </ion-item>
           
-            <img src="{{contacto.lugarImg}}">
+            <img src="{{contacto.imgUrl}}">
           
             <ion-card-content>
-              <p>{{contacto.texto}}</p>
+              <p>{{contacto.descripcion}}</p>
             </ion-card-content>
           
             <ion-row>
