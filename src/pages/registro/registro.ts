@@ -61,7 +61,6 @@ export class RegistroPage {
         user.img = Math.floor(Date.now() / 1000);
 
         this.photoProvider.uploadImage(this.imgData, user.img)
-
         .then(()=>{
           this.dbFirebase.guardaInfoAdicionalUsuario(user);
         })
@@ -69,20 +68,19 @@ export class RegistroPage {
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
         })
+        /*
         .catch(err => {
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Error', err);
         });
+        */
 
       }else{
-
         this.dbFirebase.guardaInfoAdicionalUsuario(user)
-
         .then(()=>{
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
         })
-
       }
     }).catch(err => {
       loading.dismiss();

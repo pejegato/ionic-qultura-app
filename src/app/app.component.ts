@@ -52,21 +52,23 @@ export class MyApp {
 
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
+          
           this.userProvider.getUserData(user)
           .then(response => {
-            let usuarioActual = {}
+            let usuarioActual = {}            
             if (response){              
               this.userProvider.datosUsuario = response;
-              this.userProvider.datosUsuario.uid = this.authProvider.currentUser.uid;
+                this.userProvider.datosUsuario.uid = this.authProvider.currentUser.uid;
               if (this.userProvider.datosUsuario.obras){
                 let obras = this.userProvider.datosUsuario.obras;
                 this.userProvider.datosUsuario.obras = snapshotToArray(obras);
               }
-              this.navCtrl.setRoot(DashboardPage);
+              this.navCtrl.setRoot(DashboardPage);            
             }else{
               this.avisosProvider.crearAlertaSimple('Error!', 'Se ha producido un error rescatando datos de usuario: ');
               this.navCtrl.setRoot(LoginPage);
             }
+
           });
         } else {          
           this.navCtrl.setRoot(LoginPage);

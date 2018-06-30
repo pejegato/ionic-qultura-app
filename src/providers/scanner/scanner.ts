@@ -27,34 +27,42 @@ export class ScannerProvider {
 
   }
 
-  scanCode(usuario) {
+  //Metodo encargado de escanear y recibir datos de la obra y luego realizar las llamadas a los metodos que rescatan
+  //dichos datos de la BD
+  
+  scanCode(usuario):Promise<any> {
     return new Promise<any>((resolve, reject) => {
+      
       if (!this.platform.is('cordova')) {
-        let idObra= "2";
+        console.log("1");
+        let idObra = "8";
+        let obra:any;
+        
         this.userProvider.getPiecesData(idObra)
-        .then(response1 => {
-          response1.uid = idObra;
-          this.firebaseProvider.updateDatosUsuarioObra(usuario, response1)
-          .then(response => {
-            resolve(response1);
-          })
+        .then(responseObra => {
+          console.log("2");
+          obra = responseObra;
+          
+          //Datos complementarios
+          obra.uid=idObra;
+          obra.fechaScan = new Date()
+
+          this.firebaseProvider.updateDatosUsuarioObra(usuario, responseObra)          
+        })
+        .then(() => {
+          console.log("3");
+          resolve(obra);
         })
         .catch(err => {
+          console.log("4");
           reject(err);
         });
+        console.log("5");
+
       } else {
         this.barcodeScanner.scan().then(barcodeData => {
           if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
-            let idObra = barcodeData.text;
-            this.userProvider.getPiecesData(idObra)
-            .then(obraResponse => {
-              obraResponse.uid = idObra;
-              this.firebaseProvider.updateDatosUsuarioObra(usuario, obraResponse)
-              .then(() => {
-                this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obraResponse)
-                resolve(obraResponse);
-              })
-            })
+            
           }
         }).catch(err => {
           reject(err);

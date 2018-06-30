@@ -40,16 +40,15 @@ export class DashboardPage {
   }
 
 
-  //metodo que abre el scanner y detecta qr
-  abrirScanner(){        
+  //metodo que abre el scanner y detecta qr, si todo sale bien despliega un modal con los datos de la obra escaneada
+  abrirScanner(){            
     this.sc.scanCode(this.userProvider.datosUsuario)
-    .then(response =>{
-        let obraEscaneada = response;
-        const modal = this.modalCtrl.create(ModalObraPage, {obra: obraEscaneada});
-        modal.present();
+    .then(obraResponse =>{        
+      const modal = this.modalCtrl.create(ModalObraPage, { obra: obraResponse});
+      modal.present();
     }).catch(err =>{
       this.avisosProvider.crearAlertaSimple('Error', "Problemas escaneando la obra!");
     })
-
   }
+
 }

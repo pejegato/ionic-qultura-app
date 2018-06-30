@@ -21,8 +21,9 @@ export class UserProvider {
 
     //Metodo que obtiene data del usuario autenticado en la aplicacion
     public getUserData(user){
-        return new Promise<any>(
-            (resolve, reject) => this.firebaseProvider.obtieneDatosUsuario(user.uid).subscribe(response => {
+        return new Promise<any>((resolve, reject) => 
+        this.firebaseProvider.obtieneDatosUsuario(user.uid).subscribe(
+            response => {
                 if(response){
                     this.photoProvider.downloadImageUrl(response.img)
                     .then(url => {
@@ -37,24 +38,33 @@ export class UserProvider {
                 }
             }, error => {
                 reject(error);
-             })
+            })
         );
     }
 
 
     //Metodo que obtiene data de la obra escaneada
-    public getPiecesData(dataObra) {
+    public getPiecesData(dataObra) {        
         return new Promise<any>(
-            (resolve, reject) => this.firebaseProvider.obtieneDatosObra(dataObra).subscribe(response => {
-                if (response) {
-                  let res = response.img+".jpg";
-                  this.photoProvider.downloadImageUrl(res);
+            (resolve, reject) => 
+            this.firebaseProvider.obtieneDatosObra(dataObra).subscribe(response => {
+                if (response) {                  
+                    this.photoProvider.downloadImageUrl(response.img + ".jpg")
+                    .then(url => {
+                        response.imgUrl = url;
+                        resolve(response);
+                    })
+                    .catch(err=>{
+                        reject(err);
+                    })
+                }else{
+                    reject();
                 }
-                resolve(response);
             }, error => {
                 reject(error);
             })
         );
+
     }
 
 }
