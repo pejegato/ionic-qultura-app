@@ -18,13 +18,15 @@ export class UserProvider {
         private photoProvider: PhotoProvider
     ) {}
 
+
+    //Metodo que obtiene data del usuario autenticado en la aplicacion
     public getUserData(user){
         return new Promise<any>(
             (resolve, reject) => this.firebaseProvider.obtieneDatosUsuario(user.uid).subscribe(response => {
-                if(response){                
+                if(response){
                     this.photoProvider.downloadImageUrl(response.img)
                     .then(url => {
-                        response.imgUrl = url;                        
+                        response.imgUrl = url;
                         resolve(response);
                     })
                     .catch((error) => {
@@ -32,29 +34,23 @@ export class UserProvider {
                     })
                 }else{
                     resolve(response);
-                } 
+                }
             }, error => {
                 reject(error);
              })
         );
     }
 
-    public getPiecesData(user) {
+
+    //Metodo que obtiene data de la obra escaneada
+    public getPiecesData(dataObra) {
         return new Promise<any>(
-            (resolve, reject) => this.firebaseProvider.obtieneDatosObra("1").subscribe(response => {
+            (resolve, reject) => this.firebaseProvider.obtieneDatosObra(dataObra).subscribe(response => {
                 if (response) {
-                    let res = response.img+".jpg"
-                    this.photoProvider.downloadImageUrl(res)
-                        .then(url => {
-                            response.imgUrl = url;
-                            resolve(response);
-                        })
-                        .catch((error) => {
-                            reject(error);
-                        })
-                } else {
-                    resolve(response);
+                  let res = response.img+".jpg";
+                  this.photoProvider.downloadImageUrl(res);
                 }
+                resolve(response);
             }, error => {
                 reject(error);
             })

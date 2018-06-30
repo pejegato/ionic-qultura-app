@@ -17,30 +17,27 @@ import { Injectable } from '@angular/core';
 export class ScannerProvider {
 
   constructor(
-    private http: HttpClient, 
-    private barcodeScanner: BarcodeScanner, 
-    private toastCtrl: ToastController, 
-    private platform: Platform, 
+    private http: HttpClient,
+    private barcodeScanner: BarcodeScanner,
+    private toastCtrl: ToastController,
+    private platform: Platform,
     private historialProvider: HistorialProvider,
-    private firebaseProvider: FirebaseDbProvider, 
-    private userProvider: UserProvider) { 
-    
+    private firebaseProvider: FirebaseDbProvider,
+    private userProvider: UserProvider) {
+
   }
 
-  scanCode(idUsuario) {
-    return new Promise<any>((resolve, reject) => {      
+  scanCode(usuario) {
+    return new Promise<any>((resolve, reject) => {
       if (!this.platform.is('cordova')) {
-        let idObra= "1";
+        let idObra= "2";
         this.userProvider.getPiecesData(idObra)
         .then(response1 => {
           response1.uid = idObra;
-          this.firebaseProvider.updateDatosUsuarioObra(idUsuario, response1)
+          this.firebaseProvider.updateDatosUsuarioObra(usuario, response1)
           .then(response => {
             resolve(response1);
           })
-          .catch(err => {
-            reject(err);
-          });
         })
         .catch(err => {
           reject(err);
@@ -50,21 +47,18 @@ export class ScannerProvider {
           if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
             let idObra = barcodeData.text;
             this.userProvider.getPiecesData(idObra)
-            .then(response1 => {
-              response1.uid = idObra;
-              this.firebaseProvider.updateDatosUsuarioObra(idUsuario, response1)
-                .then(response => {
-                  resolve(response1);
-                })
-                .catch(err => {
-                  reject(err);
-                });
+            .then(obraResponse => {
+              obraResponse.uid = idObra;
+              this.firebaseProvider.updateDatosUsuarioObra(usuario, obraResponse)
+              .then(() => {
+                this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obraResponse)
+                resolve(obraResponse);
+              })
             })
-            .catch(err => {
-              reject(err);
-            });
           }
-        })
+        }).catch(err => {
+          reject(err);
+        });
       }
     })
   }

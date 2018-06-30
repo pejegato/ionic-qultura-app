@@ -27,8 +27,12 @@ export class FirebaseDbProvider {
     return this.afDB.object(`obras/${obraId}`).valueChanges();
   }
 
-  updateDatosUsuarioObra(usuarioId, obra): Promise<any> {
-    return this.afDB.database.ref(`usuarios/${usuarioId}/obras/${obra.uid}`).update(obra);
+  updateDatosUsuarioObra(usuario, obra): Promise<any> {    
+    return this.afDB.database.ref(`usuarios/${usuario.uid}/obras/${obra.uid}`).update(obra);
+  }
+
+  updateDatosUsuarioPuntaje(usuario, obra): Promise<any> {
+    return this.afDB.database.ref(`usuarios/${usuario.uid}/puntos/${obra.uid}`).update(obra);
   }
 }
 

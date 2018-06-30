@@ -1,3 +1,4 @@
+import { AvisosProvider } from './../../providers/avisos/avisos';
 import {UserProvider} from "./../../providers/user/user";
 import {Component} from "@angular/core";
 import {IonicPage, MenuController, ModalController, NavParams} from "ionic-angular";
@@ -23,12 +24,13 @@ import { ModalObraPage } from "../modal-obra/modal-obra";
 export class DashboardPage {
 
   listaContactos:Dashcard[] = [];
-  
+
   constructor(
     private menuController: MenuController,
     public sc: ScannerProvider,
     public userProvider: UserProvider,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    private avisosProvider: AvisosProvider
   ) {
     this.listaContactos = DASHCARDS.slice(0);
   }
@@ -37,17 +39,17 @@ export class DashboardPage {
     this.menuController.toggle();
   }
 
-  
-  abrirScanner(){
-    console.log("Entrando a scanner");
-    
-    this.sc.scanCode(this.userProvider.datosUsuario.uid).then(response =>{
+
+  //metodo que abre el scanner y detecta qr
+  abrirScanner(){        
+    this.sc.scanCode(this.userProvider.datosUsuario)
+    .then(response =>{
         let obraEscaneada = response;
         const modal = this.modalCtrl.create(ModalObraPage, {obra: obraEscaneada});
-        modal.present();    
+        modal.present();
     }).catch(err =>{
-
+      this.avisosProvider.crearAlertaSimple('Error', "Problemas escaneando la obra!");
     })
-    
+
   }
 }

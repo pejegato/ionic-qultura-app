@@ -9,7 +9,7 @@ import firebase from "firebase";
 @Injectable()
 export class PhotoProvider {
 
-
+    //Metodo que sube la data a la app
     uploadImage(captureDataUrl, filename) {
         let storageRef = firebase.storage().ref();
         const imageRef = storageRef.child(`images/${filename}`);
@@ -17,6 +17,7 @@ export class PhotoProvider {
 
     };
 
+    //Metodo que obtiene la url de visualizacion de la app basado en el nombre de la img
     downloadImageUrl(imgId: string): any {
         let storageRef = firebase.storage().ref();
         let imageRef = storageRef.child(`images/${imgId}`);
