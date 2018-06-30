@@ -54,8 +54,12 @@ export class MyApp {
         if (user) {
           this.userProvider.getUserData(user)
           .then(response => {
-            let usuarioActual = {}
-            if (response){              
+
+            let usuarioActual = {};
+
+            usuarioActual.username = response.username;
+            usuarioActual.imgUrl = response.imgUrl;
+
               this.userProvider.datosUsuario = response;
               this.userProvider.datosUsuario.uid = this.authProvider.currentUser.uid;
               if (this.userProvider.datosUsuario.obras){
@@ -63,10 +67,7 @@ export class MyApp {
                 this.userProvider.datosUsuario.obras = snapshotToArray(obras);
               }
               this.navCtrl.setRoot(DashboardPage);
-            }else{
-              this.avisosProvider.crearAlertaSimple('Error!', 'Se ha producido un error rescatando datos de usuario: ');
-              this.navCtrl.setRoot(LoginPage);
-            }
+
           });
         } else {          
           this.navCtrl.setRoot(LoginPage);
