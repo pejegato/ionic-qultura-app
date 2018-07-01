@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import { FirebaseDbProvider } from "../firebase-db/firebase-db";
-import { PhotoProvider } from "../photo/photo";
 
 
 /*
@@ -13,58 +12,62 @@ import { PhotoProvider } from "../photo/photo";
 export class UserProvider {
 
     public datosUsuario: any
+    
     constructor(
         private firebaseProvider: FirebaseDbProvider,
-        private photoProvider: PhotoProvider
     ) {}
 
 
-    //Metodo que obtiene data del usuario autenticado en la aplicacion
+    //Metodo que obtiene data extra del usuario autenticado en la aplicacion
     public getUserData(user){
-        return new Promise<any>((resolve, reject) => 
-        this.firebaseProvider.obtieneDatosUsuario(user.uid).subscribe(
-            response => {
-                if(response){
-                    this.photoProvider.downloadImageUrl(response.img)
-                    .then(url => {
-                        response.imgUrl = url;
-                        resolve(response);
-                    })
-                    .catch((error) => {
-                        reject(error);
-                    })
-                }else{
-                    resolve(response);
-                }
-            }, error => {
-                reject(error);
-            })
-        );
+        
+        return new Promise((resolve, reject) => {           
+            var _self = this;
+            this.firebaseProvider.obtieneDatosUsuario(user.uid).subscribe({
+                next(response){
+                    if (response){
+                        _self.datosUsuario = response; 
+                        _self.datosUsuario.obras = _self.snapshotToArray(response.obras);
+                        resolve();
+                    }else{
+                        reject("No existe registro");
+                    }
+                },
+                error(msg) {reject(msg)}
+            });            
+        });
     }
 
-
-    //Metodo que obtiene data de la obra escaneada
-    public getPiecesData(dataObra) {        
-        return new Promise<any>(
-            (resolve, reject) => 
-            this.firebaseProvider.obtieneDatosObra(dataObra).subscribe(response => {
-                if (response) {                  
-                    this.photoProvider.downloadImageUrl(response.img + ".jpg")
-                    .then(url => {
-                        response.imgUrl = url;
-                        resolve(response);
-                    })
-                    .catch(err=>{
-                        reject(err);
-                    })
-                }else{
-                    reject();
+    //Metodo que obtiene data de la obra escaneada 
+    public getPiecesData(idObra) {
+        return new Promise((resolve, reject) => {
+            var _self = this;
+            this.firebaseProvider.obtieneDatosObra(idObra).subscribe({
+                next(response) 
+                {
+                    response ? resolve(response) : reject("No existe registro");    
+                },
+                error(msg) {
+                    reject(msg)
                 }
-            }, error => {
-                reject(error);
-            })
-        );
+            });
+        })
 
     }
+
+private snapshotToArray(snapshot) {
+    var returnArr = [];
+    if (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            var item = childSnapshot;
+            item.key = childSnapshot.uid;
+        
+            returnArr.push(item);
+        });
+    }
+    return returnArr;
+};
+
+    
 
 }

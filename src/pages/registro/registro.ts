@@ -1,4 +1,3 @@
-import {PhotoProvider} from "./../../providers/photo/photo";
 import {Component} from "@angular/core";
 import {IonicPage, AlertController} from "ionic-angular";
 import {AuthProvider} from "../../providers/auth/auth";
@@ -16,8 +15,7 @@ export class RegistroPage {
 
   constructor(
       public auth: AuthProvider,
-      private dbFirebase: FirebaseDbProvider,
-      private photoProvider: PhotoProvider,
+      private firebaseProvider: FirebaseDbProvider,      
       private avisosProvider: AvisosProvider,
       private camera : Camera){
   }
@@ -60,23 +58,16 @@ export class RegistroPage {
 
         user.img = Math.floor(Date.now() / 1000);
 
-        this.photoProvider.uploadImage(this.imgData, user.img)
+        this.firebaseProvider.uploadImage(this.imgData, user.img)
         .then(()=>{
-          this.dbFirebase.guardaInfoAdicionalUsuario(user);
+          this.firebaseProvider.guardaInfoAdicionalUsuario(user);
         })
         .then(()=>{
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
         })
-        /*
-        .catch(err => {
-          loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Error', err);
-        });
-        */
-
       }else{
-        this.dbFirebase.guardaInfoAdicionalUsuario(user)
+        this.firebaseProvider.guardaInfoAdicionalUsuario(user)
         .then(()=>{
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");

@@ -19,9 +19,7 @@ export class ScannerProvider {
   constructor(
     private http: HttpClient,
     private barcodeScanner: BarcodeScanner,
-    private toastCtrl: ToastController,
     private platform: Platform,
-    private historialProvider: HistorialProvider,
     private firebaseProvider: FirebaseDbProvider,
     private userProvider: UserProvider) {
 
@@ -32,41 +30,45 @@ export class ScannerProvider {
   
   scanCode(usuario):Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      
-      if (!this.platform.is('cordova')) {
-        console.log("1");
-        let idObra = "8";
-        let obra:any;
+      var obras;
+      if (!this.platform.is('cordova')) {        
         
-        this.userProvider.getPiecesData(idObra)
+        this.userProvider.getPiecesData(1)
         .then(responseObra => {
-          console.log("2");
-          obra = responseObra;
+          obras = responseObra;
+          this.firebaseProvider.updateDatosUsuarioObra(usuario, obras)
+        })          
+        .then (() => {
+          this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras)        
+        })          
+        .then(() => {          
+          resolve(obras)
+        })          
+        .catch(err  => {
+            reject(err)
+        })
           
-          //Datos complementarios
-          obra.uid=idObra;
-          obra.fechaScan = new Date()
-
-          this.firebaseProvider.updateDatosUsuarioObra(usuario, responseObra)          
-        })
-        .then(() => {
-          console.log("3");
-          resolve(obra);
-        })
-        .catch(err => {
-          console.log("4");
-          reject(err);
-        });
-        console.log("5");
-
+        
       } else {
-        this.barcodeScanner.scan().then(barcodeData => {
-          if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
-            
+        this.barcodeScanner.scan()
+        .then(barcodeData => {
+          if (!barcodeData.cancelled) {
+
+            this.userProvider.getPiecesData(barcodeData.text)
+              
+            .then(responseObra => {
+              this.firebaseProvider.updateDatosUsuarioObra(usuario, responseObra)
+            })
+            .then(obra => {
+              resolve(obra)
+            })
+            .catch(err => {
+              reject(err)
+            })
+
           }
-        }).catch(err => {
-          reject(err);
-        });
+        })
+        .catch(err => reject(err));
       }
     })
   }

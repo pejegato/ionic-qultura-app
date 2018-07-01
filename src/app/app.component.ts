@@ -52,24 +52,10 @@ export class MyApp {
 
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          
-          this.userProvider.getUserData(user)
-          .then(response => {
-            let usuarioActual = {}            
-            if (response){              
-              this.userProvider.datosUsuario = response;
-                this.userProvider.datosUsuario.uid = this.authProvider.currentUser.uid;
-              if (this.userProvider.datosUsuario.obras){
-                let obras = this.userProvider.datosUsuario.obras;
-                this.userProvider.datosUsuario.obras = snapshotToArray(obras);
-              }
-              this.navCtrl.setRoot(DashboardPage);            
-            }else{
-              this.avisosProvider.crearAlertaSimple('Error!', 'Se ha producido un error rescatando datos de usuario: ');
-              this.navCtrl.setRoot(LoginPage);
-            }
-
-          });
+          this.userProvider.getUserData(user).then(()=>{
+            console.log("Usuario: ", this.userProvider.datosUsuario);
+            this.navCtrl.setRoot(DashboardPage);            
+          })          
         } else {          
           this.navCtrl.setRoot(LoginPage);
         }
@@ -93,18 +79,7 @@ export class MyApp {
   }
 }
 
-function snapshotToArray(snapshot) {
-  var returnArr = [];
 
-  snapshot.forEach(function (childSnapshot) {
-    var item = childSnapshot;
-    //item.key = childSnapshot.uid;
-
-    returnArr.push(item);
-  });
-
-  return returnArr;
-};
 
 
 

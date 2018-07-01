@@ -27,7 +27,6 @@ import {AvisosProvider} from "../providers/avisos/avisos";
 import {diccionarioErrores} from "../providers/constants/errores";
 import {ScannerProvider} from "../providers/scanner/scanner";
 import {Camera} from "@ionic-native/camera";
-import {PhotoProvider} from "../providers/photo/photo";
 import {UserProvider} from "../providers/user/user";
 import {StartPage} from "../pages/start/start";
 import { ModalObraPage } from "../pages/modal-obra/modal-obra";
@@ -73,7 +72,7 @@ export const firebaseConfig = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    MyApp,  
     HomePage,
     GuardadosPage,
     MapaPage,
@@ -101,7 +100,6 @@ export const firebaseConfig = {
     diccionarioErrores,
     ScannerProvider,
     Camera,
-    PhotoProvider,
     UserProvider
     
   ]

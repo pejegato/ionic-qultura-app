@@ -19,20 +19,15 @@ import {MIS_LUGARES} from "../../data/dashcards.data";
   templateUrl: 'perfil.html',
 })
 export class PerfilPage {
-  miPerfil:any;
-  misLogros:any;
-  edicionPerfilPage:any = EdicionPerfilPage;
-  homePage: any = HomePage;
   
-  constructor(
-      public navCtrl: NavController,
-      public navParams: NavParams,
-      private menuController: MenuController,
-      private fb: FirebaseDbProvider,
-      public sc: ScannerProvider,
-      public userProvider: UserProvider) {
-    this.misLogros = MIS_LUGARES.slice(0);
-  }
+  edicionPerfilPage:any = EdicionPerfilPage;
+  
+  
+  constructor(      
+      private menuController: MenuController,      
+      private scannerProvider: ScannerProvider,
+      public userProvider: UserProvider
+    ) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PerfilPage');
