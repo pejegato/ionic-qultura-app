@@ -51,7 +51,7 @@ export class ScannerProvider {
         
       } else {
         this.barcodeScanner.scan().then(barcodeData => {
-          if (!barcodeData.cancelled) {
+          if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
             //alert(barcodeData.text);  
             this.userProvider.getPiecesData(barcodeData.text)
               
