@@ -50,10 +50,9 @@ export class ScannerProvider {
           
         
       } else {
-        this.barcodeScanner.scan()
-        .then(barcodeData => {
+        this.barcodeScanner.scan().then(barcodeData => {
           if (!barcodeData.cancelled) {
-
+            alert(barcodeData.text);  
             this.userProvider.getPiecesData(barcodeData.text)
               
             .then(responseObra => {

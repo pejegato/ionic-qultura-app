@@ -52,8 +52,7 @@ export class MyApp {
 
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          this.userProvider.getUserData(user).then(()=>{
-            console.log("Usuario: ", this.userProvider.datosUsuario);
+          this.userProvider.getUserData(user).then(()=>{            
             this.navCtrl.setRoot(DashboardPage);            
           })          
         } else {          
