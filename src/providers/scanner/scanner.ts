@@ -52,18 +52,19 @@ export class ScannerProvider {
       } else {
         this.barcodeScanner.scan().then(barcodeData => {
           if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
-            //alert(barcodeData.text);  
+            
             this.userProvider.getPiecesData(barcodeData.text)
               
             .then(responseObra => {
               this.firebaseProvider.updateDatosUsuarioObra(usuario, responseObra)
+              .then(obra => {
+                resolve(obra)
+              })
+              .catch(err => {
+                reject(err)
+              })
             })
-            .then(obra => {
-              resolve(obra)
-            })
-            .catch(err => {
-              reject(err)
-            })
+            
 
           }
         })
