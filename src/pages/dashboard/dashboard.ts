@@ -5,7 +5,6 @@ import {IonicPage, MenuController, ModalController, NavParams} from "ionic-angul
 import {Dashcard} from "../../interfaces/dashcard-interface";
 import {DASHCARDS} from "../../data/dashcards.data";
 import {ScannerProvider} from "../../providers/scanner/scanner";
-import { StartPage } from "../start/start";
 import { ModalObraPage } from "../modal-obra/modal-obra";
 
 /**
@@ -46,7 +45,8 @@ si todo sale bien despliega un modal con los datos de la obra escaneada
   
   abrirScanner(){            
     this.sc.scanCode(this.userProvider.datosUsuario)
-    .then(obraResponse =>{        
+    .then(obraResponse =>{
+      alert()        
       const modal = this.modalCtrl.create(ModalObraPage, { obra: obraResponse});
       modal.present();
     }).catch(err =>{      
