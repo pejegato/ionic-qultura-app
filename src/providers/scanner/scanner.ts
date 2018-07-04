@@ -56,8 +56,7 @@ export class ScannerProvider {
 
           if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
             
-            this.userProvider.getPiecesData(barcodeData.text)
-            this.userProvider.getPiecesData(3)
+            this.userProvider.getPiecesData(barcodeData.text)            
             .then(responseObra => {
               obras = responseObra;
               this.firebaseProvider.updateDatosUsuarioObra(usuario, obras)
