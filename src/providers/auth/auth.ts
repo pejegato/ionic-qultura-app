@@ -8,11 +8,16 @@ export class AuthProvider {
 
   constructor(private afAuth: AngularFireAuth) {}
 
-  // Registro de usuario
+   /*****************************************************************************
+   * Crea usuario en firebase con email y password                              *
+   *****************************************************************************/
   registerUser(newUser):Promise<any> {
     return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password);
   }
 
+  /******************************************************************************
+   * actualiza usuario en firebase                                              *
+   *****************************************************************************/
   updatePerfilUsuario(username: string, photoURL:string):Promise<any>{
     return firebase.auth().currentUser.updateProfile({
       displayName: username,
@@ -20,14 +25,23 @@ export class AuthProvider {
     })
   }
 
+  /******************************************************************************
+   * Logea usuario en FB con email y pass                                       *
+   *****************************************************************************/
   loginUser(email: string, password: string): Promise<any> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
   }
 
+ /******************************************************************************
+  * Deslogea usuario conectado                                                 *
+  *****************************************************************************/
   logout(): Promise<any> {
         return this.afAuth.auth.signOut();
   }
 
+ /******************************************************************************
+  * Verifica usuario actual logueado                                           *
+  *****************************************************************************/
   get currentUser(){
     return firebase.auth().currentUser;
   }

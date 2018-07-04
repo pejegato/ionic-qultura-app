@@ -15,6 +15,9 @@ export class AvisosProvider {
     private loadingController: LoadingController
   ) {}
 
+  /*****************************************************************************
+  * Crea una alerta para ser usada en el resto de los modulos                  *
+  *****************************************************************************/
   crearAlertaSimple(titulo, mensaje) {
     let alert = this.alertCtrl.create({
       title: titulo,
@@ -29,7 +32,10 @@ export class AvisosProvider {
     alert.present();
   }
 
-    crearLoading(mensaje: string) {
+  /*****************************************************************************
+  * Crea un loader para ser usada en el resto de los modulos                   *
+  *****************************************************************************/
+  crearLoading(mensaje: string) {
     let loading = this.loadingController.create(
         {content: mensaje}
     );

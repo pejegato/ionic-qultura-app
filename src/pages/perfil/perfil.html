@@ -9,7 +9,7 @@
           <ion-title text-center>Mi Perfil</ion-title>
         
         <ion-buttons end>
-          <button ion-button icon-only (click)='sc.scanCode()'>
+          <button ion-button icon-only (click)='abrirScanner()'>
             <ion-icon name="camera"></ion-icon>
           </button>
         </ion-buttons>
@@ -44,7 +44,7 @@
       <ion-col col-12>
         <ion-list>
           <ion-list-header>
-            Puntaje Total: 
+            Puntaje Total: {{userProvider.datosUsuario.puntaje}}
           </ion-list-header>
           <ion-item text-center>
             <h1></h1>
@@ -57,7 +57,7 @@
       <ion-col>
         <ion-list>
           <ion-list-header>
-            Ultimos Logros: {{userProvider.datosUsuario.puntaje}}
+            Ultimos Logros: 
           </ion-list-header>
           <p *ngIf="!userProvider.datosUsuario.obras" >No hay registro de obras escaneadas</p>
           <ion-card *ngFor="let contacto of userProvider.datosUsuario.obras; let i = index">

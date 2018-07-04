@@ -39,10 +39,8 @@ export class InicioSesionPage {
     this.auth.loginUser(this.user.email, this.user.password)
     .then((response) => {
       this.userProvider.getUserData(response.user)
-      .then(response=> {
-        loading.dismiss();
-        this.userProvider.datosUsuario = response;
-        this.navCtrl.setRoot(DashboardPage);
+      .then(()=> {
+        loading.dismiss();       
       })
       .catch(err => {
         loading.dismiss();

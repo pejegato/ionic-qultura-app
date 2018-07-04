@@ -1,8 +1,7 @@
 import { UserProvider } from './../user/user';
 import { FirebaseDbProvider } from './../firebase-db/firebase-db';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { Platform, ToastController } from 'ionic-angular';
-import { HistorialProvider } from './../historial/historial';
+import { Platform} from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -25,8 +24,11 @@ export class ScannerProvider {
 
   }
 
-  //Metodo encargado de escanear y recibir datos de la obra y luego realizar las llamadas a los metodos que rescatan
-  //dichos datos de la BD
+  /******************************************************************************************************
+  * Metodo encargado de escanear y recibir datos de la obra y luego realizar las llamadas a los metodos *
+  * que rescatan dichos datos de la BD                                                                  *
+  ******************************************************************************************************/
+
   
   scanCode(usuario):Promise<any> {
     return new Promise<any>((resolve, reject) => {
@@ -56,16 +58,15 @@ export class ScannerProvider {
             this.userProvider.getPiecesData(barcodeData.text)
               
             .then(responseObra => {
+              var obraEscaneada = responseObra;
               this.firebaseProvider.updateDatosUsuarioObra(usuario, responseObra)
-              .then(obra => {
-                resolve(obra)
+              .then(() => {
+                resolve(obraEscaneada)
               })
               .catch(err => {
                 reject(err)
               })
             })
-            
-
           }
         })
         .catch(err => reject(err));

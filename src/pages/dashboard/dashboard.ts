@@ -1,12 +1,13 @@
-import { AvisosProvider } from './../../providers/avisos/avisos';
-import {UserProvider} from "./../../providers/user/user";
-import {Component} from "@angular/core";
-import {IonicPage, MenuController, ModalController, NavParams} from "ionic-angular";
-import {Dashcard} from "../../interfaces/dashcard-interface";
-import {DASHCARDS} from "../../data/dashcards.data";
-import {ScannerProvider} from "../../providers/scanner/scanner";
-import { ModalObraPage } from "../modal-obra/modal-obra";
 
+import { Component } from "@angular/core";
+import { IonicPage, MenuController, ModalController, NavParams} from "ionic-angular";
+import { Dashcard } from "../../interfaces/dashcard-interface";
+import { DASHCARDS } from "../../data/dashcards.data";
+//Dependencias para Scanner
+import { ScannerProvider } from "../../providers/scanner/scanner";
+import { ModalObraPage } from "../modal-obra/modal-obra";
+import { AvisosProvider } from './../../providers/avisos/avisos';
+import { UserProvider } from "./../../providers/user/user";
 /**
  * Generated class for the DashboardPage page.
  *
@@ -24,6 +25,7 @@ export class DashboardPage {
 
   listaContactos:Dashcard[] = [];
 
+
   constructor(
     private menuController: MenuController,
     public sc: ScannerProvider,
@@ -34,19 +36,21 @@ export class DashboardPage {
     this.listaContactos = DASHCARDS.slice(0);
   }
 
+/*****************************************************************************
+* metodo que abre el menu lateral para acceder a las diferentes acciones
+******************************************************************************/
   abrirMenu(){
     this.menuController.toggle();
   }
 
-/***********************************************************************
+/*****************************************************************************
 * metodo que abre el scanner y detecta eñ codigo QR, 
-si todo sale bien despliega un modal con los datos de la obra escaneada
-************************************************************************/
+* si todo sale bien despliega un modal con los datos de la obra escaneada
+******************************************************************************/
   
   abrirScanner(){            
     this.sc.scanCode(this.userProvider.datosUsuario)
-    .then(obraResponse =>{
-      alert()        
+    .then(obraResponse =>{       
       const modal = this.modalCtrl.create(ModalObraPage, { obra: obraResponse});
       modal.present();
     }).catch(err =>{      

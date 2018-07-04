@@ -18,7 +18,10 @@ export class UserProvider {
     ) {}
 
 
-    //Metodo que obtiene data extra del usuario autenticado en la aplicacion
+/*****************************************************************************
+ * Metodo que obtiene data extra del usuario autenticado en la aplicacion     *
+ *****************************************************************************/
+    
     public getUserData(user){
         
         return new Promise((resolve, reject) => {           
@@ -38,16 +41,17 @@ export class UserProvider {
         });
     }
 
-    //Metodo que obtiene data de la obra escaneada 
+/*****************************************************************************
+ * Metodo que obtiene data de la obra escaneada                              *
+ *****************************************************************************/
     public getPiecesData(idObra) {
         return new Promise((resolve, reject) => {
             var _self = this;
             this.firebaseProvider.obtieneDatosObra(idObra).subscribe({
-                next(response) 
-                {
+                next(response) {
                     response ? resolve(response) : reject("No existe registro");    
-                },
-                error(msg) {
+                }
+                ,error(msg) {
                     reject(msg)
                 }
             });
@@ -55,18 +59,21 @@ export class UserProvider {
 
     }
 
-private snapshotToArray(snapshot) {
-    var returnArr = [];
-    if (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-            var item = childSnapshot;
-            item.key = childSnapshot.uid;
-        
-            returnArr.push(item);
-        });
-    }
-    return returnArr;
-};
+/*****************************************************************************
+ * Metodo utilitario que convierte un listado de objetos en un array         *
+ *****************************************************************************/
+    private snapshotToArray(snapshot) {
+        var returnArr = [];
+        if (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                var item = childSnapshot;
+                item.key = childSnapshot.uid;
+            
+                returnArr.push(item);
+            });
+        }
+        return returnArr;
+    };
 
     
 
