@@ -35,7 +35,7 @@ export class ScannerProvider {
       var obras;
       if (!this.platform.is('cordova')) {        
         
-        this.userProvider.getPiecesData(1)
+        this.userProvider.getPiecesData(3)
         .then(responseObra => {
           obras = responseObra;
           this.firebaseProvider.updateDatosUsuarioObra(usuario, obras)
@@ -53,20 +53,21 @@ export class ScannerProvider {
         
       } else {
         this.barcodeScanner.scan().then(barcodeData => {
+
           if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
             
             this.userProvider.getPiecesData(barcodeData.text)
-              
+            this.userProvider.getPiecesData(3)
             .then(responseObra => {
-              var obraEscaneada = responseObra;
-              this.firebaseProvider.updateDatosUsuarioObra(usuario, responseObra)
-              .then(() => {
-                resolve(obraEscaneada)
-              })
-              .catch(err => {
-                reject(err)
-              })
-            })
+              obras = responseObra;
+              this.firebaseProvider.updateDatosUsuarioObra(usuario, obras)
+            })          
+            .then (() => {
+              this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras)        
+            })          
+            .then(() => {          
+              resolve(obras)
+            })                      
           }
         })
         .catch(err => reject(err));
