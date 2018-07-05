@@ -32,7 +32,10 @@ export class ScannerProvider {
   
   scanCode(usuario):Promise<any> {
     return new Promise<any>((resolve, reject) => {
+      
       var obras;
+
+      //Pregunta si es telefono o pc
       if (!this.platform.is('cordova')) {        
         
         this.userProvider.getPiecesData(3)
@@ -52,7 +55,9 @@ export class ScannerProvider {
           
         
       } else {
-        this.barcodeScanner.scan().then(barcodeData => {
+        //abre scanner
+        this.barcodeScanner.scan()
+        .then(barcodeData => {
 
           if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
             
