@@ -54,6 +54,8 @@ export class MyApp {
         if (user) {
           this.userProvider.getUserData(user).then(()=>{            
             this.navCtrl.setRoot(DashboardPage);            
+          }).catch(()=>{
+            this.navCtrl.setRoot(LoginPage);  
           })          
         } else {          
           this.navCtrl.setRoot(LoginPage);
