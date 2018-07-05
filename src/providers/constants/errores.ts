@@ -17,11 +17,14 @@ export class diccionarioErrores {
       ["AUTH/NETWORK-ERROR", 'Error de red'],
       ["AUTH/UNKNOWN-ERROR", 'Se ha producido un error'],
       ["AUTH/USER-DENIED-AUTH", 'Usuario no autorizado'],
-      ["AUTH/USER-DOES-NOT-EXIST", 'Usuario no existe']      
+      ["AUTH/USER-DOES-NOT-EXIST", 'Usuario no existe'],
+      ["AUTH/EMAIL-ALREADY-IN-USE", 'Email ya se encuentra registrado'],
+      ["AUTH/WEAK-PASSWORD", 'Password demasiado corto']
+            
   ]);
   
   public traducirError(tipo:string, key:string) {  
-    console.log("tipo de error ",typeof key); 
+    console.log("tipo de error ", typeof key); 
     let erroresMap = new  Map<string, string>();
     let codigoError = key ? key.toString().toUpperCase() : '';
     if(tipo === 'LOGIN'){
@@ -31,7 +34,7 @@ export class diccionarioErrores {
     if(erroresMap.has(codigoError)){
       return erroresMap.get(codigoError);  
     }else{
-      return 'Error desconocido'
+      return codigoError
     }
   };
 

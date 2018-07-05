@@ -23,7 +23,7 @@ export class LoginPage {
   dashboardPage: any = DashboardPage;
   inicioSesionPage: any = InicioSesionPage;
 
-    loading: boolean;
+  loading: boolean;
 
 
   constructor(
@@ -31,14 +31,6 @@ export class LoginPage {
     public navParams: NavParams
     ) {
   }
-  user = { email: '', password: '' };
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
-
-
-
-
+  
 
 }

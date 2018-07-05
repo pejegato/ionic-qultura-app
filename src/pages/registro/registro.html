@@ -12,7 +12,6 @@
 
 </ion-header>
 
-
 <ion-content padding text-center>
 
   <ion-grid style="height: 100%">
@@ -33,6 +32,11 @@
           <ion-item>
             <ion-label floating>Nombre</ion-label>
             <ion-input type="text" [(ngModel)]="user.nombre" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Apellido</ion-label>
+            <ion-input type="text" [(ngModel)]="user.apellido" required></ion-input>
           </ion-item>
 
           <ion-item>

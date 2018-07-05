@@ -4,6 +4,7 @@ import {AuthProvider} from "../../providers/auth/auth";
 import {FirebaseDbProvider} from "../../providers/firebase-db/firebase-db";
 import {AvisosProvider} from "../../providers/avisos/avisos";
 import {Camera, CameraOptions} from "@ionic-native/camera";
+import { diccionarioErrores } from "../../providers/constants/errores";
 
 
 @IonicPage()
@@ -17,7 +18,8 @@ export class RegistroPage {
       public auth: AuthProvider,
       private firebaseProvider: FirebaseDbProvider,      
       private avisosProvider: AvisosProvider,
-      private camera : Camera){
+      private camera : Camera,
+      private errores : diccionarioErrores){
   }
 
     user = {
@@ -32,7 +34,7 @@ export class RegistroPage {
         obrasEscaneadas:[]
   };
 
-  private imgData;
+  private imgData:string;
 
   alertCtrl: AlertController;
 
@@ -50,8 +52,10 @@ export class RegistroPage {
     loading.present();
     this.auth.registerUser(user)
     .then(response => {
-
+      
+      //imagen por defecto
       user.img = "noneImg";
+      user.imgUrl = "https://firebasestorage.googleapis.com/v0/b/qultura-63b5d.appspot.com/o/images%2FnoneImg.jpg?alt=media&token=611cf7f4-1b02-4886-aa33-bd722503a9e7"
 
       this.user.uid = response.user.uid;
       if (this.imgData){
@@ -66,16 +70,24 @@ export class RegistroPage {
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
         })
+        .catch(err => {
+          loading.dismiss();
+          this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
+        });
       }else{
         this.firebaseProvider.guardaInfoAdicionalUsuario(user)
         .then(()=>{
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
         })
+        .catch(err => {
+          loading.dismiss();
+          this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
+        });
       }
     }).catch(err => {
       loading.dismiss();
-      this.avisosProvider.crearAlertaSimple('Error', err);
+      this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
     });
   }
 
@@ -91,7 +103,7 @@ export class RegistroPage {
     this.camera.getPicture(cameraOptions)
      .then((captureDataUrl) => {
        this.imgData = 'data:image/jpeg;base64,' + captureDataUrl;
-    }).catch(err => {
+    }).catch(() => {
       this.avisosProvider.crearAlertaSimple('Error',"No se pudo obtener la foto");
     });
   }

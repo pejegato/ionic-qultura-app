@@ -31,6 +31,11 @@ export class InicioSesionPage {
     private userProvider: UserProvider) {
   }
 
+/*****************************************************************************
+* metodo que llama al logueo de usuario y trae su info adicional si el logueo
+* es correcto
+******************************************************************************/
+
   login() {
 
     let loading = this.avisosProvider.crearLoading("Iniciando sesión...");
