@@ -45,11 +45,10 @@ export class UserProvider {
  * Metodo que obtiene data de la obra escaneada                              *
  *****************************************************************************/
     public getPiecesData(idObra) {
-        return new Promise((resolve, reject) => {
-            var _self = this;
+        return new Promise((resolve, reject) => {            
             this.firebaseProvider.obtieneDatosObra(idObra).subscribe({
                 next(response) {
-                    response ? resolve(response) : reject("No existe registro");    
+                    response ? resolve(response) : reject("Este código QR no corresponde a una obra valida");    
                 }
                 ,error(msg) {
                     reject(msg)

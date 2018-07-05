@@ -67,6 +67,9 @@ export class ScannerProvider {
             .then(() => {          
               resolve(obras)
             })                      
+            .catch(err  => {
+              reject(err)
+            })
           }
         })
         .catch(err => reject(err));
