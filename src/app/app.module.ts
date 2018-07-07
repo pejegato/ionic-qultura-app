@@ -28,7 +28,8 @@ import {Camera} from "@ionic-native/camera";
 import {UserProvider} from "../providers/user/user";
 import {StartPage} from "../pages/start/start";
 import { ModalObraPage } from "../pages/modal-obra/modal-obra";
-
+import { PhotosProvider } from '../providers/photos/photos';
+import 'firebase/storage';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDcB8jqFCAA5L1ieeI7E_K7toTJZXUEJ_4",
@@ -91,7 +92,8 @@ export const firebaseConfig = {
     diccionarioErrores,
     ScannerProvider,
     Camera,
-    UserProvider
+    UserProvider,
+    PhotosProvider
     
   ]
 })

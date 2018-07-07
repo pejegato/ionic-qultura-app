@@ -1,6 +1,6 @@
 import {DashboardPage} from "./../dashboard/dashboard";
 import {Component} from "@angular/core";
-import {IonicPage, NavController, NavParams, AlertController, LoadingController} from "ionic-angular";
+import {IonicPage, NavController} from "ionic-angular";
 import {AuthProvider} from "../../providers/auth/auth";
 import {AvisosProvider} from "../../providers/avisos/avisos";
 import {diccionarioErrores} from "../../providers/constants/errores";
@@ -43,14 +43,10 @@ export class InicioSesionPage {
 
     this.auth.loginUser(this.user.email, this.user.password)
     .then((response) => {
-      this.userProvider.getUserData(response.user)
-      .then(()=> {
-        loading.dismiss();       
-      })
-      .catch(err => {
-        loading.dismiss();
-        this.avisosProvider.crearAlertaSimple("Error", this.errores.traducirError('LOGIN',err.code));
-      });
+      this.userProvider.getUserData(response.user)      
+    })
+    .then(()=> {
+      loading.dismiss();       
     })
     .catch(err => {
       loading.dismiss();

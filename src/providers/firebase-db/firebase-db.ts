@@ -1,7 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {Injectable} from "@angular/core";
 import {AngularFireDatabase} from "angularfire2/database";
-import * as firebase from "firebase/app";
+
 
 
 @Injectable()
@@ -51,24 +51,6 @@ export class FirebaseDbProvider {
    *****************************************************************************/
   updateDatosUsuarioObraComentario(usuario, obra, comentario): Promise<any> {
     return this.afDB.database.ref(`usuarios/${usuario.uid}/puntos/${obra.uid}/${comentario}`).update(obra);
-  }
-
-  /************************************************************************************
-   *Metodo que sube la imagen a la base de datos creando una instancia del storage    *
-   ************************************************************************************/
-  uploadImage(captureDataUrl, filename): firebase.storage.UploadTask {
-    let storageRef = firebase.storage().ref();
-    const imageRef = storageRef.child(`images/${filename}`);
-    return imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL);
-  };
-
-  /****************************************************************************************
-   *Metodo que obtiene la url de visualizacion de la app basado en el nombre de la img    *
-   ****************************************************************************************/
-  downloadImageUrl(imgId: string): Promise<any> {
-    let storageRef = firebase.storage().ref();
-    let imageRef = storageRef.child(`images/${imgId}`);
-    return imageRef.getDownloadURL();
   }
 }
 
