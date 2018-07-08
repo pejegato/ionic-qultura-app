@@ -62,10 +62,11 @@ export class RegistroPage {
       */
       this.user.uid = response.user.uid;
       if (this.imgData){
-
         user.img = Math.floor(Date.now() / 1000);
-
         this.firebaseProvider.uploadImage(this.imgData, user.img)
+        .then(()=>{
+          user.imgUrl = this.firebaseProvider.downloadImageUrl(user.img);
+        })
         .then(()=>{
           this.firebaseProvider.guardaInfoAdicionalUsuario(user);
         })

@@ -59,7 +59,7 @@ export class FirebaseDbProvider {
    *Metodo que sube la imagen a la base de datos creando una instancia del storage    *
    ************************************************************************************/
   uploadImage(captureDataUrl, filename): firebase.storage.UploadTask {
-    let storageRef = firebase.storage().ref("/");
+    let storageRef = this.fb.storage().ref();
     const imageRef = storageRef.child(`images/${filename}`);
     return imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL);
   };
@@ -68,7 +68,7 @@ export class FirebaseDbProvider {
    *Metodo que obtiene la url de visualizacion de la app basado en el nombre de la img    *
    ****************************************************************************************/
   downloadImageUrl(imgId: string): Promise<any> {
-    let storageRef = firebase.storage().ref();
+    let storageRef = this.fb.storage().ref();
     let imageRef = storageRef.child(`images/${imgId}`);
     return imageRef.getDownloadURL();
   }
