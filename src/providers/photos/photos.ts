@@ -31,7 +31,7 @@ export class PhotosProvider {
    *Metodo que obtiene la url de visualizacion de la app basado en el nombre de la img    *
    ****************************************************************************************/
   downloadImageUrl(imgId: string): Promise<any> {
-    let storageRef = this.fb.storage().ref();
+    let storageRef = firebase.storage().ref();
     let imageRef = storageRef.child(`images/${imgId}`);
     return imageRef.getDownloadURL();
   }
