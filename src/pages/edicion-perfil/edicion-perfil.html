@@ -32,7 +32,7 @@
       
       <ion-col col-5>
         
-        <img [src]="user.imgUrl" *ng-if="!imgData"  class="avatar"/>
+        <img [src]="user.imgUrl" *ngIf="!imgData"  class="avatar"/>
         <img [src]="imgData"     *ngIf="imgData" class="avatar"/>
       </ion-col>
       <ion-col col-7>      
