@@ -1,19 +1,16 @@
 import { Component } from '@angular/core';
-import { IonicPage, MenuController, ModalController } from 'ionic-angular';
+import { IonicPage, MenuController, ModalController, NavController, AlertController } from 'ionic-angular';
+import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
+import { Camera, CameraOptions } from '../../../node_modules/@ionic-native/camera';
+import { diccionarioErrores } from '../../providers/constants/errores';
 
 //Dependencias para Scanner
 import { ScannerProvider } from "../../providers/scanner/scanner";
 import { ModalObraPage } from "../modal-obra/modal-obra";
 import { AvisosProvider } from './../../providers/avisos/avisos';
 import { UserProvider } from "./../../providers/user/user";
-
-
-/**
- * Generated class for the EdicionPerfilPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { DashboardPage } from '../dashboard/dashboard';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -22,14 +19,35 @@ import { UserProvider } from "./../../providers/user/user";
 })
 
 export class EdicionPerfilPage {
-  
+  user = {
+    uid:'',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+    username: '',
+    nombre: '',
+    img: '',
+    imgUrl: '',
+    puntaje: '',
+    obrasEscaneadas:[]
+};
+
+private originalMail:string;
+
   constructor(
     private menuController: MenuController,
-    public sc: ScannerProvider,
-    public userProvider: UserProvider,
     public modalCtrl: ModalController,
-    private avisosProvider: AvisosProvider
+    public auth: AuthProvider ,
+    private scannerProvider: ScannerProvider,
+    private firebaseProvider: FirebaseDbProvider,      
+    private avisosProvider: AvisosProvider,
+    public userProvider: UserProvider,
+    private camera : Camera,
+    private errores : diccionarioErrores,
+    private navCtrl: NavController
   ) {
+    this.user = userProvider.datosUsuario;
+    this.originalMail = userProvider.datosUsuario.email
   }
 
 /*****************************************************************************
@@ -45,12 +63,86 @@ export class EdicionPerfilPage {
 ******************************************************************************/
 
   abrirScanner(){            
-    this.sc.scanCode(this.userProvider.datosUsuario)
+    this.scannerProvider.scanCode(this.userProvider.datosUsuario)
     .then(obraResponse =>{       
       const modal = this.modalCtrl.create(ModalObraPage, { obra: obraResponse});
       modal.present();
     }).catch(err =>{      
       this.avisosProvider.crearAlertaSimple('Error', err);
     })
+  }
+  private imgData:string;
+
+  alertCtrl: AlertController;
+
+  signin(){
+    if (this.user.passwordConfirm === this.user.password){
+      this.actualizarUsuario(this.user);
+    }else{
+      this.avisosProvider.crearAlertaSimple('Error!','Passwords no coinciden!');
+    }
+  }
+
+  actualizarUsuario(user){
+
+    let loading = this.avisosProvider.crearLoading("Editando usuario...");
+    loading.present();
+    
+    this.auth.updatePerfilUsuario(user,this.originalMail)
+    .then(response => {
+      //imagen por defecto
+      this.user.img = diccionarioErrores.IMG_DEFECTO;
+      this.user.imgUrl = diccionarioErrores.URL_IMG_DEFECTO;
+
+      if (this.imgData){
+        user.img = Math.floor(Date.now() / 1000);
+        this.firebaseProvider.uploadImage(this.imgData, user.img)        
+        .then(()=>
+          this.firebaseProvider.downloadImageUrl(user.img)        
+        .then(url=>{
+          user.imgUrl = url; 
+          this.firebaseProvider.guardaInfoAdicionalUsuario(user)
+        .then(()=>{
+          loading.dismiss();
+          this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
+          this.navCtrl.setRoot(DashboardPage);
+          })        
+        })
+        .catch(err => {
+          loading.dismiss();
+          this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
+        }));
+      }else{
+        this.firebaseProvider.guardaInfoAdicionalUsuario(user)
+        .then(()=>{
+          loading.dismiss();
+          this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
+        })
+        .catch(err => {
+          loading.dismiss();
+          this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
+        });
+      }
+    }).catch(err => {
+      loading.dismiss();
+      this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
+    });
+  }
+
+  getPicture(sourceType){
+    const cameraOptions: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType:  this.camera.EncodingType.JPEG,
+      mediaType:  this.camera.MediaType.PICTURE,
+      sourceType: sourceType
+    };
+
+    this.camera.getPicture(cameraOptions)
+     .then((captureDataUrl) => {
+       this.imgData = 'data:image/jpeg;base64,' + captureDataUrl;
+    }).catch(() => {
+      this.avisosProvider.crearAlertaSimple('Error',"No se pudo obtener la foto");
+    });
   }
 }

@@ -28,68 +28,49 @@
 <ion-content padding text-center>
 
   <ion-grid style="height: 100%">
-    <ion-row align-items-center style="margin-bottom: 30px;">
+    <ion-row  align-items-center>
+      
       <ion-col col-5>
-        <img src="../../assets/avatars/rey.jpg" class="avatar-registro">
+        
+        <img [src]="user.imgUrl"  class="avatar"/>
       </ion-col>
-      <ion-col col-7>
+      <ion-col col-7>      
         <ion-buttons>
-          <button ion-button block medium icon-end [navPush]="registroPage">
-            Subir foto
-          </button>
-        </ion-buttons>
+            <button ion-button (click)="getPicture(0)">Subir Foto</button>
+        </ion-buttons>      
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col >
-          <ion-item text-center>
-              <p>
-                Cambiar Correo
-              <p>
-            </ion-item>
+      <ion-col>
           <ion-item>
-            <ion-label floating>Correo</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-label floating>Nombre</ion-label>
+            <ion-input type="text" [(ngModel)]="user.nombre" required></ion-input>
           </ion-item>
 
-          <ion-item style="margin-bottom: 40px">
-            <ion-label floating>Ingrese contraseña</ion-label>
-            <ion-input type="text"></ion-input>
-          </ion-item>              
-        
-  
-          <ion-item text-center>
-              <p>
-                Cambiar Contraseña
-              <p>
-            </ion-item>
-        <ion-item>
-          <ion-label floating>Contraseña actual</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-label floating>Apellido</ion-label>
+            <ion-input type="text" [(ngModel)]="user.apellido" required></ion-input>
+          </ion-item>
 
-        <ion-item>
-          <ion-label floating>Nueva contraseña</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-label floating>User</ion-label>
+            <ion-input [(ngModel)]="user.username" required></ion-input>
+          </ion-item>
 
-        <ion-item>
-          <ion-label floating>Confirmar contraseña</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" [(ngModel)]="user.email" required></ion-input>
+          </ion-item>
 
-        <ion-buttons>
-          <button style="margin-top: 40px" small ion-button icon-end>
-            Eliminar cuenta
-            <ion-icon name="trash"></ion-icon>
-          </button>
+          <ion-buttons>
+            <button style="margin-top: 40px" ion-button block large (click)="actualizarUsuario(user)">
+              Actualizar
+            </button>
+          </ion-buttons>
 
-          <button style="margin-top: 40px" ion-button block large [navPush]="dashboardPage">
-            Aplicar
-          </button>
-        </ion-buttons>
       </ion-col>
     </ion-row>
+
   </ion-grid>
 
 </ion-content>

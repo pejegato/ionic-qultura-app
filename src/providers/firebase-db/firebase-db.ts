@@ -15,7 +15,7 @@ export class FirebaseDbProvider {
    * Guarda la info adicional del usuario en la base de datos  *
   **************************************************************/
   guardaInfoAdicionalUsuario(usuario): Promise<any> {
-      return this.afDB.database.ref(`usuarios/${usuario.uid}`).set(usuario);
+      return this.afDB.database.ref(`usuarios/${usuario.uid}`).update(usuario);
   }
   
   /***************************************************************************************
