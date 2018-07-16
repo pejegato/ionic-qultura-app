@@ -1,6 +1,6 @@
 export class diccionarioErrores {
 
-  public static readonly URL_IMG_DEFECTO = "https://firebasestorage.googleapis.com/v0/b/qultura-63b5d.appspot.com/o/images%2FnoneImg.jpg?alt=media&token=611cf7f4-1b02-4886-aa33-bd722503a9e7";
+  public static readonly URL_IMG_DEFECTO = "https://firebasestorage.googleapis.com/v0/b/qulturatesting.appspot.com/o/images%2FnoneImg.jpg?alt=media&token=8639b640-b0ae-4a49-8671-94670c88bf9c";
   public static readonly IMG_DEFECTO = "noneImg"
 
   private ERRORES_LOGIN = new  Map<string, string>([        
