@@ -27,7 +27,7 @@
 
 <ion-content padding text-center>
 
-  <ion-grid style="height: 100%">
+  <ion-grid style="height: 200%">
     <ion-row  align-items-center>
       
       <ion-col col-5>
@@ -65,13 +65,38 @@
 
           <ion-buttons>
             <button style="margin-top: 40px" ion-button block large (click)="actualizarUsuario(user)">
-              Actualizar
+              Actualizar Datos
             </button>
           </ion-buttons>
 
       </ion-col>
     </ion-row>
+    
+    <ion-row>
+      <ion-col>
+          <ion-item>
+            <ion-label floating>Password actual</ion-label>
+            <ion-input type="text" [(ngModel)]="passwordActual" required></ion-input>
+          </ion-item>
 
+          <ion-item>
+            <ion-label floating>Nuevo Password</ion-label>
+            <ion-input type="text" [(ngModel)]="nuevoPassword" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Confirma nuevo Password</ion-label>
+            <ion-input [(ngModel)]="nuevoPasswordConfirm" required></ion-input>
+          </ion-item>
+
+          <ion-buttons>
+            <button style="margin-top: 40px" ion-button block large (click)="actualizarPassword(nuevoPassword, nuevoPasswordConfirm)">
+              Actualizar Password
+            </button>
+          </ion-buttons>
+      </ion-col>
+    </ion-row>
+  
   </ion-grid>
 
 </ion-content>

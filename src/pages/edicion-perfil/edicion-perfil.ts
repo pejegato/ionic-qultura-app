@@ -32,6 +32,9 @@ export class EdicionPerfilPage {
     obrasEscaneadas:[]
 };
 
+  password:any;
+  nuevoPassword:any;
+
 private originalMail:string;
 
   constructor(
@@ -127,6 +130,35 @@ private originalMail:string;
       loading.dismiss();
       this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
     });
+  }
+
+  actualizarPassword(nuevoPassword, nuevoPasswordConfirm){
+
+    let loading = this.avisosProvider.crearLoading("Actualizando Password...");
+    loading.present();
+    if (nuevoPassword === nuevoPasswordConfirm){
+      this.auth.updatePasswordUsuario(this.user, nuevoPassword)
+      .then(response => {
+        //manejar esta actualizacion
+        this.user.password = nuevoPassword;
+        this.user.passwordConfirm = nuevoPasswordConfirm;
+        this.firebaseProvider.guardaInfoAdicionalUsuario(this.user)
+      })        
+      .then(()=>{
+        loading.dismiss();
+        this.avisosProvider.crearAlertaSimple('Exito', "Password actualizado con Exito");
+        this.navCtrl.setRoot(DashboardPage);
+      })
+      .catch(err => {
+            loading.dismiss();
+            this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
+      });
+    }else{
+      loading.dismiss();
+      this.avisosProvider.crearAlertaSimple('Error!','Passwords no coinciden!');
+    }
+    
+    
   }
 
   getPicture(sourceType){

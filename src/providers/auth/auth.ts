@@ -20,6 +20,7 @@ export class AuthProvider {
    *****************************************************************************/
   updatePerfilUsuario(user:any, mail:string):Promise<any>{
     return new Promise<any>((resolve, reject) => {
+      //El login debe hacerse ingresando los datos 
       this.loginUser(mail, user.password).then(()=>{
         firebase.auth().currentUser.updateProfile({
           displayName: user.username,
@@ -31,8 +32,26 @@ export class AuthProvider {
         .then(()=> {
           resolve();
         })
-      })      
-      
+      })
+      .catch((err)=>{
+        reject (err);  
+      })
+    })
+  }
+
+  /******************************************************************************
+   * actualiza password de usuario en firebase                                              *
+   *****************************************************************************/
+  updatePasswordUsuario(user, nuevoPassword:string):Promise<any>{
+    return new Promise<any>((resolve, reject) => {
+      console.log(user);
+      console.log(nuevoPassword);
+      this.loginUser(user.email, user.password).then(()=>{
+        firebase.auth().currentUser.updatePassword(nuevoPassword)        
+        .then(()=> {
+          resolve();
+        })
+      })
       .catch((err)=>{
         reject (err);  
       })

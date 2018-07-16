@@ -23,12 +23,12 @@
       <ion-col row-2 col-12>
           <ion-item no-lines >            
             <ion-label color="primary" stacked>¿Donde estás?</ion-label>
-            <ion-textarea type="text" class="comentarios"></ion-textarea>            
+            <ion-textarea type="text" class="comentarios" [(ngModel)]="comentario.cuerpo"></ion-textarea>            
 
           </ion-item>        
           <ion-item no-lines>
             <ion-buttons>
-              <button ion-button block>Enviar</button>
+              <button (click)="enviarComentario()" ion-button block>Enviar</button>
             </ion-buttons>
           </ion-item>
           

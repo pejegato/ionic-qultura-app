@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app'; // for typings
 import { FirebaseApp } from 'angularfire2'; // for methods

@@ -35,23 +35,21 @@ export class ScannerProvider {
 
       //Pregunta si es telefono o pc
       if (!this.platform.is('cordova')) {        
-        
-        this.userProvider.getPiecesData(3)
+
+        this.userProvider.getPiecesData(2)
         .then(responseObra => {
           obras = responseObra;
-          this.firebaseProvider.updateDatosUsuarioObra(usuario, obras)
-        })          
+          this.firebaseProvider.updateDatosUsuarioObra(usuario, obras, 'scan')
+        })
         .then (() => {
           this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras)        
-        })          
-        .then(() => {          
+        })
+        .then(() => {
           resolve(obras)
-        })          
+        })
         .catch(err  => {
             reject(err)
         })
-          
-        
       } else {
         //abre scanner
         this.barcodeScanner.scan()
@@ -59,19 +57,19 @@ export class ScannerProvider {
 
           if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
             
-            this.userProvider.getPiecesData(barcodeData.text)            
+            this.userProvider.getPiecesData(barcodeData.text)
             .then(responseObra => {
               obras = responseObra;
-              this.firebaseProvider.updateDatosUsuarioObra(usuario, obras)
-            })          
+              this.firebaseProvider.updateDatosUsuarioObra(usuario, obras, 'scan');
+            })
             .then (() => {
-              this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras)        
-            })          
-            .then(() => {          
-              resolve(obras)
-            })                      
+              this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras);
+            })
+            .then(() => {
+              resolve(obras);
+            })
             .catch(err  => {
-              reject(err)
+              reject(err);
             })
           }
         })

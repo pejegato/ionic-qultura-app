@@ -35,9 +35,15 @@ export class FirebaseDbProvider {
   /*****************************************************************************
    *Agrega los datos de la Obra escaneada al usuario en la base de datos       *
    *****************************************************************************/
-  updateDatosUsuarioObra(usuario, obra): Promise<any> {
-    obra.fechaScan = new Date();    
-    return this.afDB.database.ref(`usuarios/${usuario.uid}/obras/${obra.uid}`).update(obra);
+  updateDatosUsuarioObra(usuario, contenido, tipoObjeto): Promise<any> {
+    
+    let objeto = {
+      fechaIngreso : new Date(),
+      tipoObjeto : tipoObjeto,
+      contenido: contenido
+    };
+    
+    return this.afDB.database.ref(`usuarios/${usuario.uid}/data/${contenido.uid}`).update(objeto);
   }
 
   /*****************************************************************************
@@ -47,13 +53,7 @@ export class FirebaseDbProvider {
     let puntaje = usuario.puntaje + obra.puntaje;
     return this.afDB.database.ref(`usuarios/${usuario.uid}`).update({"puntaje":puntaje});
   }
-
-  /*****************************************************************************
-   *Actualiza el comentario de la obra en base a lo escrito en el modal        *
-   *****************************************************************************/
-  updateDatosUsuarioObraComentario(usuario, obra, comentario): Promise<any> {
-    return this.afDB.database.ref(`usuarios/${usuario.uid}/puntos/${obra.uid}/${comentario}`).update(obra);
-  }
+  
 
   /************************************************************************************
    *Metodo que sube la imagen a la base de datos creando una instancia del storage    *

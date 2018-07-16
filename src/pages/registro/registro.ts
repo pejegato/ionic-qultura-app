@@ -33,7 +33,7 @@ export class RegistroPage {
         nombre: '',
         img: '',
         imgUrl: '',
-        puntaje: '',
+        puntaje: '0',
         obrasEscaneadas:[]
   };
 

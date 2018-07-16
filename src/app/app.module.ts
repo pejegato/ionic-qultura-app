@@ -33,11 +33,11 @@ import 'firebase/storage';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDcB8jqFCAA5L1ieeI7E_K7toTJZXUEJ_4",
-  authDomain: "qultura-63b5d.firebaseapp.com",
-  databaseURL: "https://qultura-63b5d.firebaseio.com",
-  projectId: "qultura-63b5d",
-  storageBucket: "qultura-63b5d.appspot.com",
-  messagingSenderId: "996842443204"  
+    authDomain: "qultura-63b5d.firebaseapp.com",
+    databaseURL: "https://qultura-63b5d.firebaseio.com",
+    projectId: "qultura-63b5d",
+    storageBucket: "qultura-63b5d.appspot.com",
+    messagingSenderId: "996842443204"
 };
 
 @NgModule({

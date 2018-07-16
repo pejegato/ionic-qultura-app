@@ -30,7 +30,7 @@ export class UserProvider {
                 next(response){
                     if (response){
                         _self.datosUsuario = response; 
-                        _self.datosUsuario.obras = _self.snapshotToArray(response.obras);
+                        _self.datosUsuario.data = _self.snapshotToArray(response.data);
                         resolve();
                     }else{
                         reject("No existe registro");
@@ -61,19 +61,21 @@ export class UserProvider {
 /*****************************************************************************
  * Metodo utilitario que convierte un listado de objetos en un array         *
  *****************************************************************************/
+
     private snapshotToArray(snapshot) {
         var returnArr = [];
-        if (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
-                var item = childSnapshot;
-                item.key = childSnapshot.uid;
-            
-                returnArr.push(item);
+        if(typeof snapshot !== 'undefined'){
+            Object.keys(snapshot).forEach(function(key) {
+                returnArr.push(snapshot[key]);
             });
-        }
-        return returnArr;
+            return  returnArr.sort(function(a, b) {
+                var dateA = new Date(a.fechaIngreso), dateB = new Date(b.fechaIngreso);
+                return +dateB - +dateA ;
+            });
+        }else{
+            return returnArr;
+        };
+        
     };
-
-    
 
 }

@@ -8,6 +8,7 @@ import { ScannerProvider } from "../../providers/scanner/scanner";
 import { ModalObraPage } from "../modal-obra/modal-obra";
 import { AvisosProvider } from './../../providers/avisos/avisos';
 import { UserProvider } from "./../../providers/user/user";
+import { FirebaseDbProvider } from "../../providers/firebase-db/firebase-db";
 /**
  * Generated class for the DashboardPage page.
  *
@@ -24,16 +25,22 @@ import { UserProvider } from "./../../providers/user/user";
 export class DashboardPage {
 
   listaContactos:Dashcard[] = [];
-
+  public comentario:any
 
   constructor(
     private menuController: MenuController,
     public sc: ScannerProvider,
     public userProvider: UserProvider,
     public modalCtrl: ModalController,
-    private avisosProvider: AvisosProvider
+    private avisosProvider: AvisosProvider,
+    private firebaseProvider: FirebaseDbProvider
   ) {
     this.listaContactos = DASHCARDS.slice(0);
+    this.comentario = {      
+      autor:"",
+      cuerpo:"",      
+      uid:"",
+    };
   }
 
 /*****************************************************************************
@@ -57,5 +64,22 @@ export class DashboardPage {
       this.avisosProvider.crearAlertaSimple('Error', err);
     })
   }
+
+  /*****************************************************************************
+* metodo  que abre el scanner y detecta eñ codigo QR, 
+* si todo sale bien despliega un modal con los datos de la obra escaneada
+******************************************************************************/
+  
+enviarComentario(){
+  this.comentario.uid = Math.floor(Date.now() / 1000);
+  this.comentario.autor = this.userProvider.datosUsuario.username;
+  this.firebaseProvider.updateDatosUsuarioObra(this.userProvider.datosUsuario, this.comentario, 'comentario')
+  .then(() =>{
+    this.avisosProvider.crearAlertaSimple('Exito!', "Comentario creado con exito");
+    this.comentario.cuerpo = "";
+  }).catch(err =>{
+        this.avisosProvider.crearAlertaSimple('Error', err);
+  })
+}
 
 }
