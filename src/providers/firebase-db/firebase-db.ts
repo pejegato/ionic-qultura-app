@@ -50,7 +50,7 @@ export class FirebaseDbProvider {
    *Actualiza el puntaje del usuario en base a los datos de la Obra escaneada  *
    *****************************************************************************/  
   updateDatosUsuarioPuntaje(usuario, obra): Promise<any> {
-    let puntaje = usuario.puntaje + obra.puntaje;
+    let puntaje = +usuario.puntaje + +obra.puntaje;
     return this.afDB.database.ref(`usuarios/${usuario.uid}`).update({"puntaje":puntaje});
   }
   
