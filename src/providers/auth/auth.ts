@@ -46,15 +46,20 @@ export class AuthProvider {
     return new Promise<any>((resolve, reject) => {
       console.log(user);
       console.log(nuevoPassword);
-      this.loginUser(user.email, user.password).then(()=>{
+      this.loginUser(user.email, user.password)
+      .then(()=>{
         firebase.auth().currentUser.updatePassword(nuevoPassword)        
         .then(()=> {
           resolve();
+        })
+        .catch((err)=>{
+          reject (err);  
         })
       })
       .catch((err)=>{
         reject (err);  
       })
+      
     })
   }
     
