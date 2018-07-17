@@ -174,8 +174,6 @@ private originalMail:string;
     this.camera.getPicture(cameraOptions)
      .then((captureDataUrl) => {
        this.imgData = 'data:image/jpeg;base64,' + captureDataUrl;
-    }).catch(() => {
-      this.avisosProvider.crearAlertaSimple('Error',"No se pudo obtener la foto");
-    });
+    })
   }
 }
