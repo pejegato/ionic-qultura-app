@@ -35,14 +35,17 @@ export class ScannerProvider {
 
       //Pregunta si es telefono o pc
       if (!this.platform.is('cordova')) {        
-
+        
         this.userProvider.getPiecesData(2)
         .then(responseObra => {
           obras = responseObra;
           this.firebaseProvider.updateDatosUsuarioObra(usuario, obras, 'scan')
         })
         .then (() => {
-          this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras)        
+          if(!this.comprobarObra("2", usuario.data)){
+            this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras);        
+          }
+          
         })
         .then(() => {
           resolve(obras)
@@ -63,7 +66,9 @@ export class ScannerProvider {
               this.firebaseProvider.updateDatosUsuarioObra(usuario, obras, 'scan');
             })
             .then (() => {
-              this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras);
+              if(!this.comprobarObra(barcodeData.text, usuario.data)){
+                this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras);        
+              }
             })
             .then(() => {
               resolve(obras);
@@ -77,4 +82,21 @@ export class ScannerProvider {
       }
     })
   }
+
+  comprobarObra(idObra, arrayObras) {
+    let existe:boolean = false;
+    
+    var result = arrayObras.find(obj => {
+      return obj.contenido.uid == idObra
+    })
+
+    existe = true ? typeof result !== 'undefined' : false;
+    return existe; 
+  }
+
+
 }
+
+
+
+
