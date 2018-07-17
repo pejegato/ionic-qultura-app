@@ -11,6 +11,7 @@ import { AvisosProvider } from './../../providers/avisos/avisos';
 import { UserProvider } from "./../../providers/user/user";
 import { DashboardPage } from '../dashboard/dashboard';
 import { AuthProvider } from '../../providers/auth/auth';
+import { PerfilPage } from '../perfil/perfil';
 
 @IonicPage()
 @Component({
@@ -147,7 +148,7 @@ private originalMail:string;
       .then(()=>{
         loading.dismiss();
         this.avisosProvider.crearAlertaSimple('Exito', "Password actualizado con Exito");
-        this.navCtrl.setRoot(DashboardPage);
+        this.navCtrl.setRoot(PerfilPage);
       })
       .catch(err => {
             loading.dismiss();

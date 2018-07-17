@@ -63,11 +63,10 @@
           <div *ngFor="let data of userProvider.datosUsuario.data; let i = index"> 
             <ion-card *ngIf="data.tipoObjeto == 'scan'">
               
-                <ion-item>
+                <ion-item>                  
                   <p>Has visto
                     <b>'{{data.contenido.nombre}}'</b>
                   </p>
-
                 </ion-item>
 
                 <img src="{{data.contenido.imgUrl}}">
@@ -80,7 +79,7 @@
                   <ion-col>
                     <button ion-button icon-left clear small>
                       <ion-icon name="thumbs-up"></ion-icon>
-                      <div>12 Likes</div>
+                      <div>0 Likes</div>
                     </button>
                   </ion-col>
                   <ion-col>
