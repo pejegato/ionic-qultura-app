@@ -109,7 +109,7 @@ private originalMail:string;
         .then(()=>{
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
-          this.navCtrl.setRoot(DashboardPage);
+          this.navCtrl.setRoot(PerfilPage);
           })        
         })
         .catch(err => {
