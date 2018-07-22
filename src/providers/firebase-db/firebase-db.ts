@@ -58,10 +58,12 @@ export class FirebaseDbProvider {
   updateDatosUsuarioObra(usuario, contenido, tipoObjeto): Promise<any> {
     
     let objeto = {
+      uid:usuario.uid,
       username: usuario.username,
       fechaIngreso : new Date(),
       tipoObjeto : tipoObjeto,
-      contenido: contenido
+      contenido: contenido,
+      imgUrl: usuario.imgUrl
     };
     
     return this.afDB.database.ref(`usuarios/${usuario.uid}/data/${contenido.uid}`).update(objeto);

@@ -94,7 +94,7 @@
               </ion-card>
           
 
-              <ion-card *ngIf="data.tipoObjeto == 'comentario'">
+              <ion-card *ngIf="data.tipoObjeto == 'comentario' && data.contenido.autor == userProvider.datosUsuario.username">
 
                   <ion-item>
                     

@@ -6,6 +6,7 @@ import {AvisosProvider} from "../../providers/avisos/avisos";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import { diccionarioErrores } from "../../providers/constants/errores";
 import { DashboardPage } from "../dashboard/dashboard";
+import { UserProvider } from "../../providers/user/user";
 
 
 @IonicPage()
@@ -21,7 +22,9 @@ export class RegistroPage {
       private avisosProvider: AvisosProvider,
       private camera : Camera,
       private errores : diccionarioErrores,
-      private navCtrl: NavController){
+      private navCtrl: NavController,
+      public userProvided: UserProvider
+    ){
   }
 
     user = {
@@ -113,5 +116,15 @@ export class RegistroPage {
     }).catch(() => {
       this.avisosProvider.crearAlertaSimple('Error',"No se pudo obtener la foto");
     });
+  }
+
+  
+  omit_special_char(event, email){
+    var k;  
+    k = event.charCode;
+    var x = 64
+    if(email)
+    x=63
+    return ((k > x && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57 || k == 45 || k == 46 || k == 95));
   }
 }

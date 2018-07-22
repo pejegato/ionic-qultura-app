@@ -87,5 +87,12 @@ export class ModalBuscarUsuarioPage {
     this.viewCtrl.dismiss();
   }
 
-  
+  omit_special_char(event, email){
+    var k;  
+    k = event.charCode;
+    var x = 64
+    if(email)
+    x=63
+    return ((k > x && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57 || k == 45 || k == 46 || k == 95));
+  }
 }

@@ -31,7 +31,7 @@
 
           <ion-item>
             <ion-label floating>Email</ion-label>
-            <ion-input type="text" [(ngModel)]="user.email" required></ion-input>
+            <ion-input type="text" [(ngModel)]="user.email" required (keypress)="omit_special_char($event, true)"></ion-input>
           </ion-item>
         
           <ion-item>

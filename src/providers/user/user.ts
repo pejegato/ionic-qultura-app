@@ -29,17 +29,40 @@ export class UserProvider {
             this.firebaseProvider.obtieneDatosUsuario(user.uid).subscribe({
                 next(response){
                     if (response){
+                                                
                         _self.datosUsuario = response; 
                         _self.datosUsuario.data = _self.snapshotToArray(response.data);
-                        _self.datosUsuario.contactos = _self.snapshotToArray(response.contactos);
-                        _self.datosUsuario.contactos.forEach(element => {
-                            console.log(element)
-                            _self.firebaseProvider.obtieneMensajesContacto(element.data.uid).subscribe({
-                                next(response){
-                                   let _fechaIngresoContacto = element.data.fechaIngreso;
-                                   let result = _self.snapshotToArray(response).filter(elemento => elemento.fechaIngreso >= _fechaIngresoContacto);
-                                    _self.datosUsuario.data = _self.datosUsuario.data.concat(result);
-                                    console.log(response);        
+                        _self.datosUsuario.contactos = _self.snapshotToArray(response.contactos);                        
+                        _self.datosUsuario.data = _self.snapshotToArray(response.data);
+                        _self.datosUsuario.dataContacto = [];
+                        _self.datosUsuario.dataTotal = [];
+
+                        
+                        _self.datosUsuario.contactos.forEach(contacto => {
+
+                            _self.firebaseProvider.obtieneMensajesContacto(contacto.data.uid).subscribe({
+                                next(mensajesContacto){
+
+                                    let _fechaIngresoContacto = contacto.fechaIngreso;
+                                   if(mensajesContacto){
+                                        var aux = []
+                                        
+                                        _self.snapshotToArray(mensajesContacto).forEach(mensaje => {
+                                            let existe = true;
+                                            for (var i=0; i <= _self.datosUsuario.data.length - 1;  i++) {
+                                                if (_self.datosUsuario.data[i].contenido.uid != mensaje.contenido.uid) {
+                                                    existe = false
+                                                }else{
+                                                    existe = true
+                                                    break;
+                                                }
+                                            }
+                                            if(!existe){
+                                                _self.datosUsuario.data.push(mensaje);
+                                            }
+                                        _self.datosUsuario.data = _self.snapshotToArray(_self.datosUsuario.data);
+                                        });
+                                   }
                                 }
                             })
                         });
@@ -52,6 +75,8 @@ export class UserProvider {
             });            
         });
     }
+
+    
 
 /*****************************************************************************
  * Metodo que obtiene data de la obra escaneada                              *
@@ -90,19 +115,7 @@ export class UserProvider {
         };
         
     };
-/*
-    public getContactos(username) {
-        return new Promise((resolve, reject) => {            
-            this.firebaseProvider.buscarContactos(username).subscribe({
-                next(response) {
-                    response ? resolve(response) : reject("Este código QR no corresponde a una obra valida");    
-                }
-                ,error(msg) {
-                    reject(msg)
-                }
-            });
-        })
 
-    }
-*/
+    
+    
 }

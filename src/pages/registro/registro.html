@@ -31,22 +31,22 @@
       <ion-col>
           <ion-item>
             <ion-label floating>Nombre</ion-label>
-            <ion-input type="text" [(ngModel)]="user.nombre" required></ion-input>
+            <ion-input type="text" [(ngModel)]="user.nombre" required (keypress)="omit_special_char($event, false)"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label floating>Apellido</ion-label>
-            <ion-input type="text" [(ngModel)]="user.apellido" required></ion-input>
+            <ion-input type="text" [(ngModel)]="user.apellido" required (keypress)="omit_special_char($event, false)"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label floating>User</ion-label>
-            <ion-input [(ngModel)]="user.username" required></ion-input>
+            <ion-input [(ngModel)]="user.username" required (keypress)="omit_special_char($event, false)"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label floating>Email</ion-label>
-            <ion-input type="text" [(ngModel)]="user.email" required></ion-input>
+            <ion-input type="email" [(ngModel)]="user.email" required (keypress)="omit_special_char($event, true)"></ion-input>
           </ion-item>
 
           <ion-item>

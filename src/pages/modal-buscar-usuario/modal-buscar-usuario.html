@@ -21,7 +21,7 @@
 <ion-content padding>
   <ion-item>
       <ion-label floating>Username o Correo</ion-label>
-      <ion-input type="text" [(ngModel)]="usuarioBuscado" required></ion-input>
+      <ion-input type="text" [(ngModel)]="usuarioBuscado" required (keypress)="omit_special_char($event, false)"></ion-input>
   </ion-item>
   <ion-buttons>
       <button block ion-button icon-only (click)="buscarUsuario()">
