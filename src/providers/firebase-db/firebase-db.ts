@@ -1,6 +1,6 @@
 import {Observable} from "rxjs/Rx";
 import {Injectable} from "@angular/core";
-import {AngularFireDatabase} from "angularfire2/database";
+import {AngularFireDatabase, AngularFireList} from "angularfire2/database";
 import * as firebase from 'firebase/app'; // for typings
 import { FirebaseApp } from 'angularfire2'; // for methods
 
@@ -17,6 +17,26 @@ export class FirebaseDbProvider {
   guardaInfoAdicionalUsuario(usuario): Promise<any> {
       return this.afDB.database.ref(`usuarios/${usuario.uid}`).update(usuario);
   }
+
+
+  /*************************************************************
+   * Agrega contacto del usuario en la base de datos  *
+  **************************************************************/
+ guardaContactoUsuario(usuario, contacto): Promise<any> {
+  let dataContacto = {
+    fechaIngreso : new Date(),        
+    data: {
+      uid:contacto.uid,
+      nombre:contacto.nombre,
+      apellido:contacto.apellido,
+      username:contacto.username,
+      email:contacto.email,
+      imgUrl:contacto.imgUrl
+    },
+
+  };  
+  return this.afDB.database.ref(`usuarios/${usuario.uid}/contactos/${contacto.uid}`).update(dataContacto);
+}
   
   /***************************************************************************************
    *Obtiene los datos adicionales (username, mail, foto de perfil del usuario logueado)  *                          *
@@ -38,6 +58,7 @@ export class FirebaseDbProvider {
   updateDatosUsuarioObra(usuario, contenido, tipoObjeto): Promise<any> {
     
     let objeto = {
+      username: usuario.username,
       fechaIngreso : new Date(),
       tipoObjeto : tipoObjeto,
       contenido: contenido
@@ -71,6 +92,19 @@ export class FirebaseDbProvider {
     let storageRef = this.fb.storage().ref();
     let imageRef = storageRef.child(`images/${imgId}`);
     return imageRef.getDownloadURL();
+  }
+
+  /***************************************************************************************
+   *Obtiene los datos adicionales (username, mail, foto de perfil del usuario logueado)  *                          *
+   ***************************************************************************************/
+  buscarContactos(username){
+    return firebase.database().ref('/usuarios/').ref.orderByChild('nombre')
+    .equalTo(username)
+    .once('value')
+  }
+
+  obtieneMensajesContacto(contactoUid): Observable<any> {
+    return this.afDB.object(`usuarios/${contactoUid}/data`).valueChanges();
   }
 }
 

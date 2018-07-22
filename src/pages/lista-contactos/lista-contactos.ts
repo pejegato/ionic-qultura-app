@@ -8,6 +8,7 @@ import { ScannerProvider } from "../../providers/scanner/scanner";
 import { ModalObraPage } from "../modal-obra/modal-obra";
 import { AvisosProvider } from './../../providers/avisos/avisos';
 import { UserProvider } from "./../../providers/user/user";
+import { ModalBuscarUsuarioPage } from '../modal-buscar-usuario/modal-buscar-usuario';
 
 
 /**
@@ -31,7 +32,8 @@ export class ListaContactosPage {
     public sc: ScannerProvider,
     public userProvider: UserProvider,
     public modalCtrl: ModalController,
-    private avisosProvider: AvisosProvider) {
+    private avisosProvider: AvisosProvider,
+  ) {
       this.listaContactos = CONTACTOS.slice(0);
     }
 
@@ -57,6 +59,11 @@ export class ListaContactosPage {
     }).catch(err =>{      
       this.avisosProvider.crearAlertaSimple('Error', err);
     })
+  }
+
+  abrirBusqueda(){            
+    const modal = this.modalCtrl.create(ModalBuscarUsuarioPage);
+      modal.present();  
   }
 
 }

@@ -31,6 +31,18 @@ export class UserProvider {
                     if (response){
                         _self.datosUsuario = response; 
                         _self.datosUsuario.data = _self.snapshotToArray(response.data);
+                        _self.datosUsuario.contactos = _self.snapshotToArray(response.contactos);
+                        _self.datosUsuario.contactos.forEach(element => {
+                            console.log(element)
+                            _self.firebaseProvider.obtieneMensajesContacto(element.data.uid).subscribe({
+                                next(response){
+                                   let _fechaIngresoContacto = element.data.fechaIngreso;
+                                   let result = _self.snapshotToArray(response).filter(elemento => elemento.fechaIngreso >= _fechaIngresoContacto);
+                                    _self.datosUsuario.data = _self.datosUsuario.data.concat(result);
+                                    console.log(response);        
+                                }
+                            })
+                        });
                         resolve();
                     }else{
                         reject("No existe registro");
@@ -63,6 +75,7 @@ export class UserProvider {
  *****************************************************************************/
 
     private snapshotToArray(snapshot) {
+        
         var returnArr = [];
         if(typeof snapshot !== 'undefined'){
             Object.keys(snapshot).forEach(function(key) {
@@ -77,5 +90,19 @@ export class UserProvider {
         };
         
     };
+/*
+    public getContactos(username) {
+        return new Promise((resolve, reject) => {            
+            this.firebaseProvider.buscarContactos(username).subscribe({
+                next(response) {
+                    response ? resolve(response) : reject("Este código QR no corresponde a una obra valida");    
+                }
+                ,error(msg) {
+                    reject(msg)
+                }
+            });
+        })
 
+    }
+*/
 }

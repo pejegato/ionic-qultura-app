@@ -1,0 +1,50 @@
+<!--
+  Generated template for the ModalBuscarUsuarioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Agregar contactos</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)='dismiss()'>
+        <ion-icon name="md-close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+      <ion-label floating>Username o Correo</ion-label>
+      <ion-input type="text" [(ngModel)]="usuarioBuscado" required></ion-input>
+  </ion-item>
+  <ion-buttons>
+      <button block ion-button icon-only (click)="buscarUsuario()">
+          <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+ 
+
+  <ion-list>
+    
+    <ion-item text-center *ngIf="people && people.length > 0">
+        <p>Resultado de la busqueda de "{{usuarioBuscado}}"<p>
+    </ion-item> 
+
+    <ion-item *ngFor="let contacto of people; let i = index">
+      <button no-lines ion-item detail-none (click)="agregarContacto(contacto)">
+        <ion-avatar item-left>
+          <img [src]=contacto.imgUrl>
+        </ion-avatar>
+        <h2>{{contacto.username}}</h2>
+      </button>
+  </ion-item>
+
+</ion-list>
+  
+</ion-content>

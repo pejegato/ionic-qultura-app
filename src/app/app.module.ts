@@ -30,6 +30,7 @@ import {StartPage} from "../pages/start/start";
 import { ModalObraPage } from "../pages/modal-obra/modal-obra";
 import { PhotosProvider } from '../providers/photos/photos';
 import 'firebase/storage';
+import { ModalBuscarUsuarioPage } from "../pages/modal-buscar-usuario/modal-buscar-usuario";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBP9JDYl1X_0EaKIDBUimQnsUavudVPMzw",
@@ -52,7 +53,8 @@ export const firebaseConfig = {
     ListaContactosPage,
     PerfilContactoPage,
     StartPage,
-    ModalObraPage
+    ModalObraPage,
+    ModalBuscarUsuarioPage
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ export const firebaseConfig = {
     ListaContactosPage,
     PerfilContactoPage,
     StartPage,
-    ModalObraPage
+    ModalObraPage,
+    ModalBuscarUsuarioPage
   ],
   providers: [
     StatusBar,
