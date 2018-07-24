@@ -71,15 +71,20 @@ export class DashboardPage {
 ******************************************************************************/
   
 enviarComentario(){
-  this.comentario.uid = Math.floor(Date.now() / 1000);
-  this.comentario.autor = this.userProvider.datosUsuario.username;
-  this.firebaseProvider.updateDatosUsuarioObra(this.userProvider.datosUsuario, this.comentario, 'comentario')
-  .then(() =>{
-    this.avisosProvider.crearAlertaSimple('Exito!', "Comentario creado con exito");
+  if(!this.comentario.cuerpo){
+  this.avisosProvider.crearAlertaSimple('Error!', "Debe ingresar un texto");
     this.comentario.cuerpo = "";
-  }).catch(err =>{
-        this.avisosProvider.crearAlertaSimple('Error', err);
-  })
+   }else{  
+    this.comentario.uid = Math.floor(Date.now() / 1000);
+    this.comentario.autor = this.userProvider.datosUsuario.username;
+    this.firebaseProvider.updateDatosUsuarioObra(this.userProvider.datosUsuario, this.comentario, 'comentario')
+    .then(() =>{
+      this.avisosProvider.crearAlertaSimple('Exito!', "Comentario creado con exito");
+      this.comentario.cuerpo = "";
+    }).catch(err =>{
+          this.avisosProvider.crearAlertaSimple('Error', err);
+    })
+  }
 }
 
 }
