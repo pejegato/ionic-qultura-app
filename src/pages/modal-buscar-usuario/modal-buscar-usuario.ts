@@ -38,12 +38,19 @@ export class ModalBuscarUsuarioPage {
     if(typeof this.usuarioBuscado !='undefined' && this.usuarioBuscado){
       this.firebaseProvider.buscarContactos(this.usuarioBuscado).then(function(snapshot) {
         if(snapshot.val()){
-          _self.people = _self.snapshotToArray(snapshot.val());
+          _self.people = _self.snapshotToArray(snapshot.val());          
+        }else{
+          _self.avisosProvider.crearAlertaSimple('Error', "No se han encontrado resultados");    
+          _self.people = []
+          
         }
+        
       });
     }else{
       this.avisosProvider.crearAlertaSimple('Error', "Ingresa nombre usuario a buscar");
+      
     }
+    
     
   }
 
@@ -54,11 +61,11 @@ export class ModalBuscarUsuarioPage {
         .then(()=>{
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Exito', "Contacto agregado con Exito");
-          this.people= [];
+          
         }).catch(()=>{
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Error', "Se ha producido un error ");
-          this.people= [];
+          
           this.usuarioBuscado = "";
         })
     

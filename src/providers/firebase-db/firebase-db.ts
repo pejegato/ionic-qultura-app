@@ -15,6 +15,7 @@ export class FirebaseDbProvider {
    * Guarda la info adicional del usuario en la base de datos  *
   **************************************************************/
   guardaInfoAdicionalUsuario(usuario): Promise<any> {
+      usuario.usernameLowerCase = usuario.username.toLowerCase();
       return this.afDB.database.ref(`usuarios/${usuario.uid}`).update(usuario);
   }
 
@@ -100,8 +101,11 @@ export class FirebaseDbProvider {
    *Obtiene los datos adicionales (username, mail, foto de perfil del usuario logueado)  *                          *
    ***************************************************************************************/
   buscarContactos(username){
-    return firebase.database().ref('/usuarios/').ref.orderByChild('nombre')
-    .equalTo(username)
+    return firebase.database().ref('/usuarios/').ref
+    .orderByChild('usernameLowerCase')
+    .startAt(username.trim().toLowerCase())
+    .endAt(username.trim().toLowerCase()+'~')
+    
     .once('value')
   }
 

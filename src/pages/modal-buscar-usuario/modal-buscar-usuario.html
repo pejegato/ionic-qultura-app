@@ -20,7 +20,7 @@
 
 <ion-content padding>
   <ion-item>
-      <ion-label floating>Username o Correo</ion-label>
+      <ion-label floating>Username</ion-label>
       <ion-input type="text" [(ngModel)]="usuarioBuscado" required (keypress)="omit_special_char($event, false)"></ion-input>
   </ion-item>
   <ion-buttons>
@@ -33,7 +33,7 @@
   <ion-list>
     
     <ion-item text-center *ngIf="people && people.length > 0">
-        <p>Resultado de la busqueda de "{{usuarioBuscado}}"<p>
+        <p>Resultado de la busqueda:<p>
     </ion-item> 
 
     <ion-item *ngFor="let contacto of people; let i = index">
