@@ -15,8 +15,7 @@
 <ion-content padding text-center>
 
   <ion-grid style="height: 100%">
-    <ion-row  align-items-center>
-      
+    <ion-row  align-items-center>      
       <ion-col col-5>
         <img src="../../assets/avatars/none.jpeg" *ngIf="!imgData" class="avatar-registro">
         <img [src]="imgData" *ngIf="imgData" class="avatar-registro"/>
@@ -29,6 +28,74 @@
     </ion-row>
     <ion-row>
       <ion-col>
+          <form [formGroup]="myForm" (ngSubmit)="saveData()">
+            <ion-list> 
+
+              <ion-item>
+                <ion-label floating>Name:</ion-label>
+                <ion-input formControlName="nombre" type="text"></ion-input>
+              </ion-item>
+              
+              <ion-item *ngIf="myForm.get('nombre').errors && myForm.get('nombre').dirty">
+                <p color="danger" ion-text *ngIf="myForm.get('nombre').hasError('required')">Field is required</p>
+              </ion-item>
+
+              <ion-item>
+                <ion-label floating>Apellido:</ion-label>
+                <ion-input formControlName="apellido" type="text"></ion-input>
+              </ion-item>
+
+              <ion-item *ngIf="myForm.get('apellido').errors && myForm.get('apellido').dirty">
+                <p color="danger" ion-text *ngIf="myForm.get('apellido').hasError('required')">Field is required</p>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label floating>Username:</ion-label>
+                  <ion-input formControlName="username" type="text"></ion-input>
+                </ion-item>
+  
+                <ion-item *ngIf="myForm.get('username').errors && myForm.get('username').dirty">
+                  <p color="danger" ion-text *ngIf="myForm.get('username').hasError('required')">Field is required</p>
+                  <p color="danger" ion-text *ngIf="myForm.get('username').hasError('minlength')">Min of 5 characters</p>
+                  <p color="danger" ion-text *ngIf="myForm.get('username').hasError('maxlength')">Max of 10 characters</p>
+                </ion-item>
+
+              <ion-item>
+                <ion-label floating>E-mail:</ion-label>
+                <ion-input formControlName="email" type="text"></ion-input>
+              </ion-item>
+
+              <ion-item *ngIf="myForm.get('email').errors && myForm.get('email').dirty">
+                <p color="danger" ion-text *ngIf="myForm.get('email').hasError('required')">Field is required</p>
+                <p color="danger" ion-text *ngIf="myForm.get('email').hasError('email')">It is not an email</p>
+              </ion-item>
+
+              <ion-item>
+                <ion-label floating>Password:</ion-label>
+                <ion-input formControlName="password" type="password"></ion-input>
+              </ion-item>
+
+              <ion-item *ngIf="myForm.get('password').errors && myForm.get('password').dirty">
+                <p color="danger" ion-text *ngIf="myForm.get('password').hasError('required')">Field is required</p>
+                <p color="danger" ion-text *ngIf="myForm.get('password').hasError('pattern')">It is not a strong password</p>
+              </ion-item>
+
+              <ion-item>
+                <ion-label floating>Confirma Password:</ion-label>
+                <ion-input formControlName="passwordConfirm" type="password"></ion-input>
+              </ion-item>
+
+              <ion-item *ngIf="myForm.get('passwordConfirm').errors && myForm.get('passwordConfirm').dirty">
+                <p color="danger" ion-text *ngIf="myForm.get('passwordConfirm').hasError('required')">Field is required</p>
+                <p color="danger" ion-text *ngIf="myForm.get('passwordConfirm').hasError('pattern')">It is not a strong password</p>
+              </ion-item>
+            </ion-list>
+            
+            <div padding>
+              <button ion-button block type="submit" [disabled]="myForm.invalid">Guardar</button>
+            </div>
+          </form>
+        <!--
           <ion-item>
             <ion-label floating>Nombre</ion-label>
             <ion-input type="text" [(ngModel)]="user.nombre" required (keypress)="omit_special_char($event, false)"></ion-input>
@@ -64,7 +131,7 @@
               Registrarse
             </button>
           </ion-buttons>
-
+-->
       </ion-col>
     </ion-row>
 
