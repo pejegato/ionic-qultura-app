@@ -90,8 +90,8 @@ $colors: (
 
 .avatar {
     width:150px;
-    height:150px; 
-    margin:auto;   
+    height:150px;
+    margin:auto;
     text-align: center!important;
     -webkit-border-radius: 50%;
     border-radius: 50%;
@@ -101,17 +101,17 @@ $colors: (
 
 .logo {
     width:300px;
-    height:240px; 
-    margin:auto;   
-    
+    height:240px;
+    margin:auto;
+
     margin-bottom: 10px;
     margin-top: 10px;
 }
 
 .avatar-dashboard {
     width:70px;
-    height:70px; 
-    margin: none;           
+    height:70px;
+    margin: none;
     -webkit-border-radius: 50%;
     border-radius: 50%;
     margin-left: 10px;
@@ -130,17 +130,13 @@ $colors: (
     padding-top: 3px;
     padding-right: 5px;
     padding-bottom: 3px;
-    padding-left: 10px;  
-    
+    padding-left: 10px;
+
 }
 
 .avatar-registro {
     width:90px;
-    height:90px; 
-    
-    margin-left: 10px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    height:90px;
 }
 
 $text-input-md-highlight-color-invalid: transparent;
