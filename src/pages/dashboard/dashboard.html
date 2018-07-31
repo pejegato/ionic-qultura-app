@@ -10,7 +10,7 @@
       <ion-title text-center>Historias de {{userProvider.datosUsuario.username}}</ion-title>
     
     <ion-buttons end>
-      <button ion-button icon-only (click)='sc.scanCode()'>
+      <button ion-button icon-only (click)='abrirScanner()'>
         <ion-icon name="camera"></ion-icon>
       </button>
     </ion-buttons>
@@ -40,7 +40,7 @@
       
         <ion-item>
           <ion-avatar item-start>
-            <img src="{{contacto.img}}">
+            <img src="{{contacto.imgUrl}}">
           </ion-avatar>
           <h2>{{contacto.nombre}}</h2>
           <p>Ha visto <b>'{{contacto.titulo}}'</b></p>

@@ -21,13 +21,43 @@ export class UserProvider {
     public getUserData(user){
         return new Promise<any>(
             (resolve, reject) => this.firebaseProvider.obtieneDatosUsuario(user.uid).subscribe(response => {
-                this.photoProvider.downloadImageUrl(response.img)
-                .then(url => {
-                    response.imgUrl = url;
+                if(response){                
+                    this.photoProvider.downloadImageUrl(response.img)
+                    .then(url => {
+                        response.imgUrl = url;                        
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    })
+                }else{
                     resolve(response);
-                })
-                .catch((error)=>  reject(error));
-             }, error => reject(error))
+                } 
+            }, error => {
+                reject(error);
+             })
+        );
+    }
+
+    public getPiecesData(user) {
+        return new Promise<any>(
+            (resolve, reject) => this.firebaseProvider.obtieneDatosObra("1").subscribe(response => {
+                if (response) {
+                    let res = response.img+".jpg"
+                    this.photoProvider.downloadImageUrl(res)
+                        .then(url => {
+                            response.imgUrl = url;
+                            resolve(response);
+                        })
+                        .catch((error) => {
+                            reject(error);
+                        })
+                } else {
+                    resolve(response);
+                }
+            }, error => {
+                reject(error);
+            })
         );
     }
 

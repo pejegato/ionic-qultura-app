@@ -30,6 +30,7 @@ import {Camera} from "@ionic-native/camera";
 import {PhotoProvider} from "../providers/photo/photo";
 import {UserProvider} from "../providers/user/user";
 import {StartPage} from "../pages/start/start";
+import { ModalObraPage } from "../pages/modal-obra/modal-obra";
 
 
 export const firebaseConfig = {
@@ -55,7 +56,8 @@ export const firebaseConfig = {
     EdicionPerfilPage,
     ListaContactosPage,
     PerfilContactoPage,
-    StartPage
+    StartPage,
+    ModalObraPage
   ],
   imports: [
     BrowserModule,
@@ -83,7 +85,8 @@ export const firebaseConfig = {
     EdicionPerfilPage,
     ListaContactosPage,
     PerfilContactoPage,
-    StartPage
+    StartPage,
+    ModalObraPage
   ],
   providers: [
     StatusBar,

@@ -54,13 +54,25 @@ export class MyApp {
         if (user) {
           this.userProvider.getUserData(user)
           .then(response => {
-            this.userProvider.datosUsuario = response;
-            this.navCtrl.setRoot(DashboardPage);
+
+            let usuarioActual = {};
+
+            usuarioActual.username = response.username;
+            usuarioActual.imgUrl = response.imgUrl;
+
+              this.userProvider.datosUsuario = response;
+              this.userProvider.datosUsuario.uid = this.authProvider.currentUser.uid;
+              if (this.userProvider.datosUsuario.obras){
+                let obras = this.userProvider.datosUsuario.obras;
+                this.userProvider.datosUsuario.obras = snapshotToArray(obras);
+              }
+              this.navCtrl.setRoot(DashboardPage);
+
           });
-        } else {
-          this.loading.dismiss();
+        } else {          
           this.navCtrl.setRoot(LoginPage);
         }
+        this.loading.dismiss();
       }), error => {
           this.loading.dismiss();
           this.navCtrl.setRoot(LoginPage);
@@ -77,9 +89,21 @@ export class MyApp {
   cerrarSesion() {
     this.authProvider.logout();
     this.menuController.close();
-
   }
 }
+
+function snapshotToArray(snapshot) {
+  var returnArr = [];
+
+  snapshot.forEach(function (childSnapshot) {
+    var item = childSnapshot;
+    //item.key = childSnapshot.uid;
+
+    returnArr.push(item);
+  });
+
+  return returnArr;
+};
 
 
 
