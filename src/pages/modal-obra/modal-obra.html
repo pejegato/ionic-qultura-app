@@ -13,42 +13,19 @@
 </ion-header>
 
 <ion-content padding>
-    <!--ion-card>
-
-        <img src= {{obraEscaneada.imgUrl}}>
-        <ion-item>
-          <ion-card-title>
-            {{obraEscaneada.nombre}}
-          </ion-card-title>
-        </ion-item>
-
-        <ion-item>          
-          <p>Autor</p>
-          <p>{{obraEscaneada.autor}}</p>          
-        </ion-item>
-      
-        <ion-item>          
-          <p>Año</p>
-          <p>{{obraEscaneada.anio}}</p>
-          
-        </ion-item>
-      
-        <ion-item>            
-            <p>Año</p>
-            <p>{{obraEscaneada.descripcion}}</p>            
-        </ion-item>
-      
-      </ion-card-->
+    
 <ion-card>
-  
-
+  <ion-item>
     <ion-card-title text-center>
       {{obraEscaneada.nombre}}
     </ion-card-title>
+
+  </ion-item>
+    
     <ion-card-content>
       <img src= {{obraEscaneada.imgUrl}}>
     </ion-card-content>
-    <ion-card-content>
+    <ion-card-content text-justify>
       <p>Autor: {{obraEscaneada.autor}}</p>  
       <br>
       <p>Año: {{obraEscaneada.anio}}</p>  

@@ -4,7 +4,6 @@ import {PerfilPage} from "./../pages/perfil/perfil";
 import {DashboardPage} from "./../pages/dashboard/dashboard";
 import {LoginPage} from "./../pages/login/login";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
-import {HomePage, GuardadosPage, MapaPage} from "./../pages/index-paginas";
 import {BrowserModule} from "@angular/platform-browser";
 import {ErrorHandler, NgModule} from "@angular/core";
 import {IonicApp, IonicErrorHandler, IonicModule} from "ionic-angular";
@@ -12,7 +11,6 @@ import {SplashScreen} from "@ionic-native/splash-screen";
 import {StatusBar} from "@ionic-native/status-bar";
 import {MyApp} from "./app.component";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
-import {HistorialProvider} from "../providers/historial/historial";
 import {AgmCoreModule} from "@agm/core";
 import {RegistroPage} from "../pages/registro/registro";
 import {ListaContactosPage} from "../pages/lista-contactos/lista-contactos";
@@ -27,27 +25,25 @@ import {AvisosProvider} from "../providers/avisos/avisos";
 import {diccionarioErrores} from "../providers/constants/errores";
 import {ScannerProvider} from "../providers/scanner/scanner";
 import {Camera} from "@ionic-native/camera";
-import {PhotoProvider} from "../providers/photo/photo";
 import {UserProvider} from "../providers/user/user";
 import {StartPage} from "../pages/start/start";
 import { ModalObraPage } from "../pages/modal-obra/modal-obra";
-
+import { PhotosProvider } from '../providers/photos/photos';
+import 'firebase/storage';
+import { ModalBuscarUsuarioPage } from "../pages/modal-buscar-usuario/modal-buscar-usuario";
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyDcB8jqFCAA5L1ieeI7E_K7toTJZXUEJ_4",
-  authDomain: "qultura-63b5d.firebaseapp.com",
-  databaseURL: "https://qultura-63b5d.firebaseio.com",
-  projectId: "qultura-63b5d",
-  storageBucket: "qultura-63b5d.appspot.com",
-  messagingSenderId: "996842443204"  
+  apiKey: "AIzaSyBP9JDYl1X_0EaKIDBUimQnsUavudVPMzw",
+  authDomain: "qulturatesting.firebaseapp.com",
+  databaseURL: "https://qulturatesting.firebaseio.com",
+  projectId: "qulturatesting",
+  storageBucket: "qulturatesting.appspot.com",
+  messagingSenderId: "458092754772"
 };
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage,    
-    GuardadosPage,
-    MapaPage,
+    MyApp,   
     LoginPage,
     RegistroPage,
     DashboardPage,
@@ -57,7 +53,8 @@ export const firebaseConfig = {
     ListaContactosPage,
     PerfilContactoPage,
     StartPage,
-    ModalObraPage
+    ModalObraPage,
+    ModalBuscarUsuarioPage
   ],
   imports: [
     BrowserModule,
@@ -73,10 +70,7 @@ export const firebaseConfig = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,
-    GuardadosPage,
-    MapaPage,
+    MyApp,  
     LoginPage,
     RegistroPage,
     DashboardPage,
@@ -86,23 +80,23 @@ export const firebaseConfig = {
     ListaContactosPage,
     PerfilContactoPage,
     StartPage,
-    ModalObraPage
+    ModalObraPage,
+    ModalBuscarUsuarioPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     BarcodeScanner,
     InAppBrowser,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HistorialProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},    
     AuthProvider,
     FirebaseDbProvider,
     AvisosProvider,
     diccionarioErrores,
     ScannerProvider,
     Camera,
-    PhotoProvider,
-    UserProvider
+    UserProvider,
+    PhotosProvider
     
   ]
 })

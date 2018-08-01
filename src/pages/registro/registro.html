@@ -12,7 +12,6 @@
 
 </ion-header>
 
-
 <ion-content padding text-center>
 
   <ion-grid style="height: 100%">
@@ -32,17 +31,34 @@
       <ion-col>
           <ion-item>
             <ion-label floating>Nombre</ion-label>
+<<<<<<< HEAD
             <ion-input type="text" [(ngModel)]="form.nombre" required></ion-input>
+=======
+            <ion-input type="text" [(ngModel)]="user.nombre" required (keypress)="omit_special_char($event, false)"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Apellido</ion-label>
+            <ion-input type="text" [(ngModel)]="user.apellido" required (keypress)="omit_special_char($event, false)"></ion-input>
+>>>>>>> master
           </ion-item>
 
           <ion-item>
             <ion-label floating>User</ion-label>
+<<<<<<< HEAD
             <ion-input [(ngModel)]="form.username" required></ion-input>
+=======
+            <ion-input [(ngModel)]="user.username" required (keypress)="omit_special_char($event, false)"></ion-input>
+>>>>>>> master
           </ion-item>
 
           <ion-item>
             <ion-label floating>Email</ion-label>
+<<<<<<< HEAD
             <ion-input type="text" [(ngModel)]="form.email" required></ion-input>
+=======
+            <ion-input type="email" [(ngModel)]="user.email" required (keypress)="omit_special_char($event, true)"></ion-input>
+>>>>>>> master
           </ion-item>
 
           <ion-item>

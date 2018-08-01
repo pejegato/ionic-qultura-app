@@ -10,13 +10,14 @@
           <ion-title text-center>Tus Contactos</ion-title>
         
         <ion-buttons end>
-          <button ion-button icon-only (click)='sc.scanCode()'>
+          <button ion-button icon-only (click)='abrirScanner()'>
             <ion-icon name="camera"></ion-icon>
           </button>
         </ion-buttons>
       </ion-navbar>
 
 </ion-header>
+
 
 <ion-content padding text-center>
   <ion-list>
@@ -25,27 +26,25 @@
             Tus contactos
           <p>
       </ion-item> 
-    <ion-item-sliding *ngFor="let contacto of listaContactos; let i = index">
 
-      <button ion-item detail-none [navPush]="perfilContactoPage">
+      
+      <ion-buttons>
+        <button style="margin-top: 40px" ion-button block (click)="abrirBusqueda()">
+          Buscar Contactos
+        </button>
+      </ion-buttons>
+      
+    <ion-item *ngFor="let contacto of userProvider.datosUsuario.contactos; let i = index">
+      
+      <button no-lines ion-item detail-none [navPush]="perfilContactoPage">
         <ion-avatar item-left>
-          <img [src]=contacto.img>
+          <img [src]=contacto.data.imgUrl>
         </ion-avatar>
-        <h2>{{contacto.nombre}}</h2>
+        <h2>{{contacto.data.username}}</h2>
       </button>
 
-      <ion-item-options side="right">
-        <button ion-button color="primary" [navPush]="perfilContactoPage">
-          <ion-icon name="chatbubbles"></ion-icon>
-          Mensaje
-        </button>
-        <button ion-button color="danger">
-          <ion-icon name="trash"></ion-icon>
-          Borrar
-        </button>
-
-      </ion-item-options>
-</ion-item-sliding>
+      
+</ion-item>
 
   </ion-list>
 </ion-content>

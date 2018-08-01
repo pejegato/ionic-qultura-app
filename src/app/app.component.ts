@@ -52,6 +52,7 @@ export class MyApp {
 
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
+<<<<<<< HEAD
           this.userProvider.getUserData(user)
           .then(response => {
 
@@ -69,6 +70,14 @@ export class MyApp {
               this.navCtrl.setRoot(DashboardPage);
 
           });
+=======
+          this.userProvider.getUserData(user).then(()=>{ 
+                       
+            this.navCtrl.setRoot(DashboardPage);            
+          }).catch(()=>{
+            this.navCtrl.setRoot(LoginPage);  
+          })          
+>>>>>>> master
         } else {          
           this.navCtrl.setRoot(LoginPage);
         }
@@ -92,18 +101,7 @@ export class MyApp {
   }
 }
 
-function snapshotToArray(snapshot) {
-  var returnArr = [];
 
-  snapshot.forEach(function (childSnapshot) {
-    var item = childSnapshot;
-    //item.key = childSnapshot.uid;
-
-    returnArr.push(item);
-  });
-
-  return returnArr;
-};
 
 
 
