@@ -1,13 +1,13 @@
-import { PerfilContactoPage } from './../perfil-contacto/perfil-contacto';
+import { PerfilContactoPage } from '../perfil-contacto/perfil-contacto';
 import { Component } from '@angular/core';
-import { IonicPage, MenuController, ModalController } from 'ionic-angular';
+import { IonicPage, MenuController, ModalController } from 'ionic-angular/umd';
 import { CONTACTOS } from '../../data/dashcards.data';
 
 //Dependencias para Scanner
 import { ScannerProvider } from "../../providers/scanner/scanner";
 import { ModalObraPage } from "../modal-obra/modal-obra";
-import { AvisosProvider } from './../../providers/avisos/avisos';
-import { UserProvider } from "./../../providers/user/user";
+import { AvisosProvider } from '../../providers/avisos/avisos';
+import { UserProvider } from "../../providers/user/user";
 import { ModalBuscarUsuarioPage } from '../modal-buscar-usuario/modal-buscar-usuario';
 
 

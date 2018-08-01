@@ -1,9 +1,9 @@
-import {DashboardPage} from "./../dashboard/dashboard";
+import {DashboardPage} from "../dashboard/dashboard";
 import {Component} from "@angular/core";
-import {IonicPage, NavController} from "ionic-angular";
+import {IonicPage, NavController} from "ionic-angular/umd";
 import {AuthProvider} from "../../providers/auth/auth";
 import {AvisosProvider} from "../../providers/avisos/avisos";
-import {diccionarioErrores} from "../../providers/constants/errores";
+import {diccionarioErrores} from "../../providers/constants/Errores";
 import { UserProvider } from "../../providers/user/user";
 
 

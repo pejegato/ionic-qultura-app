@@ -1,11 +1,11 @@
-import {AvisosProvider} from "./../providers/avisos/avisos";
-import {UserProvider} from "./../providers/user/user";
-import {PerfilPage} from "./../pages/perfil/perfil";
-import {EdicionPerfilPage} from "./../pages/edicion-perfil/edicion-perfil";
-import {DashboardPage} from "./../pages/dashboard/dashboard";
-import {RegistroPage} from "./../pages/registro/registro";
+import {AvisosProvider} from "../providers/avisos/avisos";
+import {UserProvider} from "../providers/user/user";
+import {PerfilPage} from "../pages/perfil/perfil";
+import {EdicionPerfilPage} from "../pages/edicion-perfil/edicion-perfil";
+import {DashboardPage} from "../pages/dashboard/dashboard";
+import {RegistroPage} from "../pages/registro/registro";
 import {Component, ViewChild} from "@angular/core";
-import {Platform, MenuController, NavController} from "ionic-angular";
+import {Platform, MenuController, NavController} from "ionic-angular/umd";
 import {StatusBar} from "@ionic-native/status-bar";
 import {SplashScreen} from "@ionic-native/splash-screen";
 import {LoginPage} from "../pages/login/login";
@@ -13,7 +13,7 @@ import {ListaContactosPage} from "../pages/lista-contactos/lista-contactos";
 import {PerfilContactoPage} from "../pages/perfil-contacto/perfil-contacto";
 import {AuthProvider} from "../providers/auth/auth";
 import {StartPage} from "../pages/start/start";
-import * as firebase from "firebase/app";
+import * as firebase from "firebase";
 
 @Component({
   templateUrl: 'app.html'

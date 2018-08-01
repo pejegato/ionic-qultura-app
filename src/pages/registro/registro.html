@@ -6,135 +6,122 @@
 -->
 <ion-header>
 
-    <ion-navbar color="primary">
-          <ion-title text-center>Registro</ion-title>
-    </ion-navbar>
+  <ion-navbar color="primary">
+    <ion-title text-center>Registro</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 <ion-content padding text-center>
 
-  <ion-grid style="height: 100%">
-    <ion-row  align-items-center>      
-      <ion-col col-5>
-        <img src="../../assets/avatars/none.jpeg" *ngIf="!imgData" class="avatar-registro">
-        <img [src]="imgData" *ngIf="imgData" class="avatar-registro"/>
-      </ion-col>
-      <ion-col col-7>      
-        <ion-buttons>
-            <button ion-button (click)="getPicture(0)">Subir Foto</button>
-        </ion-buttons>      
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-          <form [formGroup]="myForm" (ngSubmit)="saveData()">
-            <ion-list> 
 
-              <ion-item>
-                <ion-label floating>Name:</ion-label>
-                <ion-input formControlName="nombre" type="text"></ion-input>
-              </ion-item>
-              
-              <ion-item *ngIf="myForm.get('nombre').errors && myForm.get('nombre').dirty">
-                <p color="danger" ion-text *ngIf="myForm.get('nombre').hasError('required')">Field is required</p>
-              </ion-item>
+  <img src="../../assets/avatars/none.jpeg" *ngIf="!imgData" class="avatar-registro">
+  <img [src]="imgData" *ngIf="imgData" class="avatar-registro"/>
 
-              <ion-item>
-                <ion-label floating>Apellido:</ion-label>
-                <ion-input formControlName="apellido" type="text"></ion-input>
-              </ion-item>
+  <ion-buttons>
+    <button ion-button (click)="getPicture(0)">Subir Foto</button>
+  </ion-buttons>
 
-              <ion-item *ngIf="myForm.get('apellido').errors && myForm.get('apellido').dirty">
-                <p color="danger" ion-text *ngIf="myForm.get('apellido').hasError('required')">Field is required</p>
-              </ion-item>
+  <form [formGroup]="myForm" (ngSubmit)="saveData()">
+    
+    <ion-item>
+      <ion-label stacked>Nombre:</ion-label>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+    </ion-item>
 
-              <ion-item>
-                  <ion-label floating>Username:</ion-label>
-                  <ion-input formControlName="username" type="text"></ion-input>
-                </ion-item>
-  
-                <ion-item *ngIf="myForm.get('username').errors && myForm.get('username').dirty">
-                  <p color="danger" ion-text *ngIf="myForm.get('username').hasError('required')">Field is required</p>
-                  <p color="danger" ion-text *ngIf="myForm.get('username').hasError('minlength')">Min of 5 characters</p>
-                  <p color="danger" ion-text *ngIf="myForm.get('username').hasError('maxlength')">Max of 10 characters</p>
-                </ion-item>
+    <ng-container *ngFor="let validation of validation_messages.nombre">
+      <p color="danger" ion-text *ngIf="myForm.get('nombre').hasError(validation.type) && myForm.get('nombre').touched">{{ validation.message }}</p>
+    </ng-container>
 
-              <ion-item>
-                <ion-label floating>E-mail:</ion-label>
-                <ion-input formControlName="email" type="text"></ion-input>
-              </ion-item>
+    <ion-item>
+      <ion-label stacked>Apellido</ion-label>
+      <ion-input formControlName="apellido" type="text"></ion-input>
+    </ion-item>
 
-              <ion-item *ngIf="myForm.get('email').errors && myForm.get('email').dirty">
-                <p color="danger" ion-text *ngIf="myForm.get('email').hasError('required')">Field is required</p>
-                <p color="danger" ion-text *ngIf="myForm.get('email').hasError('email')">It is not an email</p>
-              </ion-item>
+    <ng-container *ngFor="let validation of validation_messages.apellido">
+      <p color="danger" ion-text *ngIf="myForm.get('apellido').hasError(validation.type) && myForm.get('apellido').touched">{{ validation.message }}</p>
+    </ng-container>
 
-              <ion-item>
-                <ion-label floating>Password:</ion-label>
-                <ion-input formControlName="password" type="password"></ion-input>
-              </ion-item>
+    <ion-item>
+      <ion-label stacked>Username:</ion-label>
+      <ion-input formControlName="username" type="text"></ion-input>
+    </ion-item>
 
-              <ion-item *ngIf="myForm.get('password').errors && myForm.get('password').dirty">
-                <p color="danger" ion-text *ngIf="myForm.get('password').hasError('required')">Field is required</p>
-                <p color="danger" ion-text *ngIf="myForm.get('password').hasError('pattern')">It is not a strong password</p>
-              </ion-item>
+    <ng-container *ngFor="let validation of validation_messages.username">
+      <p color="danger" ion-text *ngIf="myForm.get('username').hasError(validation.type) && myForm.get('username').touched">{{ validation.message }}</p>
+    </ng-container>
 
-              <ion-item>
-                <ion-label floating>Confirma Password:</ion-label>
-                <ion-input formControlName="passwordConfirm" type="password"></ion-input>
-              </ion-item>
+    <ion-item>
+      <ion-label stacked>Email:</ion-label>
+      <ion-input formControlName="email" type="text"></ion-input>
+    </ion-item>
 
-              <ion-item *ngIf="myForm.get('passwordConfirm').errors && myForm.get('passwordConfirm').dirty">
-                <p color="danger" ion-text *ngIf="myForm.get('passwordConfirm').hasError('required')">Field is required</p>
-                <p color="danger" ion-text *ngIf="myForm.get('passwordConfirm').hasError('pattern')">It is not a strong password</p>
-              </ion-item>
-            </ion-list>
-            
-            <div padding>
-              <button ion-button block type="submit" [disabled]="myForm.invalid">Guardar</button>
-            </div>
-          </form>
-        <!--
-          <ion-item>
-            <ion-label floating>Nombre</ion-label>
-            <ion-input type="text" [(ngModel)]="user.nombre" required (keypress)="omit_special_char($event, false)"></ion-input>
-          </ion-item>
+    <ng-container *ngFor="let validation of validation_messages.email">
+      <p color="danger" ion-text *ngIf="myForm.get('email').hasError(validation.type) && myForm.get('email').touched">{{ validation.message }}</p>
+    </ng-container>
 
-          <ion-item>
-            <ion-label floating>Apellido</ion-label>
-            <ion-input type="text" [(ngModel)]="user.apellido" required (keypress)="omit_special_char($event, false)"></ion-input>
-          </ion-item>
 
-          <ion-item>
-            <ion-label floating>User</ion-label>
-            <ion-input [(ngModel)]="user.username" required (keypress)="omit_special_char($event, false)"></ion-input>
-          </ion-item>
+    <ion-item>
+      <ion-label stacked>Password:</ion-label>
+      <ion-input formControlName="password" type="text"></ion-input>
+    </ion-item>
 
-          <ion-item>
-            <ion-label floating>Email</ion-label>
-            <ion-input type="email" [(ngModel)]="user.email" required (keypress)="omit_special_char($event, true)"></ion-input>
-          </ion-item>
+    <ng-container *ngFor="let validation of validation_messages.password">
+      <p color="danger" ion-text *ngIf="myForm.get('password').hasError(validation.type) && myForm.get('password').touched">{{ validation.message }}</p>
+    </ng-container>
 
-          <ion-item>
-            <ion-label floating>Contraseña</ion-label>
-            <ion-input type="password"[(ngModel)]="user.password" required></ion-input>
-          </ion-item>
 
-          <ion-item>
-            <ion-label floating>Confirmar contraseña</ion-label>
-            <ion-input type="password"[(ngModel)]="user.passwordConfirm" required></ion-input>
-          </ion-item>
+    <ion-item>
+      <ion-label stacked>Confirmar password:</ion-label>
+      <ion-input formControlName="passwordConfirm" type="text"></ion-input>
+    </ion-item>
 
-          <ion-buttons>
-            <button style="margin-top: 40px" ion-button block large (click)="signin()">
-              Registrarse
-            </button>
-          </ion-buttons>
+    <ng-container *ngFor="let validation of validation_messages.password">
+      <p color="danger" ion-text *ngIf="myForm.get('passwordConfirm').hasError(validation.type) && myForm.get('passwordConfirm').touched">{{ validation.message }}</p>
+    </ng-container>
+
+    <div padding>
+      <button ion-button block type="submit" [disabled]="myForm.invalid">Guardar</button>
+    </div>
+
+  </form>
+  <!--
+    <ion-item>
+      <ion-label stacked>Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="user.nombre" required (keypress)="omit_special_char($event, false)"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Apellido</ion-label>
+      <ion-input type="text" [(ngModel)]="user.apellido" required (keypress)="omit_special_char($event, false)"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>User</ion-label>
+      <ion-input [(ngModel)]="user.username" required (keypress)="omit_special_char($event, false)"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input type="email" [(ngModel)]="user.email" required (keypress)="omit_special_char($event, true)"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Contraseña</ion-label>
+      <ion-input type="password"[(ngModel)]="user.password" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Confirmar contraseña</ion-label>
+      <ion-input type="password"[(ngModel)]="user.passwordConfirm" required></ion-input>
+    </ion-item>
+
+    <ion-buttons>
+      <button style="margin-top: 40px" ion-button block large (click)="signin()">
+        Registrarse
+      </button>
+    </ion-buttons>
 -->
-      </ion-col>
-    </ion-row>
 
-  </ion-grid>
 
 </ion-content>

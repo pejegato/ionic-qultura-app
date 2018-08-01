@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, MenuController, ModalController, NavController, AlertController } from 'ionic-angular';
+import { IonicPage, MenuController, ModalController, NavController, AlertController } from 'ionic-angular/umd';
 import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
-import { Camera, CameraOptions } from '../../../node_modules/@ionic-native/camera';
-import { diccionarioErrores } from '../../providers/constants/errores';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { diccionarioErrores } from '../../providers/constants/Errores';
 
 //Dependencias para Scanner
 import { ScannerProvider } from "../../providers/scanner/scanner";
 import { ModalObraPage } from "../modal-obra/modal-obra";
-import { AvisosProvider } from './../../providers/avisos/avisos';
-import { UserProvider } from "./../../providers/user/user";
+import { AvisosProvider } from '../../providers/avisos/avisos';
+import { UserProvider } from "../../providers/user/user";
 import { DashboardPage } from '../dashboard/dashboard';
 import { AuthProvider } from '../../providers/auth/auth';
 import { PerfilPage } from '../perfil/perfil';

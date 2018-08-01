@@ -25,26 +25,70 @@ export class diccionarioErrores {
 
             
   ]);
+
+  public MENSAJES_VALIDACION_REGISTRO = {
+      'nombre': [
+          {type: 'required', message: 'Debes ingresar tu nombre.'},
+          {type: 'minlength', message: 'Minimum 5 characters are required for username.'},
+          {type: 'maxlength', message: 'You can enter a username of maximum 30 characters.'},
+          {type: 'pattern', message: 'Username should be composed of numbers and letters.'},
+          {type: 'validUsername', message: 'A user with the selected username already exists.'}
+      ],
+      'apellido': [
+          {type: 'required', message: 'Debes ingresar tu nombre.'},
+          {type: 'minlength', message: 'Minimum 5 characters are required for username.'},
+          {type: 'maxlength', message: 'You can enter a username of maximum 30 characters.'},
+          {type: 'pattern', message: 'Username should be composed of numbers and letters.'},
+          {type: 'validUsername', message: 'A user with the selected username already exists.'}
+      ],
+      'username': [
+          {type: 'required', message: 'Debes ingresar tu nombre.'},
+          {type: 'minlength', message: 'Minimum 5 characters are required for username.'},
+          {type: 'maxlength', message: 'You can enter a username of maximum 30 characters.'},
+          {type: 'pattern', message: 'Username should be composed of numbers and letters.'},
+          {type: 'validUsername', message: 'A user with the selected username already exists.'}
+      ],
+      'email': [
+          {type: 'required', message: 'Debes ingresar tu nombre.'},
+          {type: 'minlength', message: 'Minimum 5 characters are required for username.'},
+          {type: 'maxlength', message: 'You can enter a username of maximum 30 characters.'},
+          {type: 'pattern', message: 'Username should be composed of numbers and letters.'},
+          {type: 'validUsername', message: 'A user with the selected username already exists.'}
+      ],
+      'password': [
+          {type: 'required', message: 'Debes ingresar tu nombre.'},
+          {type: 'minlength', message: 'Minimum 5 characters are required for username.'},
+          {type: 'maxlength', message: 'You can enter a username of maximum 30 characters.'},
+          {type: 'pattern', message: 'Username should be composed of numbers and letters.'},
+          {type: 'validUsername', message: 'A user with the selected username already exists.'}
+      ],
+      'passwordConfirm': [
+          {type: 'required', message: 'Debes ingresar tu nombre.'},
+          {type: 'minlength', message: 'Minimum 5 characters are required for username.'},
+          {type: 'maxlength', message: 'You can enter a username of maximum 30 characters.'},
+          {type: 'pattern', message: 'Username should be composed of numbers and letters.'},
+          {type: 'validUsername', message: 'A user with the selected username already exists.'}
+      ],
+
+
+  };
   
   public traducirError(tipo:string, key:string) {
     if(typeof key !== 'undefined'){
+        let erroresMap = new  Map<string, string>();
+        let codigoError = key ? key.toString().toUpperCase() : '';
+        if(tipo === 'LOGIN'){
+            erroresMap = this.ERRORES_LOGIN
+        }
 
-     
-    console.log("tipo de error ", typeof key); 
-    let erroresMap = new  Map<string, string>();
-    let codigoError = key ? key.toString().toUpperCase() : '';
-    if(tipo === 'LOGIN'){
-      erroresMap = this.ERRORES_LOGIN
-    }
-    
-    if(erroresMap.has(codigoError)){
-      return erroresMap.get(codigoError);  
+        if(erroresMap.has(codigoError)){
+          return erroresMap.get(codigoError);
+        }else{
+          return codigoError
+        }
     }else{
-      return codigoError
+        return "Se ha producido un error, contactate con el soporte de Qultura"
     }
-  }else{
-    return "Se ha producido un error, contactate con el soporte de Qultura"
-  } 
   };
 
 
