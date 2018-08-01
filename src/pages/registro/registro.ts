@@ -7,6 +7,7 @@ import {Camera, CameraOptions} from "@ionic-native/camera";
 import { diccionarioErrores } from "../../providers/constants/errores";
 import { DashboardPage } from "../dashboard/dashboard";
 import { UserProvider } from "../../providers/user/user";
+import { FormBuilder, FormGroup, Validators } from "../../../node_modules/@angular/forms";
 
 
 @IonicPage()
@@ -16,6 +17,7 @@ import { UserProvider } from "../../providers/user/user";
 })
 export class RegistroPage {
 
+  
   constructor(
       public auth: AuthProvider,
       private firebaseProvider: FirebaseDbProvider,
@@ -23,10 +25,33 @@ export class RegistroPage {
       private camera : Camera,
       private errores : diccionarioErrores,
       private navCtrl: NavController,
-      public userProvided: UserProvider
-    ){
+      public userProvided: UserProvider,
+      public fb: FormBuilder
+    )
+    
+    {
+      this.myForm = this.fb.group({
+        nombre: ['', [Validators.required, Validators.maxLength(30)]],
+        apellido: ['', [Validators.required, Validators.maxLength(30)]],
+        username: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.pattern(/^[a-z0-9_-]{6,18}$/)]],
+        passwordConfirm: ['', [Validators.pattern(/^[a-z0-9_-]{6,18}$/)]]        
+      });
   }
 
+  myForm: FormGroup;
+  alertCtrl: AlertController;
+  
+  saveData(){
+    alert(JSON.stringify(this.myForm.value));
+  }
+
+ 
+
+  /*
+
+  
     user = {
         uid:'',
         email: '',
@@ -41,9 +66,7 @@ export class RegistroPage {
   };
 
   private imgData:string;
-
-  alertCtrl: AlertController;
-
+  
   signin(){
     if (this.user.passwordConfirm === this.user.password){
       this.registrarUsuario(this.user);
@@ -127,4 +150,5 @@ export class RegistroPage {
     x=63
     return ((k > x && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57 || k == 45 || k == 46 || k == 95));
   }
+  */
 }
