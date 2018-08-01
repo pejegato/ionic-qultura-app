@@ -52,33 +52,13 @@ export class MyApp {
 
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-<<<<<<< HEAD
-          this.userProvider.getUserData(user)
-          .then(response => {
+          this.userProvider.getUserData(user).then(()=>{
 
-            let usuarioActual = {};
-
-            usuarioActual.username = response.username;
-            usuarioActual.imgUrl = response.imgUrl;
-
-              this.userProvider.datosUsuario = response;
-              this.userProvider.datosUsuario.uid = this.authProvider.currentUser.uid;
-              if (this.userProvider.datosUsuario.obras){
-                let obras = this.userProvider.datosUsuario.obras;
-                this.userProvider.datosUsuario.obras = snapshotToArray(obras);
-              }
-              this.navCtrl.setRoot(DashboardPage);
-
-          });
-=======
-          this.userProvider.getUserData(user).then(()=>{ 
-                       
-            this.navCtrl.setRoot(DashboardPage);            
+            this.navCtrl.setRoot(DashboardPage);
           }).catch(()=>{
-            this.navCtrl.setRoot(LoginPage);  
-          })          
->>>>>>> master
-        } else {          
+            this.navCtrl.setRoot(LoginPage);
+          })
+        } else {
           this.navCtrl.setRoot(LoginPage);
         }
         this.loading.dismiss();

@@ -16,59 +16,47 @@
 
   <ion-grid style="height: 100%">
     <ion-row  align-items-center>
-      
+
       <ion-col col-5>
         <img src="../../assets/avatars/none.jpeg" *ngIf="!imgData" class="avatar-registro">
         <img [src]="imgData" *ngIf="imgData" class="avatar-registro"/>
       </ion-col>
-      <ion-col col-7>      
+      <ion-col col-7>
         <ion-buttons>
             <button ion-button (click)="getPicture(0)">Subir Foto</button>
-        </ion-buttons>      
+        </ion-buttons>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
           <ion-item>
             <ion-label floating>Nombre</ion-label>
-<<<<<<< HEAD
-            <ion-input type="text" [(ngModel)]="form.nombre" required></ion-input>
-=======
             <ion-input type="text" [(ngModel)]="user.nombre" required (keypress)="omit_special_char($event, false)"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label floating>Apellido</ion-label>
             <ion-input type="text" [(ngModel)]="user.apellido" required (keypress)="omit_special_char($event, false)"></ion-input>
->>>>>>> master
           </ion-item>
 
           <ion-item>
             <ion-label floating>User</ion-label>
-<<<<<<< HEAD
-            <ion-input [(ngModel)]="form.username" required></ion-input>
-=======
             <ion-input [(ngModel)]="user.username" required (keypress)="omit_special_char($event, false)"></ion-input>
->>>>>>> master
           </ion-item>
 
           <ion-item>
             <ion-label floating>Email</ion-label>
-<<<<<<< HEAD
-            <ion-input type="text" [(ngModel)]="form.email" required></ion-input>
-=======
             <ion-input type="email" [(ngModel)]="user.email" required (keypress)="omit_special_char($event, true)"></ion-input>
->>>>>>> master
           </ion-item>
 
           <ion-item>
             <ion-label floating>Contraseña</ion-label>
-            <ion-input type="password"[(ngModel)]="form.password" required></ion-input>
+            <ion-input type="password"[(ngModel)]="user.password" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label floating>Confirmar contraseña</ion-label>
-            <ion-input type="password"[(ngModel)]="form.passwordConfirm" required></ion-input>
+            <ion-input type="password"[(ngModel)]="user.passwordConfirm" required></ion-input>
           </ion-item>
 
           <ion-buttons>
