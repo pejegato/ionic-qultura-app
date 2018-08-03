@@ -1,6 +1,6 @@
 import { PerfilContactoPage } from '../perfil-contacto/perfil-contacto';
 import { Component } from '@angular/core';
-import { IonicPage, MenuController, ModalController } from 'ionic-angular/umd';
+import { IonicPage, MenuController, ModalController } from 'ionic-angular';
 import { CONTACTOS } from '../../data/dashcards.data';
 
 //Dependencias para Scanner

@@ -7,7 +7,8 @@ import {Camera, CameraOptions} from "@ionic-native/camera";
 import { diccionarioErrores } from "../../providers/constants/errores";
 import { DashboardPage } from "../dashboard/dashboard";
 import { UserProvider } from "../../providers/user/user";
-import {}
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Formularios } from '../../providers/constants/formularios';
 
 
 
@@ -25,17 +26,12 @@ export class RegistroPage {
               private errores: diccionarioErrores,
               private navCtrl: NavController,
               public userProvided: UserProvider,
-              public formBuilder: FormBuilder
+              
              ) {}
 
-  myForm: FormGroup;
-
-  ionViewWillLoad() {
-
-    myForm = formularios.FORMULARIO_REGISTRO;
-    validation_messages = MENSAJES_VALIDACION_REGISTRO;
-
-  }
+  myForm: FormGroup = Formularios.FORMULARIO_REGISTRO;
+  validation_messages = Formularios.MENSAJES_VALIDACION_REGISTRO;
+  
     /*
 
      {

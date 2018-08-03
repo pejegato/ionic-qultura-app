@@ -26,52 +26,7 @@ export class diccionarioErrores {
             
   ]);
 
-  public MENSAJES_VALIDACION_REGISTRO = {
-      'nombre': [
-          {type: 'required', message: 'Debes ingresar tu nombre.'},
-          {type: 'minlength', message: 'Minimum 5 characters are required for username.'},
-          {type: 'maxlength', message: 'You can enter a username of maximum 30 characters.'},
-          {type: 'pattern', message: 'Username should be composed of numbers and letters.'},
-          {type: 'validUsername', message: 'A user with the selected username already exists.'}
-      ],
-      'apellido': [
-          {type: 'required', message: 'Debes ingresar tu nombre.'},
-          {type: 'minlength', message: 'Minimum 5 characters are required for username.'},
-          {type: 'maxlength', message: 'You can enter a username of maximum 30 characters.'},
-          {type: 'pattern', message: 'Username should be composed of numbers and letters.'},
-          {type: 'validUsername', message: 'A user with the selected username already exists.'}
-      ],
-      'username': [
-          {type: 'required', message: 'Debes ingresar tu nombre.'},
-          {type: 'minlength', message: 'Minimum 5 characters are required for username.'},
-          {type: 'maxlength', message: 'You can enter a username of maximum 30 characters.'},
-          {type: 'pattern', message: 'Username should be composed of numbers and letters.'},
-          {type: 'validUsername', message: 'A user with the selected username already exists.'}
-      ],
-      'email': [
-          {type: 'required', message: 'Debes ingresar tu nombre.'},
-          {type: 'minlength', message: 'Minimum 5 characters are required for username.'},
-          {type: 'maxlength', message: 'You can enter a username of maximum 30 characters.'},
-          {type: 'pattern', message: 'Username should be composed of numbers and letters.'},
-          {type: 'validUsername', message: 'A user with the selected username already exists.'}
-      ],
-      'password': [
-          {type: 'required', message: 'Debes ingresar tu nombre.'},
-          {type: 'minlength', message: 'Minimum 5 characters are required for username.'},
-          {type: 'maxlength', message: 'You can enter a username of maximum 30 characters.'},
-          {type: 'pattern', message: 'Username should be composed of numbers and letters.'},
-          {type: 'validUsername', message: 'A user with the selected username already exists.'}
-      ],
-      'passwordConfirm': [
-          {type: 'required', message: 'Debes ingresar tu nombre.'},
-          {type: 'minlength', message: 'Minimum 5 characters are required for username.'},
-          {type: 'maxlength', message: 'You can enter a username of maximum 30 characters.'},
-          {type: 'pattern', message: 'Username should be composed of numbers and letters.'},
-          {type: 'validUsername', message: 'A user with the selected username already exists.'}
-      ],
-
-
-  };
+  
   
   public traducirError(tipo:string, key:string) {
     if(typeof key !== 'undefined'){

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular/umd';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular/';
 import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
 import { AngularFireList,AngularFireDatabase } from 'angularfire2/database';
 import { UserProvider } from '../../providers/user/user';

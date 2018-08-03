@@ -1,6 +1,6 @@
 
 import { Component } from "@angular/core";
-import { IonicPage, MenuController, ModalController} from "ionic-angular/umd";
+import { IonicPage, MenuController, ModalController} from "ionic-angular";
 import { Dashcard } from "../../interfaces/dashcard-interface";
 import { DASHCARDS } from "../../data/dashcards.data";
 //Dependencias para Scanner

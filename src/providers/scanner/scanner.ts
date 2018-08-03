@@ -1,7 +1,7 @@
 import { UserProvider } from '../user/user';
 import { FirebaseDbProvider } from '../firebase-db/firebase-db';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { Platform} from 'ionic-angular/umd';
+import { Platform} from 'ionic-angular/';
 import { Injectable } from '@angular/core';
 
 

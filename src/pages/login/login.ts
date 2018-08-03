@@ -1,7 +1,7 @@
 import {InicioSesionPage} from "../inicio-sesion/inicio-sesion";
 import {DashboardPage} from "../dashboard/dashboard";
 import {Component} from "@angular/core";
-import {IonicPage, NavController, NavParams} from "ionic-angular/umd";
+import {IonicPage, NavController, NavParams} from "ionic-angular/";
 import {RegistroPage} from "../registro/registro";
 
 

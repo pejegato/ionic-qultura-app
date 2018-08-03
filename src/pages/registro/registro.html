@@ -28,7 +28,7 @@
       <ion-label stacked>Nombre:</ion-label>
       <ion-input formControlName="nombre" type="text"></ion-input>
     </ion-item>
-
+    
     <ng-container *ngFor="let validation of validation_messages.nombre">
       <p color="danger" ion-text *ngIf="myForm.get('nombre').hasError(validation.type) && myForm.get('nombre').touched">{{ validation.message }}</p>
     </ng-container>

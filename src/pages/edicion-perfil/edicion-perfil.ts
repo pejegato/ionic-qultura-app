@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, MenuController, ModalController, NavController, AlertController } from 'ionic-angular/umd';
+import { IonicPage, MenuController, ModalController, NavController, AlertController } from 'ionic-angular';
 import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { diccionarioErrores } from '../../providers/constants/Errores';
+import { diccionarioErrores } from '../../providers/constants/errores';
 
 //Dependencias para Scanner
 import { ScannerProvider } from "../../providers/scanner/scanner";

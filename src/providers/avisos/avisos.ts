@@ -1,4 +1,4 @@
-import {AlertController, LoadingController} from "ionic-angular/umd";
+import {AlertController, LoadingController} from "ionic-angular/";
 import {Injectable} from "@angular/core";
 
 /*
