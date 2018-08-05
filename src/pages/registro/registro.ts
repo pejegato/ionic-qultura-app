@@ -29,41 +29,11 @@ export class RegistroPage {
               
              ) {}
 
-  myForm: FormGroup = Formularios.FORMULARIO_REGISTRO;
-  validation_messages = Formularios.MENSAJES_VALIDACION_REGISTRO;
+  formularioRegistro = Formularios.FORMULARIO_REGISTRO;
+  mensajesValidacion = Formularios.MENSAJES_VALIDACION_REGISTRO;
   
     /*
 
-     {
-     this.myForm = this.fb.group({
-     nombre: ['', [Validators.required, Validators.maxLength(30)]],
-     apellido: ['', [Validators.required, Validators.maxLength(30)]],
-     username: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
-     email: ['', [Validators.required, Validators.email]],
-     password: ['', [Validators.pattern(/^[a-z0-9_-]{6,18}$/)]],
-     passwordConfirm: ['', [Validators.pattern(/^[a-z0-9_-]{6,18}$/)]]
-     });
-     }
-
-     myForm: FormGroup;
-     alertCtrl: AlertController;
-
-     saveData(){
-     alert(JSON.stringify(this.myForm.value));
-     }
-
-     user = {
-     uid:'',
-     email: '',
-     password: '',
-     passwordConfirm: '',
-     username: '',
-     nombre: '',
-     img: '',
-     imgUrl: '',
-     puntaje: '0',
-     obrasEscaneadas:[]
-     };
 
      private imgData:string;
 

@@ -21,13 +21,9 @@ export class diccionarioErrores {
       ["AUTH/USER-DOES-NOT-EXIST", 'Usuario no existe'],
       ["AUTH/EMAIL-ALREADY-IN-USE", 'Email ya se encuentra registrado'],
       ["AUTH/WEAK-PASSWORD", 'Password demasiado corto'],
-      ["AUTH/USER-NOT-FOUND", 'Usuario no existe'],
-
-            
+      ["AUTH/USER-NOT-FOUND", 'Usuario no existe']
   ]);
 
-  
-  
   public traducirError(tipo:string, key:string) {
     if(typeof key !== 'undefined'){
         let erroresMap = new  Map<string, string>();
@@ -45,7 +41,5 @@ export class diccionarioErrores {
         return "Se ha producido un error, contactate con el soporte de Qultura"
     }
   };
-
-
 
 }
