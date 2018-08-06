@@ -1,21 +1,22 @@
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl, AbstractControl } from '@angular/forms';
 
 export class Formularios {
-
+    
+    
     static FORMULARIO_REGISTRO: FormGroup = new FormBuilder().group({
 
         username: new FormControl('', Validators.compose([
             Validators.maxLength(20),
             Validators.minLength(2),
-            Validators.patter('^[a-zA-Z0-9]+$'),
+            Validators.pattern('^[a-zA-Z0-9]+$'),
             Validators.required
-        ])),
+        ])),    
 
         email: new FormControl('', Validators.compose([
             Validators.email,
             Validators.required
         ])),
-
+        
         password: new FormControl('', Validators.compose([
             Validators.maxLength(20),
             Validators.minLength(8),
@@ -26,24 +27,20 @@ export class Formularios {
             Validators.maxLength(20),
             Validators.minLength(8),
             Validators.required
-        ])),
+        ]))
+    }, {validator: Formularios.MatchPassword})
 
-        passwords: this.formBuilder.group({
-            password: new FormControl('', Validators.compose([
-                Validators.maxLength(20),
-                Validators.minLength(8),
-                Validators.required
-            ])),
-
-            passwordConfirm: new FormControl('', Validators.compose([
-                Validators.maxLength(20),
-                Validators.minLength(8),
-                Validators.required
-            ]))
-        },{validator: this.passwordConfirming})
-    })
-
-
+    static MatchPassword(AC: AbstractControl) {
+        let password = AC.get('password').value; // to get value in input tag
+        let passwordConfirm = AC.get('passwordConfirm').value; // to get value in input tag
+         if(password != passwordConfirm) {
+             console.log('false');
+             AC.get('passwordConfirm').setErrors( {matchPassword: true} )
+         } else {
+             console.log('true');
+             return null
+         }
+     }
 
 
 
@@ -69,6 +66,7 @@ export class Formularios {
             {type: 'required', message: 'Debes ingresar un password.'},
             {type: 'minlength', message: 'Tu nombre de usuario debe tener mínimo 8 caracteres.'},
             {type: 'maxlength', message: 'Tu nombre de usuario debe tener máximo 20 caracteres.'},
+            {type: 'matchPassword', message: 'Passwords no coinciden.'}
         ]
     };
 }

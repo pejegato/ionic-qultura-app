@@ -23,7 +23,9 @@
   </ion-buttons>
 
   <form [formGroup]="formularioRegistro" (ngSubmit)="saveData()">
-   <!--Username-->
+   
+    <!--Username-->
+    
     <ion-item>
       <ion-label stacked>Username:</ion-label>
       <ion-input formControlName="username" type="text"></ion-input>
@@ -34,6 +36,7 @@
     </ng-container>
 
     <!--Email-->
+
     <ion-item>
       <ion-label stacked>Email:</ion-label>
       <ion-input formControlName="email" type="text"></ion-input>
@@ -44,31 +47,41 @@
     </ng-container>
 
     <!--Password-->
-    <div formGroupName="passwords">      
-      <ion-item>
-        <ion-label stacked>Password:</ion-label>
-        <ion-input formControlName="password" type="text"></ion-input>
-      </ion-item>
+    
+    <ion-item>
+        <button type="button" ion-button icon-only clear item-end (click) ="mostrarPassword()">
+          <ion-icon name="eye"     *ngIf="!isShowingPassword"></ion-icon>
+          <ion-icon name="eye-off" *ngIf="isShowingPassword"></ion-icon>
+        </button>
+          
+      <ion-label stacked>Password:</ion-label>
+      <ion-input formControlName="password" [type]="isShowingPassword ? 'text' : 'password'"></ion-input>      
+    </ion-item>
+    
+    <ng-container *ngFor="let validation of mensajesValidacion.password">
+      <p color="danger" ion-text *ngIf="formularioRegistro.get('password').hasError(validation.type) && formularioRegistro.get('password').touched">{{ validation.message }}</p>
+    </ng-container>
 
-      <ng-container *ngFor="let validation of mensajesValidacion.password">
-        <p color="danger" ion-text *ngIf="formularioRegistro.get('password').hasError(validation.type) && formularioRegistro.get('password').touched">{{ validation.message }}</p>
-      </ng-container>
+    <!--Password Confirm-->
 
-      <!--Password Confirm-->
-      <ion-item>
-        <ion-label stacked>Confirmar password:</ion-label>
-        <ion-input formControlName="passwordConfirm" type="text"></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label stacked>Confirmar password:</ion-label>
+      <ion-input formControlName="passwordConfirm" [type]="isShowingPassword ? 'text' : 'password'"></ion-input>
+      <button ion-button icon-only clear *ngIf="!isShowingPassword">
+        <ion-icon name="eye"></ion-icon>
+      </button>
+      <button ion-button icon-only clear *ngIf="isShowingPassword">
+        <ion-icon name="eye-off"></ion-icon>
+      </button>
+    </ion-item>
 
-      <ng-container *ngFor="let validation of mensajesValidacion.password">
-        <p color="danger" ion-text *ngIf="formularioRegistro.get('passwordConfirm').hasError(validation.type) && formularioRegistro.get('passwordConfirm').touched">{{ validation.message }}</p>
-      </ng-container>
-
-      <div padding>
-        <button ion-button block type="submit" [disabled]="formularioRegistro.invalid">Guardar</button>
-      </div>
+    <ng-container *ngFor="let validation of mensajesValidacion.passwordConfirm">
+      <p color="danger" ion-text *ngIf="formularioRegistro.get('passwordConfirm').hasError(validation.type) && formularioRegistro.get('passwordConfirm').touched">{{ validation.message }}</p>
+    </ng-container>
+    
+    <div padding>
+      <button ion-button block type="submit" [disabled]="formularioRegistro.invalid">Guardar</button>
     </div>
-
   </form>
 
 </ion-content>

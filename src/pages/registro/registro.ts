@@ -19,6 +19,15 @@ import { Formularios } from '../../providers/constants/formularios';
 })
 export class RegistroPage {
 
+  /**Declaracion variables iniciales**/
+  isShowingPassword = false;
+  
+  /**Declaracion variables Formulario**/
+  formularioRegistro = Formularios.FORMULARIO_REGISTRO;
+  mensajesValidacion = Formularios.MENSAJES_VALIDACION_REGISTRO;
+
+
+  /**Constructor */
   constructor(public auth: AuthProvider,
               private firebaseProvider: FirebaseDbProvider,
               private avisosProvider: AvisosProvider,
@@ -29,8 +38,11 @@ export class RegistroPage {
               
              ) {}
 
-  formularioRegistro = Formularios.FORMULARIO_REGISTRO;
-  mensajesValidacion = Formularios.MENSAJES_VALIDACION_REGISTRO;
+  /** Funciones */            
+  
+  public mostrarPassword(){
+    this.isShowingPassword = !this.isShowingPassword;
+  }
   
     /*
 
