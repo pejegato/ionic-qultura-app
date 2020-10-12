@@ -1,6 +1,6 @@
 import { PerfilContactoPage } from './../perfil-contacto/perfil-contacto';
 import { Component } from '@angular/core';
-import { IonicPage, MenuController, ModalController } from 'ionic-angular';
+import {IonicPage, MenuController, ModalController, NavController} from 'ionic-angular';
 import { CONTACTOS } from '../../data/dashcards.data';
 
 //Dependencias para Scanner
@@ -24,7 +24,7 @@ import { ModalBuscarUsuarioPage } from '../modal-buscar-usuario/modal-buscar-usu
   templateUrl: 'lista-contactos.html',
 })
 
-export class ListaContactosPage {  
+export class ListaContactosPage {
   listaContactos: any[] = [];
   perfilContactoPage:any = PerfilContactoPage;
   constructor  (
@@ -33,11 +33,12 @@ export class ListaContactosPage {
     public userProvider: UserProvider,
     public modalCtrl: ModalController,
     private avisosProvider: AvisosProvider,
+    public navCtrl: NavController
   ) {
       this.listaContactos = CONTACTOS.slice(0);
     }
 
-  
+
 
 /*****************************************************************************
 * metodo que abre el menu lateral para acceder a las diferentes acciones
@@ -47,23 +48,29 @@ export class ListaContactosPage {
   }
 
 /*****************************************************************************
-* metodo que abre el scanner y detecta eñ codigo QR, 
+* metodo que abre el scanner y detecta eñ codigo QR,
 * si todo sale bien despliega un modal con los datos de la obra escaneada
 ******************************************************************************/
-  
-  abrirScanner(){            
+
+  abrirScanner(){
     this.sc.scanCode(this.userProvider.datosUsuario)
-    .then(obraResponse =>{       
+    .then(obraResponse =>{
       const modal = this.modalCtrl.create(ModalObraPage, { obra: obraResponse});
       modal.present();
-    }).catch(err =>{      
+    }).catch(err =>{
       this.avisosProvider.crearAlertaSimple('Error', err);
     })
   }
 
-  abrirBusqueda(){            
+  abrirBusqueda(){
     const modal = this.modalCtrl.create(ModalBuscarUsuarioPage);
-      modal.present();  
+      modal.present();
+  }
+
+  verPerfil(event ,usuario){
+    this.navCtrl.push(this.perfilContactoPage,{
+      usuario:usuario
+    });
   }
 
 }

@@ -1,14 +1,14 @@
 <ion-header>
 
-    <ion-navbar hideBackButton color="primary">    
+    <ion-navbar hideBackButton color="primary">
         <ion-buttons left>
           <button ion-button icon-only (click)="abrirMenu()">
             <ion-icon name="menu"></ion-icon>
           </button>
-        </ion-buttons>    
-        
+        </ion-buttons>
+
           <ion-title text-center>Tus Contactos</ion-title>
-        
+
         <ion-buttons end>
           <button ion-button icon-only (click)='abrirScanner()'>
             <ion-icon name="camera"></ion-icon>
@@ -25,25 +25,25 @@
           <p>
             Tus contactos
           <p>
-      </ion-item> 
+      </ion-item>
 
-      
+
       <ion-buttons>
         <button style="margin-top: 40px" ion-button block (click)="abrirBusqueda()">
           Buscar Contactos
         </button>
       </ion-buttons>
-      
+
     <ion-item *ngFor="let contacto of userProvider.datosUsuario.contactos; let i = index">
-      
-      <button no-lines ion-item detail-none [navPush]="perfilContactoPage">
+
+      <button no-lines ion-item detail-none (click)="verPerfil($event, contacto)">
         <ion-avatar item-left>
           <img [src]=contacto.data.imgUrl>
         </ion-avatar>
         <h2>{{contacto.data.username}}</h2>
       </button>
 
-      
+
 </ion-item>
 
   </ion-list>

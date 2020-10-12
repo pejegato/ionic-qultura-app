@@ -3,7 +3,6 @@ import {InicioSesionPage} from "./../pages/inicio-sesion/inicio-sesion";
 import {PerfilPage} from "./../pages/perfil/perfil";
 import {DashboardPage} from "./../pages/dashboard/dashboard";
 import {LoginPage} from "./../pages/login/login";
-import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {BrowserModule} from "@angular/platform-browser";
 import {ErrorHandler, NgModule} from "@angular/core";
 import {IonicApp, IonicErrorHandler, IonicModule} from "ionic-angular";
@@ -31,19 +30,20 @@ import { ModalObraPage } from "../pages/modal-obra/modal-obra";
 import { PhotosProvider } from '../providers/photos/photos';
 import 'firebase/storage';
 import { ModalBuscarUsuarioPage } from "../pages/modal-buscar-usuario/modal-buscar-usuario";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyBP9JDYl1X_0EaKIDBUimQnsUavudVPMzw",
-  authDomain: "qulturatesting.firebaseapp.com",
-  databaseURL: "https://qulturatesting.firebaseio.com",
-  projectId: "qulturatesting",
-  storageBucket: "qulturatesting.appspot.com",
+  apiKey: "AIzaSyD3dDzyLDQFPXitIFsElgYQe_xhuxi3y2A",
+  authDomain: "qulturaapp.firebaseapp.com",
+  databaseURL: "https://qultura-4c64d.firebaseio.com",
+  projectId: "qultura-4c64d",
+  storageBucket: "gs://qultura-4c64d.appspot.com",
   messagingSenderId: "458092754772"
 };
 
 @NgModule({
   declarations: [
-    MyApp,   
+    MyApp,
     LoginPage,
     RegistroPage,
     DashboardPage,
@@ -60,7 +60,7 @@ export const firebaseConfig = {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBYi00yrWm7s1YVl0mOHEh9GfNqVCZpTU4'
+      apiKey: "AIzaSyD3dDzyLDQFPXitIFsElgYQe_xhuxi3y2A"
     }),
     HttpClientModule,
      AngularFireModule.initializeApp(firebaseConfig),
@@ -70,7 +70,7 @@ export const firebaseConfig = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,  
+    MyApp,
     LoginPage,
     RegistroPage,
     DashboardPage,
@@ -88,7 +88,7 @@ export const firebaseConfig = {
     SplashScreen,
     BarcodeScanner,
     InAppBrowser,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},    
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     FirebaseDbProvider,
     AvisosProvider,
@@ -97,7 +97,7 @@ export const firebaseConfig = {
     Camera,
     UserProvider,
     PhotosProvider
-    
+
   ]
 })
 export class AppModule {}

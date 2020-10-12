@@ -1,13 +1,13 @@
 <ion-header>
-    <ion-navbar hideBackButton color="primary">    
+    <ion-navbar hideBackButton color="primary">
         <ion-buttons left>
           <button ion-button icon-only (click)="abrirMenu()">
             <ion-icon name="menu"></ion-icon>
           </button>
-        </ion-buttons>    
-        
+        </ion-buttons>
+
           <ion-title text-center>Mi Perfil</ion-title>
-        
+
         <ion-buttons end>
           <button ion-button icon-only (click)='abrirScanner()'>
             <ion-icon name="camera"></ion-icon>
@@ -27,7 +27,7 @@
     <ion-row justify-content-center align-items-center>
       <ion-col>
           <h1>{{userProvider.datosUsuario.username}}</h1>
-      </ion-col>      
+      </ion-col>
     </ion-row>
 
     <ion-row justify-content-center align-items-center>
@@ -37,7 +37,7 @@
           <ion-icon name="create"></ion-icon>
         </button>
       </ion-col>
-      
+
     </ion-row>
 
     <ion-row>
@@ -60,10 +60,10 @@
             <p *ngIf="userProvider.datosUsuario.data && userProvider.datosUsuario.data.length > 0">Tus ultimos logros y comentarios:</p>
             <p *ngIf="!userProvider.datosUsuario.data || userProvider.datosUsuario.data.length == 0">Aún no tienes logros ni comentarios</p>
           </ion-list-header>
-          <div *ngFor="let data of userProvider.datosUsuario.data; let i = index"> 
+          <div *ngFor="let data of userProvider.datosUsuario.data; let i = index">
             <ion-card *ngIf="data.tipoObjeto == 'scan'">
-              
-                <ion-item>                  
+
+                <ion-item>
                   <p>Has visto
                     <b>'{{data.contenido.nombre}}'</b>
                   </p>
@@ -74,13 +74,13 @@
                 <ion-card-content>
                   <p text-justify>{{data.contenido.descripcion}}</p>
                 </ion-card-content>
-            
+
                 <ion-row>
                   <ion-col>
-                    <button ion-button icon-left clear small>
+                    <!--button ion-button icon-left clear small>
                       <ion-icon name="thumbs-up"></ion-icon>
                       <div>0 Likes</div>
-                    </button>
+                    </button-->
                   </ion-col>
                   <ion-col>
                     <button ion-button icon-left clear small>
@@ -92,13 +92,13 @@
                   </ion-col>
                 </ion-row>
               </ion-card>
-          
+
 
               <ion-card *ngIf="data.tipoObjeto == 'comentario' && data.contenido.autor == userProvider.datosUsuario.username">
 
                   <ion-item>
-                    
-                    
+
+
                     <ion-row>
                         <ion-col>
                             <ion-avatar item-start>
@@ -106,30 +106,30 @@
                               </ion-avatar>
                         </ion-col>
                         <ion-col>
-                          <button ion-button icon-start clear small>                            
+                          <button ion-button icon-start clear small>
                             <ion-note>{{data.contenido.autor}}</ion-note>
                           </button>
                         </ion-col>
                         <ion-col>
-                          
+
                         </ion-col>
-                        
+
                       </ion-row>
                   </ion-item>
-                
+
                   <!--img src="img/advance-card-bttf.png"-->
-                
+
                   <ion-card-content justify-content-center align-items-left>
                     <p text-justify>{{data.contenido.cuerpo}}</p>
                   </ion-card-content>
-                
+
                   <ion-row>
-                    
+
                     <ion-col>
-                      <button ion-button icon-start clear small>
+                      <!--button ion-button icon-start clear small>
                         <ion-icon name="thumbs-up"></ion-icon>
                         <ion-note>0 Likes</ion-note>
-                      </button>
+                      </button-->
                     </ion-col>
                     <ion-col center text-center>
                         <button ion-button icon-left clear small>
@@ -140,7 +140,7 @@
                           </button>
                     </ion-col>
                   </ion-row>
-                
+
                 </ion-card>
             </div>
         </ion-list>

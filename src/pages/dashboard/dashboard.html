@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-navbar hideBackButton color="primary"> 
-    
+  <ion-navbar hideBackButton color="primary">
+
     <ion-buttons left>
       <button ion-button icon-only (click)="abrirMenu()">
         <ion-icon name="menu"></ion-icon>
@@ -8,7 +8,7 @@
     </ion-buttons>
 
       <ion-title text-center>Historias de {{userProvider.datosUsuario.username}}</ion-title>
-    
+
     <ion-buttons end>
       <button ion-button icon-only (click)='abrirScanner()'>
         <ion-icon name="camera"></ion-icon>
@@ -21,17 +21,17 @@
   <ion-grid height="100%">
     <ion-row align-items-center>
       <ion-col row-2 col-12>
-          <ion-item no-lines >            
+          <ion-item no-lines >
             <ion-label color="primary" stacked>¿Donde estás?</ion-label>
-            <ion-textarea type="text" class="comentarios" [(ngModel)]="comentario.cuerpo"></ion-textarea>            
+            <ion-textarea type="text" class="comentarios" [(ngModel)]="comentario.cuerpo"></ion-textarea>
 
-          </ion-item>        
+          </ion-item>
           <ion-item no-lines>
             <ion-buttons>
               <button (click)="enviarComentario()" ion-button block>Enviar</button>
             </ion-buttons>
           </ion-item>
-          
+
       </ion-col>
     </ion-row>
     <ion-list>
@@ -39,28 +39,28 @@
           <p *ngIf="userProvider.datosUsuario.data && userProvider.datosUsuario.data.length > 0">Lo ultimo que han visto tú y tus amigos</p>
           <p *ngIf="!userProvider.datosUsuario.data || userProvider.datosUsuario.data.length == 0">Aún no tienes logros ni comentarios tuyos ni de amigos</p>
         </ion-list-header>
-        <div *ngFor="let data of userProvider.datosUsuario.data; let i = index"> 
+        <div *ngFor="let data of userProvider.datosUsuario.data; let i = index">
           <ion-card *ngIf="data.tipoObjeto == 'scan'">
-            
+
               <ion-item>
                 <p>{{data.username}} ha visto
                   <b>'{{data.contenido.nombre}}'</b>
                 </p>
 
               </ion-item>
-              
+
               <img src="{{data.contenido.imgUrl}}">
 
               <ion-card-content>
                 <p text-justify>{{data.contenido.descripcion}}</p>
               </ion-card-content>
-          
+
               <ion-row>
                 <ion-col>
-                  <button ion-button icon-left clear small>
+                  <!--button ion-button icon-left clear small>
                     <ion-icon name="thumbs-up"></ion-icon>
                     <div>0 Likes</div>
-                  </button>
+                  </button-->
                 </ion-col>
                 <ion-col>
                   <button ion-button icon-left clear small>
@@ -72,7 +72,7 @@
                 </ion-col>
               </ion-row>
             </ion-card>
-        
+
 
             <ion-card *ngIf="data.tipoObjeto == 'comentario'">
               <ion-item>
@@ -83,7 +83,7 @@
                       </ion-avatar>
                     </ion-col>
                     <ion-col>
-                      <button ion-button icon-start clear small>                            
+                      <button ion-button icon-start clear small>
                         <ion-note>{{data.username}}</ion-note>
                       </button>
                     </ion-col>
@@ -91,20 +91,20 @@
                     </ion-col>
                   </ion-row>
                 </ion-item>
-              
+
                 <!--img src="img/advance-card-bttf.png"-->
-              
+
                 <ion-card-content justify-content-center align-items-left>
                   <p text-justify>{{data.contenido.cuerpo}}</p>
                 </ion-card-content>
-              
+
                 <ion-row>
-                  
+
                   <ion-col>
-                    <button ion-button icon-start clear small>
+                    <!--button ion-button icon-start clear small>
                       <ion-icon name="thumbs-up"></ion-icon>
                       <ion-note>0 Likes</ion-note>
-                    </button>
+                    </button-->
                   </ion-col>
                   <ion-col center text-center>
                       <button ion-button icon-left clear small>
@@ -115,11 +115,11 @@
                         </button>
                   </ion-col>
                 </ion-row>
-              
+
               </ion-card>
           </div>
       </ion-list>
   </ion-grid>
 
-  
+
 </ion-content>

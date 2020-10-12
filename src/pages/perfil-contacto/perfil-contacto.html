@@ -1,14 +1,14 @@
 <ion-header>
 
-    <ion-navbar hideBackButton color="primary">    
+    <ion-navbar hideBackButton color="primary">
         <ion-buttons left>
           <button ion-button icon-only (click)="abrirMenu()">
             <ion-icon name="menu"></ion-icon>
           </button>
-        </ion-buttons>    
-        
+        </ion-buttons>
+
           <ion-title text-center>Perfil Contacto</ion-title>
-        
+
         <ion-buttons end>
           <button ion-button icon-only (click)='abrirScanner()'>
             <ion-icon name="camera"></ion-icon>
@@ -22,12 +22,12 @@
 
   <ion-grid>
     <ion-row justify-content-center align-items-center>
-      <img src="{{contactoPerfil.img}}" class="avatar">
+      <img src="{{userData.data.imgUrl}}" class="avatar">
     </ion-row>
 
     <ion-row justify-content-center align-items-center>
       <ion-col>
-        <h1>{{contactoPerfil.nombre}}</h1>
+        <h1>{{userData.data.username}}</h1>
       </ion-col>
     </ion-row>
 
@@ -52,43 +52,92 @@
       <ion-col>
         <ion-list>
           <ion-list-header>
-            Ultimos Logros
+            <p *ngIf="actividadesContacto && actividadesContacto.length > 0">Últimos logros y comentarios:</p>
+            <p *ngIf="!actividadesContacto || actividadesContacto == 0">Aún no tienes logros ni comentarios</p>
           </ion-list-header>
-          <ion-card *ngFor="let contacto of contactoLogros; let i = index">
+          <div *ngFor="let data of actividadesContacto; let i = index">
+            <ion-card *ngIf="data.tipoObjeto == 'scan'">
 
-            <ion-item>
-              <p>Has visto
-                <b>'{{contacto.titulo}}'</b>
-              </p>
-              <p>{{contacto.fecha | date : 'medium'}}</p>
-            </ion-item>
+              <ion-item>
+                <p>Has visto
+                  <b>'{{data.contenido.nombre}}'</b>
+                </p>
+              </ion-item>
 
-            <img src="{{contacto.lugarImg}}">
+              <img src="{{data.contenido.imgUrl}}">
 
-            <ion-card-content>
-              <p>{{contacto.texto}}</p>
-            </ion-card-content>
+              <ion-card-content>
+                <p text-justify>{{data.contenido.descripcion}}</p>
+              </ion-card-content>
 
-            <ion-row>
-              <ion-col>
-                <button ion-button icon-left clear small>
-                  <ion-icon name="thumbs-up"></ion-icon>
-                  <div>12 Likes</div>
-                </button>
-              </ion-col>
-              <ion-col>
-                <button ion-button icon-left clear small>
-                  <ion-icon name="text"></ion-icon>
-                  <div>4 Comments</div>
-                </button>
-              </ion-col>
-              <ion-col center text-center>
-                <ion-note>
-                  11h ago
-                </ion-note>
-              </ion-col>
-            </ion-row>
-          </ion-card>
+              <ion-row>
+                <ion-col>
+                  <!--button ion-button icon-left clear small>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <div>0 Likes</div>
+                  </button-->
+                </ion-col>
+                <ion-col>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="calendar"></ion-icon>
+                    <ion-note>
+                      {{data.fechaIngreso | date: 'dd/MM/yyyy'}}
+                    </ion-note>
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+
+
+            <ion-card *ngIf="data.tipoObjeto == 'comentario'">
+
+              <ion-item>
+
+
+                <ion-row>
+                  <ion-col>
+                    <ion-avatar item-start>
+                      <img src="{{userData.data.imgUrl}}">
+                    </ion-avatar>
+                  </ion-col>
+                  <ion-col>
+                    <button ion-button icon-start clear small>
+                      <ion-note>{{data.contenido.autor}}</ion-note>
+                    </button>
+                  </ion-col>
+                  <ion-col>
+
+                  </ion-col>
+
+                </ion-row>
+              </ion-item>
+
+              <!--img src="img/advance-card-bttf.png"-->
+
+              <ion-card-content justify-content-center align-items-left>
+                <p text-justify>{{data.contenido.cuerpo}}</p>
+              </ion-card-content>
+
+              <ion-row>
+
+                <ion-col>
+                  <!--button ion-button icon-start clear small>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <ion-note>0 Likes</ion-note>
+                  </button-->
+                </ion-col>
+                <ion-col center text-center>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="calendar"></ion-icon>
+                    <ion-note>
+                      {{data.fechaIngreso | date: 'dd/MM/yyyy'}}
+                    </ion-note>
+                  </button>
+                </ion-col>
+              </ion-row>
+
+            </ion-card>
+          </div>
         </ion-list>
       </ion-col>
     </ion-row>

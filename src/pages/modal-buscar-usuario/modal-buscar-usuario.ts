@@ -22,9 +22,9 @@ export class ModalBuscarUsuarioPage {
   tasks: any;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
-    
+
     private viewCtrl: ViewController,
     private firebaseProvider: FirebaseDbProvider,
     private userProvider: UserProvider,
@@ -38,20 +38,20 @@ export class ModalBuscarUsuarioPage {
     if(typeof this.usuarioBuscado !='undefined' && this.usuarioBuscado){
       this.firebaseProvider.buscarContactos(this.usuarioBuscado).then(function(snapshot) {
         if(snapshot.val()){
-          _self.people = _self.snapshotToArray(snapshot.val());          
+          _self.people = _self.snapshotToArray(snapshot.val());
         }else{
-          _self.avisosProvider.crearAlertaSimple('Error', "No se han encontrado resultados");    
+          _self.avisosProvider.crearAlertaSimple('Error', "No se han encontrado resultados");
           _self.people = []
-          
+
         }
-        
+
       });
     }else{
       this.avisosProvider.crearAlertaSimple('Error', "Ingresa nombre usuario a buscar");
-      
+
     }
-    
-    
+
+
   }
 
   private agregarContacto(contacto):void {
@@ -61,14 +61,14 @@ export class ModalBuscarUsuarioPage {
         .then(()=>{
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Exito', "Contacto agregado con Exito");
-          
+
         }).catch(()=>{
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Error', "Se ha producido un error ");
-          
+
           this.usuarioBuscado = "";
         })
-    
+
   };
 
  /*****************************************************************************
@@ -95,7 +95,7 @@ export class ModalBuscarUsuarioPage {
   }
 
   omit_special_char(event, email){
-    var k;  
+    var k;
     k = event.charCode;
     var x = 64
     if(email)
