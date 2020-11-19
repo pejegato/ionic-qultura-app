@@ -36,9 +36,9 @@ export class DashboardPage {
     private firebaseProvider: FirebaseDbProvider
   ) {
     this.listaContactos = DASHCARDS.slice(0);
-    this.comentario = {      
+    this.comentario = {
       autor:"",
-      cuerpo:"",      
+      cuerpo:"",
       uid:"",
     };
   }
@@ -51,35 +51,35 @@ export class DashboardPage {
   }
 
 /*****************************************************************************
-* metodo que abre el scanner y detecta eñ codigo QR, 
+* metodo que abre el scanner y detecta eñ codigo QR,
 * si todo sale bien despliega un modal con los datos de la obra escaneada
 ******************************************************************************/
-  
-  abrirScanner(){            
+
+  abrirScanner(){
     this.sc.scanCode(this.userProvider.datosUsuario)
-    .then(obraResponse =>{       
+    .then(obraResponse =>{
       const modal = this.modalCtrl.create(ModalObraPage, { obra: obraResponse});
       modal.present();
-    }).catch(err =>{      
+    }).catch(err =>{
       this.avisosProvider.crearAlertaSimple('Error', err);
     })
   }
 
   /*****************************************************************************
-* metodo  que abre el scanner y detecta eñ codigo QR, 
+* metodo  que abre el scanner y detecta eñ codigo QR,
 * si todo sale bien despliega un modal con los datos de la obra escaneada
 ******************************************************************************/
-  
+
 enviarComentario(){
   if(!this.comentario.cuerpo){
   this.avisosProvider.crearAlertaSimple('Error!', "Debe ingresar un texto");
     this.comentario.cuerpo = "";
-   }else{  
+   }else{
     this.comentario.uid = Math.floor(Date.now() / 1000);
     this.comentario.autor = this.userProvider.datosUsuario.username;
     this.firebaseProvider.updateDatosUsuarioObra(this.userProvider.datosUsuario, this.comentario, 'comentario')
     .then(() =>{
-      this.avisosProvider.crearAlertaSimple('Exito!', "Comentario creado con exito");
+      this.avisosProvider.crearAlertaSimple('¡Éxito!', "Comentario ha sido compartido correctamente.");
       this.comentario.cuerpo = "";
     }).catch(err =>{
           this.avisosProvider.crearAlertaSimple('Error', err);

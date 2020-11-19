@@ -60,7 +60,7 @@ export class ModalBuscarUsuarioPage {
     this.firebaseProvider.guardaContactoUsuario(this.userProvider.datosUsuario,contacto)
         .then(()=>{
           loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Exito', "Contacto agregado con Exito");
+          this.avisosProvider.crearAlertaSimple('Éxito', "Contacto agregado con correctamente");
 
         }).catch(()=>{
           loading.dismiss();

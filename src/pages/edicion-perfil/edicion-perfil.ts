@@ -36,6 +36,7 @@ export class EdicionPerfilPage {
   password:any;
   nuevoPassword:any;
 
+
 private originalMail:string;
 
   constructor(
@@ -43,7 +44,7 @@ private originalMail:string;
     public modalCtrl: ModalController,
     public auth: AuthProvider ,
     private scannerProvider: ScannerProvider,
-    private firebaseProvider: FirebaseDbProvider,      
+    private firebaseProvider: FirebaseDbProvider,
     private avisosProvider: AvisosProvider,
     public userProvider: UserProvider,
     private camera : Camera,
@@ -62,16 +63,16 @@ private originalMail:string;
   }
 
 /*****************************************************************************
-* metodo que abre el scanner y detecta eñ codigo QR, 
+* metodo que abre el scanner y detecta eñ codigo QR,
 * si todo sale bien despliega un modal con los datos de la obra escaneada
 ******************************************************************************/
 
-  abrirScanner(){            
+  abrirScanner(){
     this.scannerProvider.scanCode(this.userProvider.datosUsuario)
-    .then(obraResponse =>{       
+    .then(obraResponse =>{
       const modal = this.modalCtrl.create(ModalObraPage, { obra: obraResponse});
       modal.present();
-    }).catch(err =>{      
+    }).catch(err =>{
       this.avisosProvider.crearAlertaSimple('Error', err);
     })
   }
@@ -91,7 +92,7 @@ private originalMail:string;
 
     let loading = this.avisosProvider.crearLoading("Editando usuario...");
     loading.present();
-    
+
     this.auth.updatePerfilUsuario(user,this.originalMail)
     .then(response => {
       //imagen por defecto
@@ -100,17 +101,17 @@ private originalMail:string;
 
       if (this.imgData){
         user.img = Math.floor(Date.now() / 1000);
-        this.firebaseProvider.uploadImage(this.imgData, user.img)        
+        this.firebaseProvider.uploadImage(this.imgData, user.img)
         .then(()=>
-          this.firebaseProvider.downloadImageUrl(user.img)        
+          this.firebaseProvider.downloadImageUrl(user.img)
         .then(url=>{
-          user.imgUrl = url; 
+          user.imgUrl = url;
           this.firebaseProvider.guardaInfoAdicionalUsuario(user)
         .then(()=>{
           loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
+          this.avisosProvider.crearAlertaSimple('Éxito', "Usuario editado correctamente.");
           this.navCtrl.setRoot(PerfilPage);
-          })        
+          })
         })
         .catch(err => {
           loading.dismiss();
@@ -120,7 +121,7 @@ private originalMail:string;
         this.firebaseProvider.guardaInfoAdicionalUsuario(user)
         .then(()=>{
           loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
+          this.avisosProvider.crearAlertaSimple('¡Éxito!', "Usuario editado correctamente.");
         })
         .catch(err => {
           loading.dismiss();
@@ -144,10 +145,10 @@ private originalMail:string;
         this.user.password = nuevoPassword;
         this.user.passwordConfirm = nuevoPasswordConfirm;
         this.firebaseProvider.guardaInfoAdicionalUsuario(this.user)
-      })        
+      })
       .then(()=>{
         loading.dismiss();
-        this.avisosProvider.crearAlertaSimple('Exito', "Password actualizado con Exito");
+        this.avisosProvider.crearAlertaSimple('¡Éxito!', "Password actualizado correctamente.");
         this.navCtrl.setRoot(PerfilPage);
       })
       .catch(err => {
@@ -158,8 +159,8 @@ private originalMail:string;
       loading.dismiss();
       this.avisosProvider.crearAlertaSimple('Error!','Passwords no coinciden!');
     }
-    
-    
+
+
   }
 
   getPicture(sourceType){

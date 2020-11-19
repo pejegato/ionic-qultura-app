@@ -18,7 +18,7 @@ export class RegistroPage {
 
   constructor(
       public auth: AuthProvider,
-      private firebaseProvider: FirebaseDbProvider,      
+      private firebaseProvider: FirebaseDbProvider,
       private avisosProvider: AvisosProvider,
       private camera : Camera,
       private errores : diccionarioErrores,
@@ -34,6 +34,7 @@ export class RegistroPage {
         passwordConfirm: '',
         username: '',
         nombre: '',
+        apellido: '',
         img: '',
         imgUrl: '',
         puntaje: '0',
@@ -56,10 +57,10 @@ export class RegistroPage {
 
     let loading = this.avisosProvider.crearLoading("Registrando usuario...");
     loading.present();
-    
+
     this.auth.registerUser(user)
     .then(response => {
-      
+
       //imagen por defecto
       user.img = diccionarioErrores.IMG_DEFECTO;
       user.imgUrl = diccionarioErrores.URL_IMG_DEFECTO;
@@ -67,19 +68,19 @@ export class RegistroPage {
       this.user.uid = response.user.uid;
       if (this.imgData){
         user.img = Math.floor(Date.now() / 1000);
-        this.firebaseProvider.uploadImage(this.imgData, user.img)        
+        this.firebaseProvider.uploadImage(this.imgData, user.img)
         .then(()=>
-          this.firebaseProvider.downloadImageUrl(user.img)        
+          this.firebaseProvider.downloadImageUrl(user.img)
         .then(url=>{
-          user.imgUrl = url; 
+          user.imgUrl = url;
           this.firebaseProvider.guardaInfoAdicionalUsuario(user)
         .then(()=>{
           loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
+          this.avisosProvider.crearAlertaSimple('¡Éxito!', "Usuario editado correctamente.");
           this.navCtrl.setRoot(DashboardPage);
-          })        
+          })
         })
-        
+
         .catch(err => {
           loading.dismiss();
           this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
@@ -88,7 +89,7 @@ export class RegistroPage {
         this.firebaseProvider.guardaInfoAdicionalUsuario(user)
         .then(()=>{
           loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Exito', "Usuario Guardado con Exito");
+          this.avisosProvider.crearAlertaSimple('¡Éxito!', "Usuario ha sido creado correctamente.");
         })
         .catch(err => {
           loading.dismiss();
@@ -118,9 +119,9 @@ export class RegistroPage {
     });
   }
 
-  
+
   omit_special_char(event, email){
-    var k;  
+    var k;
     k = event.charCode;
     var x = 64
     if(email)

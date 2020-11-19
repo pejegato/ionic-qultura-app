@@ -16,15 +16,15 @@
 
   <ion-grid style="height: 100%">
     <ion-row  align-items-center>
-      
+
       <ion-col col-5>
         <img src="../../assets/avatars/none.jpeg" *ngIf="!imgData" class="avatar-registro">
         <img [src]="imgData" *ngIf="imgData" class="avatar-registro"/>
       </ion-col>
-      <ion-col col-7>      
+      <ion-col col-7>
         <ion-buttons>
             <button ion-button (click)="getPicture(0)">Subir Foto</button>
-        </ion-buttons>      
+        </ion-buttons>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -40,12 +40,12 @@
           </ion-item>
 
           <ion-item>
-            <ion-label floating>User</ion-label>
+            <ion-label floating>Usuario</ion-label>
             <ion-input [(ngModel)]="user.username" required (keypress)="omit_special_char($event, false)"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label floating>Email</ion-label>
+            <ion-label floating>Correo electrónico</ion-label>
             <ion-input type="email" [(ngModel)]="user.email" required (keypress)="omit_special_char($event, true)"></ion-input>
           </ion-item>
 

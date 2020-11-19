@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar color="primary">
-    
+    <ion-title text-center>Iniciar Sesión</ion-title>
     <ion-buttons end>
       <button ion-button icon-only >
-        
+
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -16,29 +16,29 @@
   <ion-grid style="height: 100%">
 
     <ion-row justify-content-center align-items-center style="height: 50%">
-      <img src="../../assets/avatars/none.jpeg" class="avatar">
+      <img src="../../assets/imgs/logo.jpg" class="avatar" style="width: 200px">
     </ion-row>
 
     <ion-row>
 
       <ion-col>
 
-        <ion-list>        
+        <ion-list>
 
           <ion-list-header>
-            Datos de inicio de sesión
+            ¡Te extrañamos!
           </ion-list-header>
 
           <ion-item>
-            <ion-label floating>Email</ion-label>
+            <ion-label floating>Correo electrónico</ion-label>
             <ion-input type="text" [(ngModel)]="user.email" required (keypress)="omit_special_char($event, true)"></ion-input>
           </ion-item>
-        
+
           <ion-item>
-            <ion-label floating>Password</ion-label>
+            <ion-label floating>Contraseña</ion-label>
             <ion-input type="password" [(ngModel)]="user.password" required></ion-input>
           </ion-item>
-        
+
           <ion-buttons>
             <button style="margin-top: 30px" ion-button block (click)="login()">
               Iniciar Sesión
@@ -47,8 +47,8 @@
 
         </ion-list>
 
-      </ion-col>      
-      
+      </ion-col>
+
     </ion-row>
 
   </ion-grid>

@@ -6,15 +6,15 @@
 -->
 <ion-header>
 
-    <ion-navbar hideBackButton color="primary">    
+    <ion-navbar hideBackButton color="primary">
         <ion-buttons left>
           <button ion-button icon-only (click)="abrirMenu()">
             <ion-icon name="menu"></ion-icon>
           </button>
-        </ion-buttons>    
-        
+        </ion-buttons>
+
           <ion-title text-center>Editar Perfil</ion-title>
-        
+
         <ion-buttons end>
           <button ion-button icon-only  (click)='abrirScanner()'>
             <ion-icon name="camera"></ion-icon>
@@ -29,16 +29,16 @@
 
   <ion-grid>
     <ion-row  align-items-center>
-      
+
       <ion-col col-5>
-        
+
         <img [src]="user.imgUrl" *ngIf="!imgData"  class="avatar"/>
         <img [src]="imgData"     *ngIf="imgData" class="avatar"/>
       </ion-col>
-      <ion-col col-7>      
+      <ion-col col-7>
         <ion-buttons>
             <button ion-button (click)="getPicture(0)">Subir Foto</button>
-        </ion-buttons>      
+        </ion-buttons>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -54,7 +54,7 @@
           </ion-item>
 
           <ion-item>
-            <ion-label floating>User</ion-label>
+            <ion-label floating>Usuario</ion-label>
             <ion-input [(ngModel)]="user.username" required></ion-input>
           </ion-item>
 
@@ -71,21 +71,21 @@
 
       </ion-col>
     </ion-row>
-    
+
     <ion-row>
       <ion-col>
           <ion-item>
-            <ion-label floating>Password actual</ion-label>
+            <ion-label floating>Contraseña actual</ion-label>
             <ion-input type="password" [(ngModel)]="passwordActual" required></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label floating>Nuevo Password</ion-label>
+            <ion-label floating>Nueva contraseña</ion-label>
             <ion-input type="password" [(ngModel)]="nuevoPassword" required></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label floating>Confirma nuevo Password</ion-label>
+            <ion-label floating>Confirma nueva Contraseña</ion-label>
             <ion-input type="password" [(ngModel)]="nuevoPasswordConfirm" required></ion-input>
           </ion-item>
 
@@ -96,7 +96,7 @@
           </ion-buttons>
       </ion-col>
     </ion-row>
-  
+
   </ion-grid>
 
 </ion-content>

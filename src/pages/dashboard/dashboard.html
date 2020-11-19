@@ -36,15 +36,15 @@
     </ion-row>
     <ion-list>
         <ion-list-header>
-          <p *ngIf="userProvider.datosUsuario.data && userProvider.datosUsuario.data.length > 0">Lo ultimo que han visto tú y tus amigos</p>
-          <p *ngIf="!userProvider.datosUsuario.data || userProvider.datosUsuario.data.length == 0">Aún no tienes logros ni comentarios tuyos ni de amigos</p>
+          <p *ngIf="userProvider.datosUsuario.data && userProvider.datosUsuario.data.length > 0">Lo último que han visto tú y tus amigos:</p>
+          <p *ngIf="!userProvider.datosUsuario.data || userProvider.datosUsuario.data.length == 0">Aún no tienes logros ni comentarios tuyos ni de amigos.</p>
         </ion-list-header>
         <div *ngFor="let data of userProvider.datosUsuario.data; let i = index">
           <ion-card *ngIf="data.tipoObjeto == 'scan'">
 
               <ion-item>
                 <p>{{data.username}} ha visto
-                  <b>'{{data.contenido.nombre}}'</b>
+                  <b>'{{data.contenido.nombre}}'.</b>
                 </p>
 
               </ion-item>

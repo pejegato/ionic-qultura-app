@@ -14,7 +14,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ScannerProvider {
 
-  constructor(    
+  constructor(
     private barcodeScanner: BarcodeScanner,
     private platform: Platform,
     private firebaseProvider: FirebaseDbProvider,
@@ -27,25 +27,25 @@ export class ScannerProvider {
   * que rescatan dichos datos de la BD                                                                  *
   ******************************************************************************************************/
 
-  
+
   scanCode(usuario):Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      
+
       var obras;
 
       //Pregunta si es telefono o pc
-      if (!this.platform.is('cordova')) {        
-        
-        this.userProvider.getPiecesData(2)
+      if (!this.platform.is('cordova')) {
+
+        this.userProvider.getPiecesData("0000002")
         .then(responseObra => {
           obras = responseObra;
           this.firebaseProvider.updateDatosUsuarioObra(usuario, obras, 'scan')
         })
         .then (() => {
-          if(!this.comprobarObra("2", usuario.data)){
-            this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras);        
+          if(!this.comprobarObra("0000002", usuario.data)){
+            this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras);
           }
-          
+
         })
         .then(() => {
           resolve(obras)
@@ -59,7 +59,7 @@ export class ScannerProvider {
         .then(barcodeData => {
 
           if (!barcodeData.cancelled && barcodeData.cancelled !== null) {
-            
+
             this.userProvider.getPiecesData(barcodeData.text)
             .then(responseObra => {
               obras = responseObra;
@@ -67,7 +67,7 @@ export class ScannerProvider {
             })
             .then (() => {
               if(!this.comprobarObra(barcodeData.text, usuario.data)){
-                this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras);        
+                this.firebaseProvider.updateDatosUsuarioPuntaje(usuario, obras);
               }
             })
             .then(() => {
@@ -85,13 +85,13 @@ export class ScannerProvider {
 
   comprobarObra(idObra, arrayObras) {
     let existe:boolean = false;
-    
+
     var result = arrayObras.find(obj => {
       return obj.contenido.uid == idObra
     })
 
     existe = true ? typeof result !== 'undefined' : false;
-    return existe; 
+    return existe;
   }
 
 
