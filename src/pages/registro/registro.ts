@@ -46,10 +46,16 @@ export class RegistroPage {
   alertCtrl: AlertController;
 
   signin(){
-    if (this.user.passwordConfirm === this.user.password){
-      this.registrarUsuario(this.user);
+    if (this.user.nombre === null || this.user.nombre.trim() === ''){
+      this.avisosProvider.crearAlertaSimple('¡Error!','Nombre inválido.');
+    }
+    else if (this.user.username === null || this.user.username.trim() === ''){
+      this.avisosProvider.crearAlertaSimple('¡Error!','Nombre de usuario inválido.');
+    }
+    else if (this.user.passwordConfirm !== this.user.password){
+      this.avisosProvider.crearAlertaSimple('¡Error!','Las contraseñas no coinciden.');
     }else{
-      this.avisosProvider.crearAlertaSimple('Error!','Passwords no coinciden!');
+      this.registrarUsuario(this.user);
     }
   }
 
@@ -76,14 +82,14 @@ export class RegistroPage {
           this.firebaseProvider.guardaInfoAdicionalUsuario(user)
         .then(()=>{
           loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('¡Éxito!', "Usuario editado correctamente.");
+          this.avisosProvider.crearAlertaSimple('¡Éxito!', "Usuario ha sido creado correctamente.");
           this.navCtrl.setRoot(DashboardPage);
           })
         })
 
         .catch(err => {
           loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
+          this.avisosProvider.crearAlertaSimple('¡Error!', this.errores.traducirError('LOGIN',err.code));
         }));
       }else{
         this.firebaseProvider.guardaInfoAdicionalUsuario(user)
@@ -93,12 +99,12 @@ export class RegistroPage {
         })
         .catch(err => {
           loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
+          this.avisosProvider.crearAlertaSimple('¡Error!', this.errores.traducirError('LOGIN',err.code));
         });
       }
     }).catch(err => {
       loading.dismiss();
-      this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
+      this.avisosProvider.crearAlertaSimple('¡Error!', this.errores.traducirError('LOGIN',err.code));
     });
   }
 
@@ -115,7 +121,7 @@ export class RegistroPage {
      .then((captureDataUrl) => {
        this.imgData = 'data:image/jpeg;base64,' + captureDataUrl;
     }).catch(() => {
-      this.avisosProvider.crearAlertaSimple('Error',"No se pudo obtener la foto");
+      this.avisosProvider.crearAlertaSimple('¡Error!',"No se pudo obtener la foto.");
     });
   }
 

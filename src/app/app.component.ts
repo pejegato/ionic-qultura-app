@@ -52,13 +52,13 @@ export class MyApp {
 
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          this.userProvider.getUserData(user).then(()=>{ 
-                       
-            this.navCtrl.setRoot(DashboardPage);            
+          this.userProvider.getUserData(user).then(()=>{
+
+            this.navCtrl.setRoot(DashboardPage);
           }).catch(()=>{
-            this.navCtrl.setRoot(LoginPage);  
-          })          
-        } else {          
+            this.navCtrl.setRoot(LoginPage);
+          })
+        } else {
           this.navCtrl.setRoot(LoginPage);
         }
         this.loading.dismiss();
@@ -76,6 +76,8 @@ export class MyApp {
   }
 
   cerrarSesion() {
+
+
     this.authProvider.logout();
     this.menuController.close();
   }

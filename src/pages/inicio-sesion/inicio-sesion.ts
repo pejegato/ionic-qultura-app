@@ -43,19 +43,19 @@ export class InicioSesionPage {
 
     this.auth.loginUser(this.user.email, this.user.password)
     .then((response) => {
-      this.userProvider.getUserData(response.user)      
+      this.userProvider.getUserData(response.user)
     })
     .then(()=> {
-      loading.dismiss();       
+      loading.dismiss();
     })
     .catch(err => {
       loading.dismiss();
-      this.avisosProvider.crearAlertaSimple("Error", this.errores.traducirError('LOGIN',err.code));
+      this.avisosProvider.crearAlertaSimple("¡Error!", this.errores.traducirError('LOGIN',err.code));
     })
   }
 
   omit_special_char(event, email){
-    var k;  
+    var k;
     k = event.charCode;
     var x = 64
     if(email)

@@ -28,6 +28,7 @@ export class PerfilContactoPage {
   userData:any;
 
   public actividadesContacto:any[] = [];
+  public perfilContacto:any[]  = [];
 
   constructor(
     private menuController: MenuController,
@@ -46,6 +47,7 @@ export class PerfilContactoPage {
 
   ionViewWillEnter(){
     this.obtenerDatosContacto();
+    this.obtenerDataContacto();
 }
 
 /*****************************************************************************
@@ -91,12 +93,27 @@ obtenerDatosContacto(){
 
           _self.actividadesContacto = _self.snapshotToArray(_self.actividadesContacto);
 
-          console.log(_self.actividadesContacto);
+          //console.log(_self.actividadesContacto);
         });
       }
     }
   })
 }
+
+  obtenerDataContacto(){
+    let _self= this;
+    let aux:any[] = [];
+    this.firebaseProvider.obtieneDatosUsuario(this.userData.data.uid).subscribe({
+      next(mensajesContacto){
+        _self.userData.data = mensajesContacto
+
+
+        console.log(_self.userData);
+      }
+    })
+
+
+  }
 
   /*****************************************************************************
    * Metodo utilitario que convierte un listado de objetos en un array         *

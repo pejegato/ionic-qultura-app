@@ -6,11 +6,11 @@ export class diccionarioErrores {
   private ERRORES_LOGIN = new  Map<string, string>([
       ["AUTH/AUTHENTICATION-PROVIDER-DISABLED","Autenticación Deshabilitada."],
       ["AUTH/INVALID-CREDENTIALS", 'Credenciales inválidas.'],
-      ['AUTH/INVALID-EMAIL', 'Email inválido.'],
+      ['AUTH/INVALID-EMAIL', 'Correo electrónico inválido.'],
       ["AUTH/INVALID-ORIGIN", 'Origen inválido.'],
-      ["AUTH/INVALID-PASSWORD", 'Password inválido.'],
-      ["AUTH/WRONG-PASSWORD", 'Password inválido.'],
-      ["AUTH/EMAIL-TAKEN", 'Email ya existe.'],
+      ["AUTH/INVALID-PASSWORD", 'Contraseña no corresponde, intente nuevamente.'],
+      ["AUTH/WRONG-PASSWORD", 'Contraseña no corresponde, intente nuevamente.'],
+      ["AUTH/EMAIL-TAKEN", 'Este correo electrónico ya se encuentra registrado.'],
       ["AUTH/INVALID-PROVIDER", 'Proveedor inválido.'],
       ["AUTH/INVALID-AUTH-ARGUMENTS", 'Argumentos de autenticación inválidos.'],
       ["AUTH/INVALID-CONFIGURATION", 'Configuración inválida.'],
@@ -18,10 +18,12 @@ export class diccionarioErrores {
       ["AUTH/NETWORK-ERROR", 'Error de red.'],
       ["AUTH/UNKNOWN-ERROR", 'Se ha producido un error.'],
       ["AUTH/USER-DENIED-AUTH", 'Usuario no autorizado.'],
-      ["AUTH/USER-DOES-NOT-EXIST", 'Usuario no existe.'],
-      ["AUTH/EMAIL-ALREADY-IN-USE", 'Email ya se encuentra registrado.'],
-      ["AUTH/WEAK-PASSWORD", 'Password demasiado corto.'],
-      ["AUTH/USER-NOT-FOUND", 'Usuario no existe.'],
+      ["AUTH/USER-DOES-NOT-EXIST", 'Este correo electrónico no se encuentra registrado.'],
+      ["AUTH/EMAIL-ALREADY-IN-USE", 'Este correo electrónico ya se encuentra registrado.'],
+      ["AUTH/WEAK-PASSWORD", 'Contraseña demasiado corta.'],
+      ["AUTH/USER-NOT-FOUND", 'Este correo electrónico no se encuentra registrado.'],
+      ["AUTH/ARGUMENT-ERROR", 'Ingrese una contraseña nueva para realizar la actualización.'],
+      ["AUTH/NETWORK-REQUEST-FAILED", 'Revise su conexión a internet.'],
 
 
   ]);

@@ -33,8 +33,9 @@ export class EdicionPerfilPage {
     obrasEscaneadas:[]
 };
 
-  password:any;
+  passwordActual:any;
   nuevoPassword:any;
+  nuevoPasswordConfirm:any;
 
 
 private originalMail:string;
@@ -73,7 +74,7 @@ private originalMail:string;
       const modal = this.modalCtrl.create(ModalObraPage, { obra: obraResponse});
       modal.present();
     }).catch(err =>{
-      this.avisosProvider.crearAlertaSimple('Error', err);
+      this.avisosProvider.crearAlertaSimple('¡Error!', err);
     })
   }
   private imgData:string;
@@ -81,10 +82,10 @@ private originalMail:string;
   alertCtrl: AlertController;
 
   signin(){
-    if (this.user.passwordConfirm === this.user.password){
-      this.actualizarUsuario(this.user);
+    if (this.passwordActual === this.user.password){
+      return true;
     }else{
-      this.avisosProvider.crearAlertaSimple('Error!','Passwords no coinciden!');
+      return false;
     }
   }
 
@@ -93,72 +94,94 @@ private originalMail:string;
     let loading = this.avisosProvider.crearLoading("Editando usuario...");
     loading.present();
 
-    this.auth.updatePerfilUsuario(user,this.originalMail)
-    .then(response => {
-      //imagen por defecto
-      this.user.img = diccionarioErrores.IMG_DEFECTO;
-      this.user.imgUrl = diccionarioErrores.URL_IMG_DEFECTO;
-
-      if (this.imgData){
-        user.img = Math.floor(Date.now() / 1000);
-        this.firebaseProvider.uploadImage(this.imgData, user.img)
-        .then(()=>
-          this.firebaseProvider.downloadImageUrl(user.img)
-        .then(url=>{
-          user.imgUrl = url;
-          this.firebaseProvider.guardaInfoAdicionalUsuario(user)
-        .then(()=>{
-          loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Éxito', "Usuario editado correctamente.");
-          this.navCtrl.setRoot(PerfilPage);
-          })
-        })
-        .catch(err => {
-          loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
-        }));
-      }else{
-        this.firebaseProvider.guardaInfoAdicionalUsuario(user)
-        .then(()=>{
-          loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('¡Éxito!', "Usuario editado correctamente.");
-        })
-        .catch(err => {
-          loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
-        });
-      }
-    }).catch(err => {
+    if (this.user.nombre === null || this.user.nombre.trim() === ''){
       loading.dismiss();
-      this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
-    });
+      this.avisosProvider.crearAlertaSimple('¡Error!','Nombre inválido.');
+    }
+    else if (this.user.username === null || this.user.username.trim() === ''){
+      loading.dismiss();
+      this.avisosProvider.crearAlertaSimple('¡Error!','Nombre de usuario inválido.');
+    }
+    else if (this.user.passwordConfirm !== this.user.password){
+      this.avisosProvider.crearAlertaSimple('¡Error!','Las contraseñas no coinciden.');
+    }else{
+      this.auth.updatePerfilUsuario(user,this.originalMail)
+        .then(response => {
+          //imagen por defecto
+          this.user.img = diccionarioErrores.IMG_DEFECTO;
+          this.user.imgUrl = diccionarioErrores.URL_IMG_DEFECTO;
+
+          if (this.imgData){
+            user.img = Math.floor(Date.now() / 1000);
+            this.firebaseProvider.uploadImage(this.imgData, user.img)
+              .then(()=>
+                this.firebaseProvider.downloadImageUrl(user.img)
+                  .then(url=>{
+                    user.imgUrl = url;
+                    this.firebaseProvider.guardaInfoAdicionalUsuario(user)
+                      .then(()=>{
+                        loading.dismiss();
+                        this.avisosProvider.crearAlertaSimple('¡Éxito!', "Usuario editado correctamente.");
+                        this.navCtrl.setRoot(PerfilPage);
+                      })
+                  })
+                  .catch(err => {
+                    loading.dismiss();
+                    this.avisosProvider.crearAlertaSimple('¡Error!', this.errores.traducirError('LOGIN',err.code));
+                  }));
+          }else{
+            this.firebaseProvider.guardaInfoAdicionalUsuario(user)
+              .then(()=>{
+                loading.dismiss();
+                this.avisosProvider.crearAlertaSimple('¡Éxito!', "Usuario editado correctamente.");
+              })
+              .catch(err => {
+                loading.dismiss();
+                this.avisosProvider.crearAlertaSimple('¡Error!', this.errores.traducirError('LOGIN',err.code));
+              });
+          }
+        }).catch(err => {
+        loading.dismiss();
+        this.avisosProvider.crearAlertaSimple('¡Error!', this.errores.traducirError('LOGIN',err.code));
+      });
+    }
   }
 
   actualizarPassword(nuevoPassword, nuevoPasswordConfirm){
 
-    let loading = this.avisosProvider.crearLoading("Actualizando Password...");
+    let loading = this.avisosProvider.crearLoading("Actualizando contraseña...");
     loading.present();
-    if (nuevoPassword === nuevoPasswordConfirm){
-      this.auth.updatePasswordUsuario(this.user, nuevoPassword)
-      .then(response => {
-        //manejar esta actualizacion
-        this.user.password = nuevoPassword;
-        this.user.passwordConfirm = nuevoPasswordConfirm;
-        this.firebaseProvider.guardaInfoAdicionalUsuario(this.user)
-      })
-      .then(()=>{
-        loading.dismiss();
-        this.avisosProvider.crearAlertaSimple('¡Éxito!', "Password actualizado correctamente.");
-        this.navCtrl.setRoot(PerfilPage);
-      })
-      .catch(err => {
+
+    if(this.signin()){
+      if (nuevoPassword === nuevoPasswordConfirm &&
+        (nuevoPassword !== '' && nuevoPasswordConfirm !== '')
+      ){
+        this.auth.updatePasswordUsuario(this.user, nuevoPassword)
+          .then(response => {
+            //manejar esta actualizacion
+            this.user.password = nuevoPassword;
+            this.user.passwordConfirm = nuevoPasswordConfirm;
+            this.firebaseProvider.guardaInfoAdicionalUsuario(this.user)
+          })
+          .then(()=>{
             loading.dismiss();
-            this.avisosProvider.crearAlertaSimple('Error', this.errores.traducirError('LOGIN',err.code));
-      });
+            this.avisosProvider.crearAlertaSimple('¡Éxito!', "Contraseña actualizada correctamente.");
+            this.navCtrl.setRoot(PerfilPage);
+          })
+          .catch(err => {
+            loading.dismiss();
+            this.avisosProvider.crearAlertaSimple('¡Error!', this.errores.traducirError('LOGIN',err.code));
+          });
+      }else{
+        loading.dismiss();
+        this.avisosProvider.crearAlertaSimple('¡Error!','Contraseñas no coinciden.');
+      }
     }else{
       loading.dismiss();
-      this.avisosProvider.crearAlertaSimple('Error!','Passwords no coinciden!');
+      this.avisosProvider.crearAlertaSimple('¡Error!','Contraseña actual incorrecta.');
     }
+
+
 
 
   }
@@ -175,6 +198,8 @@ private originalMail:string;
     this.camera.getPicture(cameraOptions)
      .then((captureDataUrl) => {
        this.imgData = 'data:image/jpeg;base64,' + captureDataUrl;
-    })
+    }).catch(() => {
+      this.avisosProvider.crearAlertaSimple('¡Error!',"No se pudo obtener la foto.");
+    });
   }
 }

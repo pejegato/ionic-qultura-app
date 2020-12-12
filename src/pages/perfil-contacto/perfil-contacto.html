@@ -35,15 +35,9 @@
       <ion-col col-12>
         <ion-list>
           <ion-list-header>
-            Logros Desbloqueados
+            Puntaje actual de {{userData.data.username}}: <br>
+            <ion-icon name="star"></ion-icon> <span style="font-size: 20px; color: #e8794e">{{userData.data.puntaje}}</span> <ion-icon name="star"></ion-icon>
           </ion-list-header>
-          <ion-item text-center>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-          </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
@@ -58,9 +52,9 @@
           <div *ngFor="let data of actividadesContacto; let i = index">
             <ion-card *ngIf="data.tipoObjeto == 'scan'">
 
-              <ion-item>
-                <p>Has visto
-                  <b>'{{data.contenido.nombre}}'</b>
+              <ion-item text-center>
+                <p>{{userData.data.username}} ha visto:
+                 <br> <b>'{{data.contenido.nombre}}'</b>
                 </p>
               </ion-item>
 
@@ -72,16 +66,16 @@
 
               <ion-row>
                 <ion-col>
-                  <!--button ion-button icon-left clear small>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <div>0 Likes</div>
-                  </button-->
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="calendar"></ion-icon>
+                    <ion-note>{{data.fechaIngreso | date: 'dd/MM/yyyy'}}</ion-note>
+                  </button>
                 </ion-col>
                 <ion-col>
                   <button ion-button icon-left clear small>
-                    <ion-icon name="calendar"></ion-icon>
+                    <ion-icon name="clock"></ion-icon>
                     <ion-note>
-                      {{data.fechaIngreso | date: 'dd/MM/yyyy'}}
+                      {{data.fechaIngreso | date: 'HH:mm'}}
                     </ion-note>
                   </button>
                 </ion-col>
@@ -121,16 +115,16 @@
               <ion-row>
 
                 <ion-col>
-                  <!--button ion-button icon-start clear small>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <ion-note>0 Likes</ion-note>
-                  </button-->
-                </ion-col>
-                <ion-col center text-center>
                   <button ion-button icon-left clear small>
                     <ion-icon name="calendar"></ion-icon>
+                    <ion-note>{{data.fechaIngreso | date: 'dd/MM/yyyy'}}</ion-note>
+                  </button>
+                </ion-col>
+                <ion-col  right text-right>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="clock"></ion-icon>
                     <ion-note>
-                      {{data.fechaIngreso | date: 'dd/MM/yyyy'}}
+                      {{data.fechaIngreso | date: 'HH:mm'}}
                     </ion-note>
                   </button>
                 </ion-col>

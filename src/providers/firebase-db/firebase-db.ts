@@ -6,11 +6,11 @@ import { FirebaseApp } from 'angularfire2'; // for methods
 
 @Injectable()
 export class FirebaseDbProvider {
-  
+
   constructor(
     public afDB: AngularFireDatabase,
     private fb: FirebaseApp) {}
-  
+
   /*************************************************************
    * Guarda la info adicional del usuario en la base de datos  *
   **************************************************************/
@@ -25,7 +25,7 @@ export class FirebaseDbProvider {
   **************************************************************/
  guardaContactoUsuario(usuario, contacto): Promise<any> {
   let dataContacto = {
-    fechaIngreso : new Date(),        
+    fechaIngreso : new Date(),
     data: {
       uid:contacto.uid,
       nombre:contacto.nombre,
@@ -35,29 +35,29 @@ export class FirebaseDbProvider {
       imgUrl:contacto.imgUrl
     },
 
-  };  
+  };
   return this.afDB.database.ref(`usuarios/${usuario.uid}/contactos/${contacto.uid}`).update(dataContacto);
 }
-  
+
   /***************************************************************************************
    *Obtiene los datos adicionales (username, mail, foto de perfil del usuario logueado)  *                          *
    ***************************************************************************************/
   obtieneDatosUsuario(usuarioId): Observable<any> {
       return this.afDB.object(`usuarios/${usuarioId}`).valueChanges();
   }
-  
+
   /*****************************************************************************
    *Busca los datos de las Obra en la base de datos                            *
    *****************************************************************************/
   obtieneDatosObra(obraId): Observable<any> {
     return this.afDB.object(`obras/${obraId}`).valueChanges();
   }
-  
+
   /*****************************************************************************
    *Agrega los datos de la Obra escaneada al usuario en la base de datos       *
    *****************************************************************************/
   updateDatosUsuarioObra(usuario, contenido, tipoObjeto): Promise<any> {
-    
+
     let objeto = {
       uid:usuario.uid,
       username: usuario.username,
@@ -66,18 +66,18 @@ export class FirebaseDbProvider {
       contenido: contenido,
       imgUrl: usuario.imgUrl
     };
-    
+
     return this.afDB.database.ref(`usuarios/${usuario.uid}/data/${contenido.uid}`).update(objeto);
   }
 
   /*****************************************************************************
    *Actualiza el puntaje del usuario en base a los datos de la Obra escaneada  *
-   *****************************************************************************/  
+   *****************************************************************************/
   updateDatosUsuarioPuntaje(usuario, obra): Promise<any> {
     let puntaje = +usuario.puntaje + +obra.puntaje;
     return this.afDB.database.ref(`usuarios/${usuario.uid}`).update({"puntaje":puntaje});
   }
-  
+
 
   /************************************************************************************
    *Metodo que sube la imagen a la base de datos creando una instancia del storage    *
@@ -105,12 +105,14 @@ export class FirebaseDbProvider {
     .orderByChild('usernameLowerCase')
     .startAt(username.trim().toLowerCase())
     .endAt(username.trim().toLowerCase()+'~')
-    
+
     .once('value')
   }
 
   obtieneMensajesContacto(contactoUid): Observable<any> {
     return this.afDB.object(`usuarios/${contactoUid}/data`).valueChanges();
   }
+
+
 }
 

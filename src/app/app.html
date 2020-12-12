@@ -1,32 +1,38 @@
-<ion-menu [content]="content"  *ngIf="this.userProvider.datosUsuario"> 
+<ion-menu [content]="content"  *ngIf="this.userProvider.datosUsuario">
     <ion-header>
         <ion-toolbar color="primary">
             <ion-title>Menu</ion-title>
         </ion-toolbar>
     </ion-header>
     <ion-content>
-        <ion-list>            
+        <ion-list>
             <button ion-item detail-none (click)="openPage(dashboardPage)">
                 <ion-icon name="home" item-start></ion-icon>
                 Historias
-            </button>                    
+            </button>
             <button ion-item detail-none (click)="openPage(perfilPage)">
                 <ion-icon name="contact" item-start></ion-icon>
                 Perfil
             </button>
-                    
+
             <button ion-item detail-none (click)="openPage(contactosPage)">
                 <ion-icon name="people" item-start></ion-icon>
                 Contactos
             </button>
-                    
+
             <button ion-item detail-none (click)="cerrarSesion()">
                 <ion-icon name="log-out" item-start></ion-icon>
                 Cerrar sesión
             </button>
 
         </ion-list>
+
+      <ion-row style="height: 70%">
+        <img src="../../assets/imgs/logo.jpg" class="avatar" style="width: 130px; height: 100px">
+      </ion-row>
     </ion-content>
+
+
 </ion-menu>
 
 <ion-nav [root]="rootPage" #content></ion-nav>

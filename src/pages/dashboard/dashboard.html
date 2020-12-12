@@ -22,7 +22,7 @@
     <ion-row align-items-center>
       <ion-col row-2 col-12>
           <ion-item no-lines >
-            <ion-label color="primary" stacked>¿Donde estás?</ion-label>
+            <ion-label color="primary" stacked>¿Dónde estás?</ion-label>
             <ion-textarea type="text" class="comentarios" [(ngModel)]="comentario.cuerpo"></ion-textarea>
 
           </ion-item>
@@ -57,17 +57,15 @@
 
               <ion-row>
                 <ion-col>
-                  <!--button ion-button icon-left clear small>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <div>0 Likes</div>
-                  </button-->
-                </ion-col>
-                <ion-col>
                   <button ion-button icon-left clear small>
                     <ion-icon name="calendar"></ion-icon>
-                    <ion-note>
-                        {{data.fechaIngreso | date: 'dd/MM/yyyy'}}
-                    </ion-note>
+                    <ion-note>{{data.fechaIngreso | date: 'dd/MM/yyyy'}}</ion-note>
+                  </button>
+                </ion-col>
+                <ion-col right text-right>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="clock"></ion-icon>
+                    <ion-note>{{data.fechaIngreso | date: 'HH:mm'}}</ion-note>
                   </button>
                 </ion-col>
               </ion-row>
@@ -98,23 +96,20 @@
                   <p text-justify>{{data.contenido.cuerpo}}</p>
                 </ion-card-content>
 
-                <ion-row>
-
-                  <ion-col>
-                    <!--button ion-button icon-start clear small>
-                      <ion-icon name="thumbs-up"></ion-icon>
-                      <ion-note>0 Likes</ion-note>
-                    </button-->
-                  </ion-col>
-                  <ion-col center text-center>
-                      <button ion-button icon-left clear small>
-                          <ion-icon name="calendar"></ion-icon>
-                          <ion-note>
-                              {{data.fechaIngreso | date: 'dd/MM/yyyy'}}
-                          </ion-note>
-                        </button>
-                  </ion-col>
-                </ion-row>
+              <ion-row>
+                <ion-col>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="calendar"></ion-icon>
+                    <ion-note>{{data.fechaIngreso | date: 'dd/MM/yyyy'}}</ion-note>
+                  </button>
+                </ion-col>
+                <ion-col right text-right>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="clock"></ion-icon>
+                    <ion-note>{{data.fechaIngreso | date: 'HH:mm'}}</ion-note>
+                  </button>
+                </ion-col>
+              </ion-row>
 
               </ion-card>
           </div>

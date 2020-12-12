@@ -3,6 +3,10 @@ import { FirebaseDbProvider } from './../firebase-db/firebase-db';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Platform} from 'ionic-angular';
 import { Injectable } from '@angular/core';
+import { Network } from '@ionic-native/network';
+
+
+
 
 
 /*
@@ -15,10 +19,12 @@ import { Injectable } from '@angular/core';
 export class ScannerProvider {
 
   constructor(
+
     private barcodeScanner: BarcodeScanner,
     private platform: Platform,
     private firebaseProvider: FirebaseDbProvider,
-    private userProvider: UserProvider) {
+    private userProvider: UserProvider,
+    ) {
 
   }
 

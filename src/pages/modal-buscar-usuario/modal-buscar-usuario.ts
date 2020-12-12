@@ -20,6 +20,7 @@ export class ModalBuscarUsuarioPage {
   public people:any=[];
   tasksRef: AngularFireList<any>;
   tasks: any;
+  user: any;
 
   constructor(
     public navCtrl: NavController,
@@ -29,9 +30,12 @@ export class ModalBuscarUsuarioPage {
     private firebaseProvider: FirebaseDbProvider,
     private userProvider: UserProvider,
     private avisosProvider: AvisosProvider,
-  ) {}
+  ) {
+    this.user = userProvider.datosUsuario;
+  }
 
   usuarioBuscado:any;
+
 
   buscarUsuario(){
     var _self = this;
@@ -39,15 +43,14 @@ export class ModalBuscarUsuarioPage {
       this.firebaseProvider.buscarContactos(this.usuarioBuscado).then(function(snapshot) {
         if(snapshot.val()){
           _self.people = _self.snapshotToArray(snapshot.val());
+
         }else{
-          _self.avisosProvider.crearAlertaSimple('Error', "No se han encontrado resultados");
+          _self.avisosProvider.crearAlertaSimple('¡Oops!', "No se han encontrado resultados.");
           _self.people = []
-
         }
-
       });
     }else{
-      this.avisosProvider.crearAlertaSimple('Error', "Ingresa nombre usuario a buscar");
+      this.avisosProvider.crearAlertaSimple('¡Error!', "Ingresa nombre usuario a buscar.");
 
     }
 
@@ -56,17 +59,21 @@ export class ModalBuscarUsuarioPage {
 
   private agregarContacto(contacto):void {
     let loading = this.avisosProvider.crearLoading("Agregando contacto...");
+    contacto.fechaVinculo = new Date().toString()
     loading.present();
-    this.firebaseProvider.guardaContactoUsuario(this.userProvider.datosUsuario,contacto)
+
+    this.firebaseProvider.guardaContactoUsuario(this.userProvider.datosUsuario, contacto)
         .then(()=>{
           loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Éxito', "Contacto agregado con correctamente");
+          this.avisosProvider.crearAlertaSimple('¡Éxito!', "Contacto agregado correctamente.");
+          this.dismiss()
 
         }).catch(()=>{
           loading.dismiss();
-          this.avisosProvider.crearAlertaSimple('Error', "Se ha producido un error ");
+          this.avisosProvider.crearAlertaSimple('Error', "Se ha producido un error.");
 
           this.usuarioBuscado = "";
+
         })
 
   };
@@ -78,8 +85,24 @@ export class ModalBuscarUsuarioPage {
   private snapshotToArray(snapshot):any[] {
     var returnArr = [];
     if(typeof snapshot !== 'undefined'){
+        let _this = this;
         Object.keys(snapshot).forEach(function(key) {
-            returnArr.push(snapshot[key]);
+            if(snapshot[key].uid !== _this.user.uid){
+              let existe:boolean = false;
+              //logica para comprar el contacto obtenido con los que ya tengo
+
+              let array:any[] = _this.user.contactos;
+              array.forEach( e => {
+                if(snapshot[key].uid === e.data.uid){
+                  existe = true;
+                }
+
+              })
+              if(existe == false){
+                returnArr.push(snapshot[key]);
+              }
+            }
+
         });
         return  returnArr.sort(function(a, b) {
             var dateA = new Date(a.fechaIngreso), dateB = new Date(b.fechaIngreso);
